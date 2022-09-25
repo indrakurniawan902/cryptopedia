@@ -1,4 +1,4 @@
-# ternakcoin
+# cryptopedia
 
 A new Flutter project.
 

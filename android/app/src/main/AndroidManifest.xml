@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.ternakcoin">
+    package="com.example.cryptopedia">
    <application
-        android:label="ternakcoin"
+        android:label="cryptopedia"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity
