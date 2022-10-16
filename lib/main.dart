@@ -1,4 +1,4 @@
-import 'package:cryptopedia/view/homepage.dart';
+import 'package:cryptopedia/screen/on_boarding/on_boarding.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -15,7 +15,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const Homepage(),
+      home: const OnBoarding(),
     );
   }
 }
