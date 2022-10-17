@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:cryptopedia/utils/constant/app_colors.dart';
 
 class OnBoarding extends StatefulWidget {
   const OnBoarding({super.key});
@@ -10,6 +11,10 @@ class OnBoarding extends StatefulWidget {
 class _OnBoardingState extends State<OnBoarding> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold();
+    return SafeArea(
+      child: Scaffold(
+        body: Container(color: AppColors.primaryBrand),
+      ),
+    );
   }
 }
