@@ -1,5 +1,5 @@
-import 'package:cryptopedia/screen/components/ButtonComponent.dart';
-import 'package:cryptopedia/screen/components/FormFieldComponent.dart';
+import 'package:cryptopedia/screen/components/button_component.dart';
+import 'package:cryptopedia/screen/components/form_field_component.dart';
 import 'package:cryptopedia/utils/constant/app_colors.dart';
 import 'package:flutter/material.dart';
 
