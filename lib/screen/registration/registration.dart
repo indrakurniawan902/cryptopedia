@@ -17,103 +17,94 @@ class _RegistrationState extends State<Registration> {
   TextEditingController usernameC = TextEditingController();
 
   @override
-  void initState() {
-    super.initState();
-
-    fullnameC.addListener(_validateInput);
-    usernameC.addListener(_validateInput);
-  }
-
-  @override
-  void dispose() {
-    fullnameC.dispose();
-    usernameC.dispose();
-    super.dispose();
-  }
-
-  void _validateInput() {
-    print('Second text field:');
-  }
-
-  @override
   Widget build(BuildContext context) {
-    final formKey = GlobalKey<FormState>();
+    final _formKey = GlobalKey<FormState>();
+
+    void _validateInput() {
+      if (fullnameC.text != "" && usernameC.text != "") {}
+    }
 
     return SafeArea(
       child: Scaffold(
-        body: Container(
-          padding: EdgeInsets.symmetric(horizontal: 20),
-          child: Form(
-            key: formKey,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(
-                  "Complete Your",
-                  style: TextStyle(fontSize: 28),
-                ),
-                Text(
-                  "Registration",
-                  style: TextStyle(
-                      fontSize: 28,
-                      fontWeight: FontWeight.bold,
-                      color: AppColors.primaryBrand),
-                ),
-                SizedBox(height: 40),
-                Column(
+        body: Center(
+          child: SingleChildScrollView(
+            child: Container(
+              padding: EdgeInsets.symmetric(horizontal: 20),
+              child: Form(
+                key: _formKey,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Container(
-                      padding:
-                          EdgeInsets.symmetric(horizontal: 16, vertical: 20),
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      child: Column(
-                        children: [
-                          FormFieldComponent(
-                            name: "Email",
-                            placeholder: "johndoe@gmail.com",
-                            controller: emailC,
-                            validation: (() {}),
-                            isDisable: true,
-                          ),
-                          SizedBox(
-                            height: 12,
-                          ),
-                          FormFieldComponent(
-                            name: "Fullname",
-                            placeholder: "John doe",
-                            controller: emailC,
-                            validation: (() {}),
-                            isDisable: false,
-                          ),
-                          SizedBox(
-                            height: 12,
-                          ),
-                          FormFieldComponent(
-                            name: "Username",
-                            placeholder: "johndoe22",
-                            controller: emailC,
-                            validation: (() {}),
-                            isDisable: false,
-                          ),
-                        ],
-                      ),
+                    Text(
+                      "Complete Your",
+                      style: TextStyle(fontSize: 28),
                     ),
-                    SizedBox(
-                      height: 32,
+                    Text(
+                      "Registration",
+                      style: TextStyle(
+                          fontSize: 28,
+                          fontWeight: FontWeight.bold,
+                          color: AppColors.primaryBrand),
                     ),
-                    SizedBox(
-                      width: double.infinity,
-                      child: ButtonComponent(
-                          text: "Save",
-                          onClickFunction: () {},
-                          isDisable: isDisable),
-                    ),
+                    SizedBox(height: 40),
+                    Column(
+                      children: [
+                        Container(
+                          padding: EdgeInsets.symmetric(
+                              horizontal: 16, vertical: 20),
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          child: Column(
+                            children: [
+                              FormFieldComponent(
+                                name: "Email",
+                                placeholder: "johndoe@gmail.com",
+                                controller: emailC,
+                                validation: _validateInput,
+                                isDisable: true,
+                              ),
+                              SizedBox(
+                                height: 12,
+                              ),
+                              FormFieldComponent(
+                                name: "Fullname",
+                                placeholder: "John doe",
+                                controller: fullnameC,
+                                validation: _validateInput,
+                                isDisable: false,
+                              ),
+                              SizedBox(
+                                height: 12,
+                              ),
+                              FormFieldComponent(
+                                name: "Username",
+                                placeholder: "johndoe22",
+                                controller: usernameC,
+                                validation: _validateInput,
+                                isDisable: false,
+                              ),
+                            ],
+                          ),
+                        ),
+                        SizedBox(
+                          height: 32,
+                        ),
+                        SizedBox(
+                          width: double.infinity,
+                          child: ButtonComponent(
+                              text: "Save",
+                              onClickFunction: () {
+                                if (_formKey.currentState!.validate()) {}
+                              },
+                              isDisable: false),
+                        ),
+                      ],
+                    )
                   ],
-                )
-              ],
+                ),
+              ),
             ),
           ),
         ),

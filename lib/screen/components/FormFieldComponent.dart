@@ -29,9 +29,18 @@ class FormFieldComponent extends StatelessWidget {
         ),
         TextFormField(
           enabled: !isDisable,
+          validator: (value) {
+            if (value == null || value.isEmpty) {
+              return 'Please enter some text';
+            }
+            return null;
+          },
           decoration: InputDecoration(
-            contentPadding:
-                const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
+            errorStyle: TextStyle(
+              fontSize: 14.0,
+            ),
+            prefix: const Padding(padding: EdgeInsets.only(left: 16.0)),
+            contentPadding: const EdgeInsets.symmetric(vertical: 12),
             fillColor: const Color(0xffFFFFFF),
             filled: true,
             hintText: placeholder,
