@@ -2,6 +2,7 @@ import 'package:cryptopedia/provider/on_boarding_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:cryptopedia/utils/constant/app_colors.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class OnBoarding extends StatefulWidget {
   const OnBoarding({super.key});
@@ -30,87 +31,61 @@ class _OnBoardingState extends State<OnBoarding> {
                 return Column(
                   children: [
                     Consumer<OnBoardingProvider>(
-                        builder: (context, value, child) => Padding(
-                            padding: const EdgeInsets.fromLTRB(30, 71, 30, 21),
+                        builder: (context, value, child) => Container(
+                            padding: EdgeInsets.symmetric(vertical: 30.w),
                             child: Image.asset(
                               value.getOnBoard[index].image!,
-                              height: 316,
-                              width: 316,
+                              height: 316.h,
+                              width: 316.w,
                             ))),
                     Consumer<OnBoardingProvider>(
-                        builder: (context, value, child) => Padding(
-                            padding: const EdgeInsets.fromLTRB(24, 0, 24, 12),
+                        builder: (context, value, child) => Container(
+                            padding: EdgeInsets.symmetric(vertical: 24.w),
                             child: Column(
                               children: [
-                                value.getOnBoard[index].title2 == null
-                                    ? Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        children: [
-                                          Text(
-                                            value.getOnBoard[index].titleBold!,
-                                            style: const TextStyle(
-                                                fontSize: 24,
-                                                fontFamily: 'Poppins-Bold',
-                                                fontWeight: FontWeight.bold),
-                                          ),
-                                          Text(
-                                            value.getOnBoard[index].title1!,
-                                            style: const TextStyle(
-                                                fontSize: 24,
-                                                fontFamily: 'Poppins'),
-                                          ),
-                                        ],
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Text(
+                                      value.getOnBoard[index].titleBold!,
+                                      style: TextStyle(
+                                          fontSize: 22.sp,
+                                          fontFamily: 'Poppins-Bold',
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                    Text(
+                                      value.getOnBoard[index].title1!,
+                                      style: TextStyle(
+                                          fontSize: 22.sp,
+                                          fontFamily: 'Poppins'),
+                                    ),
+                                  ],
+                                ),
+                                value.getOnBoard[index].title2 != null
+                                    ? Text(
+                                        value.getOnBoard[index].title2!,
+                                        style: TextStyle(
+                                            fontSize: 20.sp,
+                                            fontFamily: 'Poppins'),
                                       )
-                                    : Column(
-                                        children: [
-                                          Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.center,
-                                            children: [
-                                              Text(
-                                                value.getOnBoard[index]
-                                                    .titleBold!,
-                                                style: const TextStyle(
-                                                    fontSize: 24,
-                                                    fontFamily: 'Poppins',
-                                                    fontWeight:
-                                                        FontWeight.bold),
-                                              ),
-                                              Text(
-                                                value.getOnBoard[index].title1!,
-                                                style: const TextStyle(
-                                                    fontSize: 24,
-                                                    fontFamily: 'Poppins'),
-                                              ),
-                                            ],
-                                          ),
-                                          Text(
-                                            value.getOnBoard[index].title2!,
-                                            style: const TextStyle(
-                                                fontSize: 24,
-                                                fontFamily: 'Poppins'),
-                                          ),
-                                        ],
-                                      ),
+                                    : const SizedBox()
                               ],
                             ))),
                     Consumer<OnBoardingProvider>(
-                        builder: (context, value, child) => Padding(
-                            padding: const EdgeInsets.fromLTRB(24, 0, 24, 20),
+                        builder: (context, value, child) => Container(
+                            padding: EdgeInsets.symmetric(horizontal: 24.w),
                             child: Text(
                               value.getOnBoard[index].description!,
-                              style: const TextStyle(
-                                  fontSize: 14, fontFamily: 'Poppins'),
+                              style: TextStyle(
+                                  fontSize: 13.sp, fontFamily: 'Poppins'),
                             ))),
                   ],
                 );
               },
               itemCount: onBoard.getOnBoard.length,
             ),
-            Positioned(
-              top: 640,
-              left: 175,
+            Align(
+              alignment: Alignment(0.w, 0.68.h),
               child: Consumer<OnBoardingProvider>(
                 builder: (context, value, child) => Row(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -123,13 +98,11 @@ class _OnBoardingState extends State<OnBoarding> {
               ),
             ),
             _pageIndex == 2
-                ? Positioned(
-                    top: 734,
-                    left: 24,
-                    right: 24,
+                ? Align(
+                    alignment: Alignment(0.w, 0.85.h),
                     child: ElevatedButton(
                         onPressed: () {}, child: const Text('data')))
-                : const Text(''),
+                : const SizedBox(),
           ],
         ),
       ),
