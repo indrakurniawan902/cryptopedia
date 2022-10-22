@@ -1,7 +1,9 @@
 import 'package:cryptopedia/screen/components/button_component.dart';
 import 'package:cryptopedia/screen/components/form_field_component.dart';
 import 'package:cryptopedia/utils/constant/app_colors.dart';
+import 'package:cryptopedia/utils/constant/app_text_style.dart';
 import 'package:flutter/material.dart';
+import '../../utils/constant/app_shadow.dart';
 
 class Registration extends StatefulWidget {
   const Registration({Key? key}) : super(key: key);
@@ -18,9 +20,9 @@ class _RegistrationState extends State<Registration> {
 
   @override
   Widget build(BuildContext context) {
-    final _formKey = GlobalKey<FormState>();
+    final formKey = GlobalKey<FormState>();
 
-    void _validateInput() {
+    void validateInput() {
       if (fullnameC.text != "" && usernameC.text != "") {}
     }
 
@@ -29,66 +31,65 @@ class _RegistrationState extends State<Registration> {
         body: Center(
           child: SingleChildScrollView(
             child: Container(
-              padding: EdgeInsets.symmetric(horizontal: 20),
+              padding: const EdgeInsets.symmetric(horizontal: 20),
               child: Form(
-                key: _formKey,
+                key: formKey,
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
                       "Complete Your",
-                      style: TextStyle(fontSize: 28),
+                      style: headerStyleBlack,
                     ),
                     Text(
                       "Registration",
-                      style: TextStyle(
-                          fontSize: 28,
-                          fontWeight: FontWeight.bold,
-                          color: AppColors.primaryBrand),
+                      style: headerStyleGreen,
                     ),
-                    SizedBox(height: 40),
+                    const SizedBox(height: 40),
                     Column(
                       children: [
                         Container(
-                          padding: EdgeInsets.symmetric(
+                          padding: const EdgeInsets.symmetric(
                               horizontal: 16, vertical: 20),
                           decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(10),
-                          ),
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(10),
+                              boxShadow: <BoxShadow>[
+                                AppShadow.shadow1,
+                              ]),
                           child: Column(
                             children: [
                               FormFieldComponent(
                                 name: "Email",
                                 placeholder: "johndoe@gmail.com",
                                 controller: emailC,
-                                validation: _validateInput,
+                                validation: validateInput,
                                 isDisable: true,
                               ),
-                              SizedBox(
+                              const SizedBox(
                                 height: 12,
                               ),
                               FormFieldComponent(
                                 name: "Fullname",
                                 placeholder: "John doe",
                                 controller: fullnameC,
-                                validation: _validateInput,
+                                validation: validateInput,
                                 isDisable: false,
                               ),
-                              SizedBox(
+                              const SizedBox(
                                 height: 12,
                               ),
                               FormFieldComponent(
                                 name: "Username",
                                 placeholder: "johndoe22",
                                 controller: usernameC,
-                                validation: _validateInput,
+                                validation: validateInput,
                                 isDisable: false,
                               ),
                             ],
                           ),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 32,
                         ),
                         SizedBox(
@@ -96,7 +97,7 @@ class _RegistrationState extends State<Registration> {
                           child: ButtonComponent(
                               text: "Save",
                               onClickFunction: () {
-                                if (_formKey.currentState!.validate()) {}
+                                if (formKey.currentState!.validate()) {}
                               },
                               isDisable: false),
                         ),
