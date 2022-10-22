@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "668427536058",
+    "project_id": "cryptopedia-a819d",
+    "storage_bucket": "cryptopedia-a819d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:668427536058:android:bb40a5088194fb7289a483",
+        "android_client_info": {
+          "package_name": "com.example.cryptopedia"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "668427536058-q7pt84t0bhc4m12pukpp9880hr8il3sa.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAAfVJ6-IuCKRhZJJDoEX5DTlZ7mMNiPjQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "668427536058-q7pt84t0bhc4m12pukpp9880hr8il3sa.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
