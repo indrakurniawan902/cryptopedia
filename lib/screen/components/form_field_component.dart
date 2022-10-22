@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../utils/constant/app_colors.dart';
 
@@ -24,8 +25,8 @@ class FormFieldComponent extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(name),
-        const SizedBox(
-          height: 8,
+        SizedBox(
+          height: 8.h,
         ),
         TextFormField(
           enabled: !isDisable,
@@ -37,10 +38,10 @@ class FormFieldComponent extends StatelessWidget {
           },
           decoration: InputDecoration(
             errorStyle: TextStyle(
-              fontSize: 14.0,
+              fontSize: 14.sp,
             ),
-            prefix: const Padding(padding: EdgeInsets.only(left: 16.0)),
-            contentPadding: const EdgeInsets.symmetric(vertical: 12),
+            prefix: Padding(padding: EdgeInsets.only(left: 16.w)),
+            contentPadding: EdgeInsets.symmetric(vertical: 12.h),
             fillColor: const Color(0xffFFFFFF),
             filled: true,
             hintText: placeholder,

@@ -1,7 +1,6 @@
+import 'package:cryptopedia/provider/auth_provider.dart';
 import 'package:cryptopedia/provider/on_boarding_provider.dart';
-import 'package:cryptopedia/screen/on_boarding/on_boarding.dart';
-import 'package:cryptopedia/screen/registration/registration.dart';
-import 'package:cryptopedia/screen/registration/registration_success.dart';
+import 'package:cryptopedia/screen/wrapper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
@@ -25,6 +24,7 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (context) => OnBoardingProvider()),
+        ChangeNotifierProvider(create: (context) => AuthProvider()),
       ],
       child: ScreenUtilInit(
         designSize: const Size(375, 812),
@@ -33,7 +33,7 @@ class MyApp extends StatelessWidget {
           theme: ThemeData(
             primarySwatch: Colors.blue,
           ),
-          home: const OnBoarding(),
+          home: const Wrapper(),
         ),
       ),
     );

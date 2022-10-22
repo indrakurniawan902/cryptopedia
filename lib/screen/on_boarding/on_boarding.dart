@@ -1,3 +1,4 @@
+import 'package:cryptopedia/provider/auth_provider.dart';
 import 'package:cryptopedia/provider/on_boarding_provider.dart';
 import 'package:cryptopedia/screen/components/button_component.dart';
 import 'package:flutter/material.dart';
@@ -18,6 +19,8 @@ class _OnBoardingState extends State<OnBoarding> {
   @override
   Widget build(BuildContext context) {
     final onBoard = Provider.of<OnBoardingProvider>(context, listen: false);
+    final auth = Provider.of<AuthProvider>(context, listen: false);
+
     return SafeArea(
       child: Scaffold(
         body: Stack(
@@ -115,7 +118,9 @@ class _OnBoardingState extends State<OnBoarding> {
                       height: 46.h,
                       child: ButtonComponent(
                           text: 'Continue With Google',
-                          onClickFunction: () {},
+                          onClickFunction: () {
+                            auth.signInWithGoogle();
+                          },
                           isDisable: false),
                     ))
                 : const SizedBox(),

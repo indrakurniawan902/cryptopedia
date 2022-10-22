@@ -1,8 +1,8 @@
 import 'package:cryptopedia/screen/components/button_component.dart';
 import 'package:cryptopedia/screen/components/form_field_component.dart';
-import 'package:cryptopedia/utils/constant/app_colors.dart';
 import 'package:cryptopedia/utils/constant/app_text_style.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../utils/constant/app_shadow.dart';
 
 class Registration extends StatefulWidget {
@@ -45,16 +45,16 @@ class _RegistrationState extends State<Registration> {
                       "Registration",
                       style: headerStyleGreen,
                     ),
-                    const SizedBox(height: 40),
+                    SizedBox(height: 40.h),
                     Column(
                       children: [
                         Container(
-                          padding: const EdgeInsets.symmetric(
-                              horizontal: 16, vertical: 20),
+                          padding: EdgeInsets.symmetric(
+                              horizontal: 16.w, vertical: 20.h),
                           decoration: BoxDecoration(
                               color: Colors.white,
                               borderRadius: BorderRadius.circular(10),
-                              boxShadow: <BoxShadow>[
+                              boxShadow: const <BoxShadow>[
                                 AppShadow.shadow1,
                               ]),
                           child: Column(
@@ -66,8 +66,8 @@ class _RegistrationState extends State<Registration> {
                                 validation: validateInput,
                                 isDisable: true,
                               ),
-                              const SizedBox(
-                                height: 12,
+                              SizedBox(
+                                height: 12.h,
                               ),
                               FormFieldComponent(
                                 name: "Fullname",
@@ -76,8 +76,8 @@ class _RegistrationState extends State<Registration> {
                                 validation: validateInput,
                                 isDisable: false,
                               ),
-                              const SizedBox(
-                                height: 12,
+                              SizedBox(
+                                height: 12.h,
                               ),
                               FormFieldComponent(
                                 name: "Username",
@@ -89,8 +89,8 @@ class _RegistrationState extends State<Registration> {
                             ],
                           ),
                         ),
-                        const SizedBox(
-                          height: 32,
+                        SizedBox(
+                          height: 32.h,
                         ),
                         SizedBox(
                           width: double.infinity,

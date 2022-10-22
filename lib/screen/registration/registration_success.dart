@@ -1,5 +1,6 @@
 import 'package:cryptopedia/utils/constant/app_text_style.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class RegistrationSuccess extends StatelessWidget {
   const RegistrationSuccess({Key? key}) : super(key: key);
@@ -42,7 +43,7 @@ class RegistrationSuccess extends StatelessWidget {
                           style: headerStyleBlack,
                           textAlign: TextAlign.center,
                         ),
-                        const SizedBox(width: 4),
+                        SizedBox(width: 4.w),
                         Text(
                           "Registation",
                           style: headerStyleGreen,
@@ -54,12 +55,12 @@ class RegistrationSuccess extends StatelessWidget {
                       "Success",
                       style: headerStyleBlack,
                     ),
-                    const SizedBox(
-                      height: 40,
+                    SizedBox(
+                      height: 40.h,
                     ),
                     Image.asset(
                       'assets/images/jump.png',
-                      height: 324,
+                      height: 324.h,
                     ),
                   ],
                 ),
