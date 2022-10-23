@@ -29,7 +29,10 @@ class ButtonComponent extends StatelessWidget {
               borderRadius: BorderRadius.circular(12.w))),
       child: Text(
         text,
-        style: TextStyle(fontSize: 16.sp, fontWeight: FontWeight.bold),
+        style: TextStyle(
+            fontSize: 16.sp,
+            fontWeight: FontWeight.bold,
+            fontFamily: "Poppins"),
       ),
     );
   }

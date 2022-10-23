@@ -3,16 +3,16 @@ import 'package:flutter/painting.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 TextStyle headerStyleBlack = TextStyle(
-    fontSize: 28.sp, fontFamily: 'Poppins-Bold', fontWeight: FontWeight.bold);
+    fontSize: 28.sp, fontFamily: 'Poppins', fontWeight: FontWeight.w600);
 
 TextStyle headerStyleGreen = TextStyle(
     fontSize: 28.sp,
-    fontFamily: 'Poppins-Bold',
-    fontWeight: FontWeight.bold,
+    fontFamily: 'Poppins',
+    fontWeight: FontWeight.w600,
     color: AppColors.primaryBrand);
 
 TextStyle appHeaderText = TextStyle(
     fontSize: 32.sp,
-    fontFamily: 'Poppins-Bold',
-    fontWeight: FontWeight.bold,
+    fontFamily: 'Poppins',
+    fontWeight: FontWeight.w600,
     color: AppColors.lightColor);

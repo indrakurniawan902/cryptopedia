@@ -31,11 +31,17 @@ class FormFieldComponent extends StatelessWidget {
           height: 8.h,
         ),
         TextFormField(
+          style: TextStyle(
+            color: isDisable ? AppColors.gray3 : AppColors.darkColor,
+            fontFamily: "Poppins",
+          ),
           enabled: !isDisable,
           controller: controller,
           validator: (value) {
             if (value == null || value.isEmpty) {
               return 'Please enter some text';
+            } else if (value.length < 4) {
+              return 'Text must have more than 4 character length';
             }
             return null;
           },
