@@ -2,8 +2,21 @@ import 'package:cryptopedia/utils/constant/app_text_style.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class RegistrationSuccess extends StatelessWidget {
+class RegistrationSuccess extends StatefulWidget {
   const RegistrationSuccess({Key? key}) : super(key: key);
+
+  @override
+  State<RegistrationSuccess> createState() => _RegistrationSuccessState();
+}
+
+class _RegistrationSuccessState extends State<RegistrationSuccess> {
+  @override
+  void initState() {
+    super.initState();
+    Future<void>.delayed(Duration(seconds: 2), () {
+      Navigator.popAndPushNamed(context, "/home");
+    });
+  }
 
   @override
   Widget build(BuildContext context) {

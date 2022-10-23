@@ -25,8 +25,8 @@ class ButtonComponent extends StatelessWidget {
           shadowColor: Colors.transparent,
           padding: EdgeInsets.symmetric(vertical: 16.h, horizontal: 24.w),
           elevation: 0.0,
-          shape:
-              RoundedRectangleBorder(borderRadius: BorderRadius.circular(12))),
+          shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(12.w))),
       child: Text(
         text,
         style: TextStyle(fontSize: 16.sp, fontWeight: FontWeight.bold),

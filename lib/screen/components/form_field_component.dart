@@ -9,7 +9,7 @@ class FormFieldComponent extends StatelessWidget {
       required this.name,
       required this.placeholder,
       required this.validation,
-      this.controller,
+      required this.controller,
       required this.isDisable,
       this.initialValue})
       : super(key: key);
@@ -18,7 +18,7 @@ class FormFieldComponent extends StatelessWidget {
   final String placeholder;
   final Function() validation;
   final bool isDisable;
-  final TextEditingController? controller;
+  final TextEditingController controller;
   final String? initialValue;
 
   @override
@@ -32,13 +32,13 @@ class FormFieldComponent extends StatelessWidget {
         ),
         TextFormField(
           enabled: !isDisable,
+          controller: controller,
           validator: (value) {
             if (value == null || value.isEmpty) {
               return 'Please enter some text';
             }
             return null;
           },
-          initialValue: initialValue ?? "",
           decoration: InputDecoration(
             errorStyle: TextStyle(
               fontSize: 14.sp,

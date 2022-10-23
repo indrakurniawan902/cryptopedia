@@ -34,41 +34,20 @@ class _RegistrationState extends State<Registration> {
     Future<void>.delayed(Duration.zero, () {
       ScaffoldMessenger.of(context).showSnackBar(registSnackBar);
     });
-    _checkRegisteredUser();
     emailC.text = widget.userEmail!;
-    print(widget.userEmail!);
   }
 
-  Future<void> _checkRegisteredUser() async {
-    try {
-      var res = await http.get(Uri.parse(
-          "${ApiConstants.baseUrl}${ApiConstants.checkRegister}?email=${widget.userEmail}"));
-      if (res.statusCode == 200) {
-        var dataResponse = jsonDecode(res.body);
-        var data = dataResponse;
-        print(dataResponse == 0);
-        //tambahin kondisi semisal dataResponse nya == 1 dia otomatis dipindah ke halaman home (karene udah registrasi)
-
-      } else {
-        print("Error");
-      }
-    } catch (e) {
-      print(e);
-    }
-  }
-
-  Future<void> _postRegister() async {
+  Future<void> _postRegister(
+      BuildContext context, VoidCallback onSuccess) async {
     try {
       var res = await http.post(Uri.parse(
           "${ApiConstants.baseUrl}${ApiConstants.register}?email=${emailC.text}&name=${fullnameC.text}&username=${usernameC.text}"));
       if (res.statusCode == 200) {
         var dataResponse = jsonDecode(res.body);
-        var data = dataResponse;
         print(dataResponse);
-        //tambahin kondisi semisal dataResponse nyaada dan ga error dia pindah dan munculin registrasi berhasil)
-
-      } else {
-        print("Error");
+        if (dataResponse != null) {
+          onSuccess.call();
+        }
       }
     } catch (e) {
       print(e);
@@ -78,8 +57,6 @@ class _RegistrationState extends State<Registration> {
   @override
   Widget build(BuildContext context) {
     final formKey = GlobalKey<FormState>();
-    final auth = Provider.of<AuthProvider>(context, listen: false);
-    User? user = auth.getUser();
 
     void validateInput() {
       if (fullnameC.text != "" && usernameC.text != "") {}
@@ -158,7 +135,10 @@ class _RegistrationState extends State<Registration> {
                               text: "Save",
                               onClickFunction: () {
                                 if (formKey.currentState!.validate()) {
-                                  _postRegister();
+                                  _postRegister(context, () {
+                                    Navigator.popAndPushNamed(
+                                        context, "/register-success");
+                                  });
                                 }
                               },
                               isDisable: false),

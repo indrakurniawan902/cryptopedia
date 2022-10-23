@@ -8,9 +8,35 @@ var registSnackBar = SnackBar(
   backgroundColor: Colors.transparent,
   width: double.infinity,
   content: AwesomeSnackbarContent(
-    title: 'Succsess!',
+    title: 'Success!',
     color: AppColors.primaryBrand,
     message: 'Please complete your registration here!',
     contentType: ContentType.success,
+  ),
+);
+
+var registSuccessSnackBar = SnackBar(
+  elevation: 0,
+  behavior: SnackBarBehavior.floating,
+  backgroundColor: Colors.transparent,
+  width: double.infinity,
+  content: AwesomeSnackbarContent(
+    title: 'Success!',
+    color: AppColors.primaryBrand,
+    message: 'Your registration is complete!',
+    contentType: ContentType.success,
+  ),
+);
+
+var registFailedSnackBar = SnackBar(
+  elevation: 0,
+  behavior: SnackBarBehavior.floating,
+  backgroundColor: Colors.transparent,
+  width: double.infinity,
+  content: AwesomeSnackbarContent(
+    title: 'Opps!',
+    color: AppColors.primaryBrand,
+    message: 'Something went wrong, please try again later!',
+    contentType: ContentType.failure,
   ),
 );
