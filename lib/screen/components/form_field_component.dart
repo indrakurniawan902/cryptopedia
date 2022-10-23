@@ -8,16 +8,18 @@ class FormFieldComponent extends StatelessWidget {
       {Key? key,
       required this.name,
       required this.placeholder,
-      required this.controller,
       required this.validation,
-      required this.isDisable})
+      this.controller,
+      required this.isDisable,
+      this.initialValue})
       : super(key: key);
 
   final String name;
   final String placeholder;
-  final TextEditingController controller;
   final Function() validation;
   final bool isDisable;
+  final TextEditingController? controller;
+  final String? initialValue;
 
   @override
   Widget build(BuildContext context) {
@@ -36,6 +38,7 @@ class FormFieldComponent extends StatelessWidget {
             }
             return null;
           },
+          initialValue: initialValue ?? "",
           decoration: InputDecoration(
             errorStyle: TextStyle(
               fontSize: 14.sp,
@@ -48,6 +51,7 @@ class FormFieldComponent extends StatelessWidget {
             focusedBorder: const OutlineInputBorder(
               borderSide: BorderSide(color: AppColors.primaryBrand, width: 1.0),
             ),
+            hintStyle: TextStyle(color: AppColors.gray4),
             border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(5.0),
             ),

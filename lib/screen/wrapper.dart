@@ -15,11 +15,13 @@ class Wrapper extends StatelessWidget {
     return StreamBuilder<User?>(
       stream: auth.changeState(),
       builder: (context, snapshot) {
-        print(snapshot);
+        // print(snapshot.data);
         if (snapshot.connectionState == ConnectionState.active) {
           // return (snapshot.data != null && snapshot.data!.emailVerified)
           return (snapshot.data != null) //untuk anonimous login
-              ? const Registration()
+              ? Registration(
+                  userEmail: snapshot.data!.email,
+                )
               : const OnBoarding();
         } else {
           return const Center(

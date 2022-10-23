@@ -7,7 +7,7 @@ class AuthProvider with ChangeNotifier {
 
   Stream<User?> changeState() {
     return auth.idTokenChanges();
-  }  
+  }
 
   void logout() async {
     try {
@@ -17,17 +17,22 @@ class AuthProvider with ChangeNotifier {
     }
   }
 
-  Future<UserCredential> signInWithGoogle() async {    
+  User? getUser() {
+    final User? user = auth.currentUser;
+    return user;
+  }
+
+  Future<UserCredential> signInWithGoogle() async {
     final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
-    
+
     final GoogleSignInAuthentication? googleAuth =
         await googleUser?.authentication;
-    
+
     final credential = GoogleAuthProvider.credential(
       accessToken: googleAuth?.accessToken,
       idToken: googleAuth?.idToken,
     );
-    
+
     return await FirebaseAuth.instance.signInWithCredential(credential);
   }
 }

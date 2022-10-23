@@ -1,12 +1,22 @@
+import 'dart:convert';
+
+import 'package:cryptopedia/provider/auth_provider.dart';
 import 'package:cryptopedia/screen/components/button_component.dart';
 import 'package:cryptopedia/screen/components/form_field_component.dart';
+import 'package:cryptopedia/screen/components/snackbar.dart';
+import 'package:cryptopedia/utils/constant/api_constant.dart';
 import 'package:cryptopedia/utils/constant/app_text_style.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:provider/provider.dart';
 import '../../utils/constant/app_shadow.dart';
+import 'dart:async';
+import 'package:http/http.dart' as http;
 
 class Registration extends StatefulWidget {
-  const Registration({Key? key}) : super(key: key);
+  const Registration({Key? key, required this.userEmail}) : super(key: key);
+  final String? userEmail;
 
   @override
   State<Registration> createState() => _RegistrationState();
@@ -19,8 +29,57 @@ class _RegistrationState extends State<Registration> {
   TextEditingController usernameC = TextEditingController();
 
   @override
+  void initState() {
+    super.initState();
+    Future<void>.delayed(Duration.zero, () {
+      ScaffoldMessenger.of(context).showSnackBar(registSnackBar);
+    });
+    _checkRegisteredUser();
+    emailC.text = widget.userEmail!;
+    print(widget.userEmail!);
+  }
+
+  Future<void> _checkRegisteredUser() async {
+    try {
+      var res = await http.get(Uri.parse(
+          "${ApiConstants.baseUrl}${ApiConstants.checkRegister}?email=${widget.userEmail}"));
+      if (res.statusCode == 200) {
+        var dataResponse = jsonDecode(res.body);
+        var data = dataResponse;
+        print(dataResponse == 0);
+        //tambahin kondisi semisal dataResponse nya == 1 dia otomatis dipindah ke halaman home (karene udah registrasi)
+
+      } else {
+        print("Error");
+      }
+    } catch (e) {
+      print(e);
+    }
+  }
+
+  Future<void> _postRegister() async {
+    try {
+      var res = await http.post(Uri.parse(
+          "${ApiConstants.baseUrl}${ApiConstants.register}?email=${emailC.text}&name=${fullnameC.text}&username=${usernameC.text}"));
+      if (res.statusCode == 200) {
+        var dataResponse = jsonDecode(res.body);
+        var data = dataResponse;
+        print(dataResponse);
+        //tambahin kondisi semisal dataResponse nyaada dan ga error dia pindah dan munculin registrasi berhasil)
+
+      } else {
+        print("Error");
+      }
+    } catch (e) {
+      print(e);
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
     final formKey = GlobalKey<FormState>();
+    final auth = Provider.of<AuthProvider>(context, listen: false);
+    User? user = auth.getUser();
 
     void validateInput() {
       if (fullnameC.text != "" && usernameC.text != "") {}
@@ -61,9 +120,10 @@ class _RegistrationState extends State<Registration> {
                             children: [
                               FormFieldComponent(
                                 name: "Email",
-                                placeholder: "johndoe@gmail.com",
+                                placeholder: widget.userEmail!,
                                 controller: emailC,
-                                validation: validateInput,
+                                initialValue: widget.userEmail,
+                                validation: () {},
                                 isDisable: true,
                               ),
                               SizedBox(
@@ -97,7 +157,9 @@ class _RegistrationState extends State<Registration> {
                           child: ButtonComponent(
                               text: "Save",
                               onClickFunction: () {
-                                if (formKey.currentState!.validate()) {}
+                                if (formKey.currentState!.validate()) {
+                                  _postRegister();
+                                }
                               },
                               isDisable: false),
                         ),
