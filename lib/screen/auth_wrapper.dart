@@ -53,7 +53,7 @@ class _AuthWrapperState extends State<AuthWrapper> {
                   future: _isRegistered(snapshotStream.data!.email),
                   builder: ((context, snapshot) {
                     if (snapshot.connectionState == ConnectionState.waiting) {
-                      return Scaffold(
+                      return const Scaffold(
                         body: Center(
                           child: CircularProgressIndicator(
                             color: AppColors.primaryBrand,
@@ -62,10 +62,10 @@ class _AuthWrapperState extends State<AuthWrapper> {
                       );
                     } else {
                       if (snapshot.hasData && snapshot.data!) {
-                        return Homepage();
+                        return const Homepage();
                       } else {
                         return Registration(
-                          userEmail: email,
+                          userEmail: snapshotStream.data!.email,
                         );
                       }
                     }

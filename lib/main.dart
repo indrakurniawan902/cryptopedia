@@ -1,7 +1,6 @@
 import 'package:cryptopedia/provider/auth_provider.dart';
 import 'package:cryptopedia/provider/on_boarding_provider.dart';
 import 'package:cryptopedia/screen/homepage.dart';
-import 'package:cryptopedia/screen/registration/registration.dart';
 import 'package:cryptopedia/screen/registration/registration_success.dart';
 import 'package:cryptopedia/screen/auth_wrapper.dart';
 import 'package:flutter/material.dart';

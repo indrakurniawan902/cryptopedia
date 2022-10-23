@@ -13,7 +13,7 @@ class _RegistrationSuccessState extends State<RegistrationSuccess> {
   @override
   void initState() {
     super.initState();
-    Future<void>.delayed(Duration(seconds: 2), () {
+    Future<void>.delayed(const Duration(seconds: 2), () {
       Navigator.popAndPushNamed(context, "/home");
     });
   }

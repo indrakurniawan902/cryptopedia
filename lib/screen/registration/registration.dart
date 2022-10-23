@@ -1,15 +1,12 @@
 import 'dart:convert';
 
-import 'package:cryptopedia/provider/auth_provider.dart';
 import 'package:cryptopedia/screen/components/button_component.dart';
 import 'package:cryptopedia/screen/components/form_field_component.dart';
 import 'package:cryptopedia/screen/components/snackbar.dart';
 import 'package:cryptopedia/utils/constant/api_constant.dart';
 import 'package:cryptopedia/utils/constant/app_text_style.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:provider/provider.dart';
 import '../../utils/constant/app_shadow.dart';
 import 'dart:async';
 import 'package:http/http.dart' as http;
