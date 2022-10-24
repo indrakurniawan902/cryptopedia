@@ -21,6 +21,8 @@ class Registration extends StatefulWidget {
 
 class _RegistrationState extends State<Registration> {
   bool isDisable = true;
+  bool isFetching = false;
+
   TextEditingController emailC = TextEditingController();
   TextEditingController fullnameC = TextEditingController();
   TextEditingController usernameC = TextEditingController();

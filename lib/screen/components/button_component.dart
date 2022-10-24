@@ -8,32 +8,39 @@ class ButtonComponent extends StatelessWidget {
     required this.text,
     required this.onClickFunction,
     required this.isDisable,
+    this.isLoading,
   }) : super(key: key);
 
   final String text;
   final Function() onClickFunction;
   final bool isDisable;
+  final bool? isLoading;
 
   @override
   Widget build(BuildContext context) {
     return TextButton(
-      onPressed: isDisable ? null : onClickFunction,
+      onPressed: isDisable || isLoading == true ? null : onClickFunction,
       style: TextButton.styleFrom(
-          backgroundColor:
-              isDisable ? const Color(0xffE5E5E5) : AppColors.primaryBrand,
+          backgroundColor: isDisable || isLoading == true
+              ? const Color(0xffE5E5E5)
+              : AppColors.primaryBrand,
           foregroundColor: Colors.white,
           shadowColor: Colors.transparent,
           padding: EdgeInsets.symmetric(vertical: 16.h, horizontal: 24.w),
           elevation: 0.0,
           shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(12.w))),
-      child: Text(
-        text,
-        style: TextStyle(
-            fontSize: 16.sp,
-            fontWeight: FontWeight.bold,
-            fontFamily: "Poppins"),
-      ),
+      child: isLoading == true
+          ? CircularProgressIndicator(
+              color: AppColors.lightColor,
+            )
+          : Text(
+              text,
+              style: TextStyle(
+                  fontSize: 16.sp,
+                  fontWeight: FontWeight.bold,
+                  fontFamily: "Poppins"),
+            ),
     );
   }
 }

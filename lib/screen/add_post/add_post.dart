@@ -13,6 +13,7 @@ import '../../utils/constant/api_constant.dart';
 import '../../utils/constant/app_shadow.dart';
 import '../../utils/constant/app_text_style.dart';
 import '../components/button_component.dart';
+import '../components/snackbar.dart';
 
 class AddPost extends StatefulWidget {
   const AddPost({Key? key}) : super(key: key);
@@ -23,25 +24,27 @@ class AddPost extends StatefulWidget {
 
 class _AddPostState extends State<AddPost> {
   String category = cryptoCategory.first;
+  TextEditingController titleC = TextEditingController();
+  TextEditingController categoryC = TextEditingController();
+  TextEditingController contentC = TextEditingController();
+  TextEditingController tagC = TextEditingController();
+  bool isFetching = false;
 
   @override
   Widget build(BuildContext context) {
     final formKey = GlobalKey<FormState>();
-    TextEditingController titleC = TextEditingController();
-    TextEditingController categoryC = TextEditingController();
-    TextEditingController contentC = TextEditingController();
-    TextEditingController tagC = TextEditingController();
+
     AuthProvider auth = Provider.of<AuthProvider>(context);
-    User? user = auth.getUser();
 
     Future<void> _postForum(
-        BuildContext context, VoidCallback onSuccess) async {
+        BuildContext context, VoidCallback onSuccess, String email) async {
       try {
         var res = await http.post(
           Uri.parse("${ApiConstants.baseUrl}${ApiConstants.addPost}"),
           body: {
-            'email': user?.email,
+            'email': email,
             'title': titleC.text,
+            'content': contentC.text,
             'category': category,
             'tags': tagC.text,
           },
@@ -52,6 +55,8 @@ class _AddPostState extends State<AddPost> {
           if (dataResponse != null) {
             onSuccess.call();
           }
+        } else {
+          print(res.statusCode);
         }
       } catch (e) {
         print(e);
@@ -204,17 +209,27 @@ class _AddPostState extends State<AddPost> {
                             ),
                             SizedBox(
                               width: double.infinity,
-                              child: ButtonComponent(
-                                  text: "Post",
-                                  onClickFunction: () {
-                                    if (formKey.currentState!.validate()) {
-                                      _postForum(context, () {
-                                        // Navigator.popAndPushNamed(
-                                        //     context, "/register-success");
-                                      });
-                                    }
-                                  },
-                                  isDisable: false),
+                              child: StreamBuilder<User?>(
+                                  stream: auth.changeState(),
+                                  builder: (context, snapshot) {
+                                    return ButtonComponent(
+                                        text: "Post",
+                                        isLoading: isFetching,
+                                        onClickFunction: () {
+                                          if (formKey.currentState!
+                                              .validate()) {
+                                            _postForum(context, () {
+                                              // Navigator.popAndPushNamed(
+                                              //     context, "/register-success");
+                                              ScaffoldMessenger.of(context)
+                                                  .showSnackBar(
+                                                      postSuccessSnackBar);
+                                            }, snapshot.data!.email!);
+                                          }
+                                        },
+                                        isDisable:
+                                            snapshot.hasData ? false : true);
+                                  }),
                             ),
                           ],
                         )
