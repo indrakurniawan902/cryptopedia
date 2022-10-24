@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:convert';
 
 import 'package:cryptopedia/provider/auth_provider.dart';
+import 'package:cryptopedia/screen/add_post/add_post.dart';
 import 'package:cryptopedia/screen/homepage.dart';
 import 'package:cryptopedia/screen/on_boarding/on_boarding.dart';
 import 'package:cryptopedia/screen/registration/registration.dart';
@@ -62,7 +63,7 @@ class _AuthWrapperState extends State<AuthWrapper> {
                       );
                     } else {
                       if (snapshot.hasData && snapshot.data!) {
-                        return const Homepage();
+                        return const AddPost();
                       } else {
                         return Registration(
                           userEmail: snapshotStream.data!.email,

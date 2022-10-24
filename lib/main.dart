@@ -1,5 +1,6 @@
 import 'package:cryptopedia/provider/auth_provider.dart';
 import 'package:cryptopedia/provider/on_boarding_provider.dart';
+import 'package:cryptopedia/screen/add_post/add_post.dart';
 import 'package:cryptopedia/screen/homepage.dart';
 import 'package:cryptopedia/screen/registration/registration_success.dart';
 import 'package:cryptopedia/screen/auth_wrapper.dart';
@@ -42,8 +43,10 @@ class MyApp extends StatelessWidget {
             '/': (context) => const AuthWrapper(),
             '/register-success': (context) => const RegistrationSuccess(),
             '/home': (context) => const Homepage(),
+            '/add-post': (context) => const AddPost(),
           },
           initialRoute: '/',
+          // initialRoute: '/add-post',
         ),
       ),
     );

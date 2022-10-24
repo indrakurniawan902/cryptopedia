@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -11,7 +13,8 @@ class FormFieldComponent extends StatelessWidget {
       required this.validation,
       required this.controller,
       required this.isDisable,
-      this.initialValue})
+      this.initialValue,
+      this.height})
       : super(key: key);
 
   final String name;
@@ -20,6 +23,7 @@ class FormFieldComponent extends StatelessWidget {
   final bool isDisable;
   final TextEditingController controller;
   final String? initialValue;
+  final int? height;
 
   @override
   Widget build(BuildContext context) {
@@ -31,6 +35,7 @@ class FormFieldComponent extends StatelessWidget {
           height: 8.h,
         ),
         TextFormField(
+          maxLines: height,
           style: TextStyle(
             color: isDisable ? AppColors.gray3 : AppColors.darkColor,
             fontFamily: "Poppins",

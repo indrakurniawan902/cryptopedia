@@ -11,6 +11,12 @@ TextStyle headerStyleGreen = TextStyle(
     fontWeight: FontWeight.w600,
     color: AppColors.primaryBrand);
 
+TextStyle headerStyleWhite = TextStyle(
+    fontSize: 28.sp,
+    fontFamily: 'Poppins',
+    fontWeight: FontWeight.w600,
+    color: AppColors.lightColor);
+
 TextStyle appHeaderText = TextStyle(
     fontSize: 32.sp,
     fontFamily: 'Poppins',
