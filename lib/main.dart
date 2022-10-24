@@ -5,6 +5,7 @@ import 'package:cryptopedia/screen/registration/registration.dart';
 import 'package:cryptopedia/screen/registration/registration_success.dart';
 import 'package:cryptopedia/screen/auth_wrapper.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -12,6 +13,7 @@ import 'firebase_options.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
@@ -32,7 +34,7 @@ class MyApp extends StatelessWidget {
       child: ScreenUtilInit(
         designSize: const Size(375, 812),
         builder: (context, child) => MaterialApp(
-          title: 'Flutter Demo',
+          debugShowCheckedModeBanner: false,
           theme: ThemeData(
             primarySwatch: Colors.blue,
           ),
