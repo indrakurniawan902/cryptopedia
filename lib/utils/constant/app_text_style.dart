@@ -16,3 +16,9 @@ TextStyle appHeaderText = TextStyle(
     fontFamily: 'Poppins-Bold',
     fontWeight: FontWeight.bold,
     color: AppColors.lightColor);
+
+TextStyle textProfile = TextStyle(
+    fontSize: 14.sp,
+    fontFamily: 'Poppins',
+    color: AppColors.darkColor,
+    fontWeight: FontWeight.w500);

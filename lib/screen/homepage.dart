@@ -21,7 +21,13 @@ class Homepage extends StatelessWidget {
               auth.logout();
             },
             isDisable: false,
-          )
+          ),
+          ButtonComponent(
+              text: 'Profile',
+              onClickFunction: () {
+                Navigator.pushNamed(context, '/profile');
+              },
+              isDisable: false)
         ],
       )),
     );
