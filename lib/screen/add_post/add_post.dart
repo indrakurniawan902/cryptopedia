@@ -13,6 +13,8 @@ import '../../utils/constant/api_constant.dart';
 import '../../utils/constant/app_shadow.dart';
 import '../../utils/constant/app_text_style.dart';
 import '../components/button_component.dart';
+import '../components/pop_up_dialog.dart';
+// ignore: unused_import
 import '../components/snackbar.dart';
 
 class AddPost extends StatefulWidget {
@@ -75,7 +77,7 @@ class _AddPostState extends State<AddPost> {
                     padding:
                         EdgeInsets.symmetric(horizontal: 20.w, vertical: 12.h),
                     width: double.infinity,
-                    decoration: BoxDecoration(
+                    decoration: const BoxDecoration(
                       shape: BoxShape.rectangle,
                       color: AppColors.primaryBrand,
                       borderRadius: BorderRadius.only(
@@ -123,7 +125,7 @@ class _AddPostState extends State<AddPost> {
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
                                     children: [
-                                      Text(
+                                      const Text(
                                         "Category",
                                         textAlign: TextAlign.left,
                                       ),
@@ -132,7 +134,7 @@ class _AddPostState extends State<AddPost> {
                                       ),
                                       DropdownButtonFormField(
                                         value: category,
-                                        style: TextStyle(
+                                        style: const TextStyle(
                                           color: AppColors.darkColor,
                                           fontFamily: "Poppins",
                                         ),
@@ -155,8 +157,8 @@ class _AddPostState extends State<AddPost> {
                                                 color: AppColors.primaryBrand,
                                                 width: 1.0),
                                           ),
-                                          hintStyle:
-                                              TextStyle(color: AppColors.gray4),
+                                          hintStyle: const TextStyle(
+                                              color: AppColors.gray4),
                                           border: OutlineInputBorder(
                                             borderRadius:
                                                 BorderRadius.circular(5.0),
@@ -210,26 +212,34 @@ class _AddPostState extends State<AddPost> {
                             SizedBox(
                               width: double.infinity,
                               child: StreamBuilder<User?>(
-                                  stream: auth.changeState(),
-                                  builder: (context, snapshot) {
-                                    return ButtonComponent(
-                                        text: "Post",
-                                        isLoading: isFetching,
-                                        onClickFunction: () {
-                                          if (formKey.currentState!
-                                              .validate()) {
-                                            _postForum(context, () {
-                                              // Navigator.popAndPushNamed(
-                                              //     context, "/register-success");
-                                              ScaffoldMessenger.of(context)
-                                                  .showSnackBar(
-                                                      postSuccessSnackBar);
-                                            }, snapshot.data!.email!);
-                                          }
-                                        },
-                                        isDisable:
-                                            snapshot.hasData ? false : true);
-                                  }),
+                                stream: auth.changeState(),
+                                builder: (context, snapshot) {
+                                  return ButtonComponent(
+                                      text: "Post",
+                                      isLoading: isFetching,
+                                      onClickFunction: () {
+                                        if (formKey.currentState!.validate()) {
+                                          _postForum(context, () {
+                                            Navigator.popAndPushNamed(
+                                                context, "/register-success");
+                                            showDialog(
+                                              context: context,
+                                              builder: (BuildContext context) {
+                                                return const PopUpDialog(
+                                                  type: 'success',
+                                                  title: 'Success!',
+                                                  description:
+                                                      'Your forum has been posted!',
+                                                );
+                                              },
+                                            );
+                                          }, snapshot.data!.email!);
+                                        }
+                                      },
+                                      isDisable:
+                                          snapshot.hasData ? false : true);
+                                },
+                              ),
                             ),
                           ],
                         )
