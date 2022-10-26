@@ -23,41 +23,42 @@ class MenuItemProfile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      onTap: onTilepress,
-      child: SizedBox(
-        height: 30.h,
-        child: Expanded(
-            child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                Icon(leading,
-                    color: isLogout == true
-                        ? AppColors.error
-                        : AppColors.primaryBrand),
-                SizedBox(
-                  width: 15.w,
-                ),
-                Text(
-                  title!,
-                  style: textProfile,
-                )
-              ],
-            ),
-            isToogle == true
-                ? Switch(
-                    activeColor: AppColors.primaryBrand,
-                    value: false,
-                    onChanged: (value) {
-                      value = !value;
-                    },
+    return Material(
+      color: AppColors.lightColor,
+      child: InkWell(
+        onTap: onTilepress,
+        child: SizedBox(
+          height: 40.h,
+          width: 315.w,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Icon(leading,
+                      color: isLogout == true
+                          ? AppColors.error
+                          : AppColors.primaryBrand),
+                  SizedBox(
+                    width: 15.w,
+                  ),
+                  Text(
+                    title!,
+                    style: textProfile,
                   )
-                : IconButton(icon: Icon(trailing), onPressed: () {}),
-          ],
-        )),
+                ],
+              ),
+              isToogle == true
+                  ? Switch(
+                      activeColor: AppColors.primaryBrand,
+                      value: true,
+                      onChanged: (value) {},
+                    )
+                  : Icon(trailing),
+            ],
+          ),
+        ),
       ),
     );
   }

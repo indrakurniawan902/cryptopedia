@@ -1,4 +1,6 @@
+import 'package:cryptopedia/screen/homepage.dart';
 import 'package:cryptopedia/utils/constant/app_colors.dart';
+import 'package:cryptopedia/utils/constant/app_text_style.dart';
 import 'package:flutter/material.dart';
 import "package:flutter_feather_icons/flutter_feather_icons.dart";
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -8,13 +10,17 @@ class DefaultAppbar extends StatelessWidget with PreferredSizeWidget {
       {super.key,
       required this.size,
       required this.title,
-      required this.isBack,
+      this.user,
+      this.isBack,
+      this.isHomepage,
       required this.fontSize});
 
   final double size;
   final double fontSize;
   final String title;
-  final bool isBack;
+  final String? user;
+  final bool? isBack;
+  final bool? isHomepage;
   @override
   Widget build(BuildContext context) {
     return AppBar(
@@ -23,15 +29,33 @@ class DefaultAppbar extends StatelessWidget with PreferredSizeWidget {
       backgroundColor: Colors.transparent,
       title: Text(
         title,
-        style: TextStyle(fontSize: fontSize),
+        style: TextStyle(fontSize: fontSize, fontFamily: 'Poppins-SemiBold'),
       ),
       centerTitle: true,
+      actions: isHomepage == true
+          ? [
+              Padding(
+                  padding: EdgeInsets.fromLTRB(0.w, 23.h, 20.w, 23.h),
+                  child: Text(
+                    user!,
+                    style: userStyle,
+                  ))
+            ]
+          : [const SizedBox()],
       leading: isBack == true
           ? IconButton(
               icon: const Icon(FeatherIcons.chevronLeft),
               onPressed: () => Navigator.pop(context),
             )
-          : const SizedBox(),
+          : isHomepage == true
+              ? Padding(
+                  padding: EdgeInsets.fromLTRB(20.w, 17.h, 0, 17.h),
+                  child: Image.asset(
+                      cacheHeight: 32.h.toInt(),
+                      cacheWidth: 35.w.toInt(),
+                      'assets/images/icon_home.png'),
+                )
+              : const SizedBox(),
       flexibleSpace: Container(
         decoration: const BoxDecoration(
           color: AppColors.primaryBrand,

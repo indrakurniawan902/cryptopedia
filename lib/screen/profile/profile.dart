@@ -2,6 +2,8 @@ import 'package:cryptopedia/provider/auth_provider.dart';
 import 'package:cryptopedia/screen/components/default_appbar.dart';
 import 'package:cryptopedia/screen/profile/widget/menu_item_profile.dart';
 import 'package:cryptopedia/utils/constant/app_colors.dart';
+import 'package:cryptopedia/utils/constant/app_shadow.dart';
+import 'package:cryptopedia/utils/constant/app_text_style.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_feather_icons/flutter_feather_icons.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -67,16 +69,21 @@ class _ProfileState extends State<Profile> {
               ),
               Container(
                 decoration: BoxDecoration(
+                  boxShadow: const <BoxShadow>[
+                    AppShadow.shadow1,
+                  ],
                   borderRadius: BorderRadius.circular(10),
                   color: Colors.white,
                 ),
-                height: 257.h,
+                height: 307.h,
                 padding: EdgeInsets.symmetric(vertical: 20.w, horizontal: 10.h),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    const MenuItemProfile(
+                    MenuItemProfile(
                       title: 'My Profile',
+                      onTilepress: () =>
+                          Navigator.pushNamed(context, '/my-profile'),
                       leading: FeatherIcons.user,
                       trailing: FeatherIcons.chevronRight,
                     ),
@@ -114,8 +121,10 @@ class _ProfileState extends State<Profile> {
                     SizedBox(
                       height: 2.h,
                     ),
-                    const MenuItemProfile(
+                    MenuItemProfile(
                       title: 'About App',
+                      onTilepress: () =>
+                          Navigator.pushNamed(context, '/about-app'),
                       leading: FeatherIcons.info,
                     ),
                   ],
@@ -126,10 +135,13 @@ class _ProfileState extends State<Profile> {
               ),
               Container(
                 decoration: BoxDecoration(
+                  boxShadow: const <BoxShadow>[
+                    AppShadow.shadow1,
+                  ],
                   borderRadius: BorderRadius.circular(10),
                   color: Colors.white,
                 ),
-                height: 52.h,
+                height: 62.h,
                 padding: EdgeInsets.symmetric(vertical: 10.w, horizontal: 10.h),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
@@ -146,6 +158,14 @@ class _ProfileState extends State<Profile> {
                     ),
                   ],
                 ),
+              ),
+              SizedBox(
+                height: 64.h,
+              ),
+              Text(
+                '© 2022 cryptopedia',
+                textAlign: TextAlign.center,
+                style: copyRight,
               ),
             ],
           ),

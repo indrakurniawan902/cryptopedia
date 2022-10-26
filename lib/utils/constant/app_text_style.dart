@@ -19,6 +19,22 @@ TextStyle appHeaderText = TextStyle(
 
 TextStyle textProfile = TextStyle(
     fontSize: 14.sp,
-    fontFamily: 'Poppins',
+    fontFamily: 'Poppins-Medium',
     color: AppColors.darkColor,
     fontWeight: FontWeight.w500);
+TextStyle userStyle = TextStyle(
+    fontFamily: 'Poppins',
+    fontSize: 12.sp,
+    fontWeight: FontWeight.bold,
+    color: AppColors.lightColor);
+TextStyle copyRight = TextStyle(
+  fontFamily: 'Poppins-Medium',
+  fontSize: 10.sp,
+  color: AppColors.gray3,
+);
+TextStyle aboutText = TextStyle(
+  fontFamily: 'Poppins-Regular',
+  fontSize: 14.sp,
+  height: 1.5.sp,
+  color: AppColors.darkColor,
+);

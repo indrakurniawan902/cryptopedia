@@ -1,6 +1,8 @@
 import 'package:cryptopedia/provider/auth_provider.dart';
 import 'package:cryptopedia/provider/on_boarding_provider.dart';
+import 'package:cryptopedia/screen/about_app/about_app.dart';
 import 'package:cryptopedia/screen/homepage.dart';
+import 'package:cryptopedia/screen/my_profile/my_profile.dart';
 import 'package:cryptopedia/screen/profile/profile.dart';
 import 'package:cryptopedia/screen/registration/registration_success.dart';
 import 'package:cryptopedia/screen/auth_wrapper.dart';
@@ -43,6 +45,8 @@ class MyApp extends StatelessWidget {
             '/register-success': (context) => const RegistrationSuccess(),
             '/home': (context) => const Homepage(),
             '/profile': (context) => const Profile(),
+            '/my-profile': (context) => const MyProfile(),
+            '/about-app': (context) => const AboutApp(),
           },
           initialRoute: '/',
         ),
