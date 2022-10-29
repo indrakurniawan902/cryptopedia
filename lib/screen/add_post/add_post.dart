@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:cryptopedia/main.dart';
 import 'package:cryptopedia/screen/components/form_field_component.dart';
 import 'package:cryptopedia/utils/constant/app_colors.dart';
 import 'package:cryptopedia/utils/constant/crypto_category.dart';
@@ -35,7 +36,7 @@ class _AddPostState extends State<AddPost> {
   bool isFetching = false;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext buildContext) {
     final formKey = GlobalKey<FormState>();
 
     AuthProvider auth = Provider.of<AuthProvider>(context);
@@ -229,11 +230,20 @@ class _AddPostState extends State<AddPost> {
                                       isLoading: isFetching,
                                       onClickFunction: () {
                                         if (formKey.currentState!.validate()) {
-                                          _postForum(context, () {
-                                            Navigator.popAndPushNamed(
-                                                context, "/home");
+                                          WidgetsBinding.instance
+                                              .addPostFrameCallback(
+                                            (_) => setState(
+                                              () {
+                                                isFetching = true;
+                                              },
+                                            ),
+                                          );
+                                          _postForum(buildContext, () {
+                                            Navigator.of(buildContext)
+                                                .popAndPushNamed("/home");
                                             showDialog(
-                                              context: context,
+                                              context:
+                                                  navigatorKey.currentContext!,
                                               builder: (BuildContext context) {
                                                 return const PopUpDialog(
                                                   type: 'success',

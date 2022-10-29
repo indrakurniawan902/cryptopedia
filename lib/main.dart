@@ -17,6 +17,8 @@ import 'package:provider/provider.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
 
+final navigatorKey = GlobalKey<NavigatorState>();
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
@@ -46,6 +48,7 @@ class MyApp extends StatelessWidget {
           builder: (context, value, child) => MaterialApp(
             debugShowCheckedModeBanner: false,
             theme: ThemeStyles.switchTheme(value.themeValue, context),
+            navigatorKey: navigatorKey,
             routes: {
               '/': (context) => const AuthWrapper(),
               '/register-success': (context) => const RegistrationSuccess(),
