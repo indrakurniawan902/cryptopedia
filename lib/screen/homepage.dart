@@ -14,7 +14,7 @@ class Homepage extends StatelessWidget {
       body: SafeArea(
           child: Column(
         children: [
-          Text("Berhasil Login"),
+          const Text("Berhasil Login"),
           ButtonComponent(
             text: "Logout",
             onClickFunction: () {

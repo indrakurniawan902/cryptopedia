@@ -1,4 +1,5 @@
 import 'package:cryptopedia/provider/auth_provider.dart';
+import 'package:cryptopedia/provider/theme_provider.dart';
 import 'package:cryptopedia/screen/components/default_appbar.dart';
 import 'package:cryptopedia/screen/profile/widget/menu_item_profile.dart';
 import 'package:cryptopedia/utils/constant/app_colors.dart';
@@ -19,7 +20,6 @@ class Profile extends StatefulWidget {
 class _ProfileState extends State<Profile> {
   @override
   Widget build(BuildContext context) {
-    final auth = Provider.of<AuthProvider>(context, listen: false);
     return SafeArea(
       child: Scaffold(
         appBar: const DefaultAppbar(
@@ -29,7 +29,6 @@ class _ProfileState extends State<Profile> {
           fontSize: 24,
         ),
         body: Container(
-          color: AppColors.lightModeBgHome,
           padding: EdgeInsets.symmetric(
             horizontal: 20.w,
           ),
@@ -56,107 +55,125 @@ class _ProfileState extends State<Profile> {
               SizedBox(
                 height: 3.h,
               ),
-              Text(
-                '@Username',
-                style: TextStyle(
-                  fontSize: 12.sp,
-                  color: AppColors.gray2,
-                  fontFamily: 'Poppins',
+              Consumer<ThemeProvider>(
+                builder: (context, value, child) => Text(
+                  '@Username',
+                  style: TextStyle(
+                    fontSize: 12.sp,
+                    color: value.themeValue == false
+                        ? AppColors.gray2
+                        : AppColors.lightColor,
+                    fontFamily: 'Poppins',
+                  ),
                 ),
               ),
               SizedBox(
                 height: 21.h,
               ),
-              Container(
-                decoration: BoxDecoration(
-                  boxShadow: const <BoxShadow>[
-                    AppShadow.shadow1,
-                  ],
-                  borderRadius: BorderRadius.circular(10),
-                  color: Colors.white,
-                ),
-                height: 307.h,
-                padding: EdgeInsets.symmetric(vertical: 20.w, horizontal: 10.h),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    MenuItemProfile(
-                      title: 'My Profile',
-                      onTilepress: () =>
-                          Navigator.pushNamed(context, '/my-profile'),
-                      leading: FeatherIcons.user,
-                      trailing: FeatherIcons.chevronRight,
-                    ),
-                    SizedBox(
-                      height: 15.h,
-                    ),
-                    const MenuItemProfile(
-                      title: 'My Post',
-                      leading: FeatherIcons.archive,
-                      trailing: FeatherIcons.chevronRight,
-                    ),
-                    SizedBox(
-                      height: 15.h,
-                    ),
-                    const MenuItemProfile(
-                      title: 'My Bookmark',
-                      leading: FeatherIcons.bookmark,
-                      trailing: FeatherIcons.chevronRight,
-                    ),
-                    SizedBox(
-                      height: 15.h,
-                    ),
-                    const MenuItemProfile(
-                      isToogle: true,
-                      title: 'Dark Mode',
-                      leading: FeatherIcons.moon,
-                    ),
-                    SizedBox(
-                      height: 2.h,
-                    ),
-                    const Divider(
-                      color: AppColors.gray4,
-                      thickness: 0.8,
-                    ),
-                    SizedBox(
-                      height: 2.h,
-                    ),
-                    MenuItemProfile(
-                      title: 'About App',
-                      onTilepress: () =>
-                          Navigator.pushNamed(context, '/about-app'),
-                      leading: FeatherIcons.info,
-                    ),
-                  ],
+              Consumer<ThemeProvider>(
+                builder: (context, value, child) => Container(
+                  decoration: BoxDecoration(
+                    boxShadow: const <BoxShadow>[
+                      AppShadow.shadow1,
+                    ],
+                    borderRadius: BorderRadius.circular(10),
+                    color: value.themeValue == false
+                        ? AppColors.lightColor
+                        : AppColors.darkModeFrame,
+                  ),
+                  height: 307.h,
+                  padding:
+                      EdgeInsets.symmetric(vertical: 20.w, horizontal: 10.h),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      MenuItemProfile(
+                        title: 'My Profile',
+                        onTilepress: () =>
+                            Navigator.pushNamed(context, '/my-profile'),
+                        leading: FeatherIcons.user,
+                        trailing: FeatherIcons.chevronRight,
+                      ),
+                      SizedBox(
+                        height: 15.h,
+                      ),
+                      const MenuItemProfile(
+                        title: 'My Post',
+                        leading: FeatherIcons.archive,
+                        trailing: FeatherIcons.chevronRight,
+                      ),
+                      SizedBox(
+                        height: 15.h,
+                      ),
+                      const MenuItemProfile(
+                        title: 'My Bookmark',
+                        leading: FeatherIcons.bookmark,
+                        trailing: FeatherIcons.chevronRight,
+                      ),
+                      SizedBox(
+                        height: 15.h,
+                      ),
+                      const MenuItemProfile(
+                        isToogle: true,
+                        title: 'Dark Mode',
+                        leading: FeatherIcons.moon,
+                      ),
+                      SizedBox(
+                        height: 2.h,
+                      ),
+                      Consumer<ThemeProvider>(
+                        builder: (context, value, child) => Divider(
+                          color: value.themeValue == false
+                              ? AppColors.gray4
+                              : AppColors.lightColor,
+                          thickness: 0.8,
+                        ),
+                      ),
+                      SizedBox(
+                        height: 2.h,
+                      ),
+                      MenuItemProfile(
+                        title: 'About App',
+                        onTilepress: () =>
+                            Navigator.pushNamed(context, '/about-app'),
+                        leading: FeatherIcons.info,
+                      ),
+                    ],
+                  ),
                 ),
               ),
               SizedBox(
                 height: 20.h,
               ),
-              Container(
-                decoration: BoxDecoration(
-                  boxShadow: const <BoxShadow>[
-                    AppShadow.shadow1,
-                  ],
-                  borderRadius: BorderRadius.circular(10),
-                  color: Colors.white,
-                ),
-                height: 62.h,
-                padding: EdgeInsets.symmetric(vertical: 10.w, horizontal: 10.h),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    Consumer<AuthProvider>(
-                      builder: (context, value, child) => MenuItemProfile(
-                        onTilepress: () {
-                          value.logout();
-                        },
-                        isLogout: true,
-                        title: 'Log oout',
-                        leading: FeatherIcons.logOut,
+              Consumer<ThemeProvider>(
+                builder: (context, value, child) => Container(
+                  decoration: BoxDecoration(
+                    boxShadow: const <BoxShadow>[
+                      AppShadow.shadow1,
+                    ],
+                    borderRadius: BorderRadius.circular(10),
+                    color: value.themeValue == false
+                        ? AppColors.lightColor
+                        : AppColors.darkModeFrame,
+                  ),
+                  height: 62.h,
+                  padding:
+                      EdgeInsets.symmetric(vertical: 10.w, horizontal: 10.h),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      Consumer<AuthProvider>(
+                        builder: (context, value, child) => MenuItemProfile(
+                          onTilepress: () {
+                            value.logout();
+                          },
+                          isLogout: true,
+                          title: 'Log oout',
+                          leading: FeatherIcons.logOut,
+                        ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ),
               SizedBox(

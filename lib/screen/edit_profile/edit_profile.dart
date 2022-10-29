@@ -4,16 +4,15 @@ import 'package:cryptopedia/screen/components/default_appbar.dart';
 import 'package:cryptopedia/screen/components/form_field_component.dart';
 import 'package:cryptopedia/utils/constant/app_colors.dart';
 import 'package:cryptopedia/utils/constant/app_shadow.dart';
-import 'package:cryptopedia/utils/constant/app_text_style.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 
-class MyProfile extends StatefulWidget {
-  const MyProfile({super.key});
+class EditProfile extends StatefulWidget {
+  const EditProfile({super.key});
 
   @override
-  State<MyProfile> createState() => _MyProfileState();
+  State<EditProfile> createState() => _EditProfileState();
 }
 
 final formKey = GlobalKey<FormState>();
@@ -25,14 +24,14 @@ void validateInput() {
   if (fullnameC.text != "") {}
 }
 
-class _MyProfileState extends State<MyProfile> {
+class _EditProfileState extends State<EditProfile> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
         appBar: const DefaultAppbar(
           size: 65,
-          title: 'My Profile',
+          title: 'Edit Profile',
           isBack: true,
           fontSize: 24,
         ),
@@ -110,9 +109,9 @@ class _MyProfileState extends State<MyProfile> {
                           SizedBox(
                             width: double.infinity,
                             child: ButtonComponent(
-                                text: "Edit Profile",
+                                text: "Save",
                                 onClickFunction: () {
-                                  Navigator.pushNamed(context, '/edit-profile');
+                                  Navigator.pop(context);
                                 },
                                 isDisable: false),
                           ),

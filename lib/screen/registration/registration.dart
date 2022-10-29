@@ -1,10 +1,12 @@
 import 'dart:convert';
 
 import 'package:cryptopedia/provider/auth_provider.dart';
+import 'package:cryptopedia/provider/theme_provider.dart';
 import 'package:cryptopedia/screen/components/button_component.dart';
 import 'package:cryptopedia/screen/components/form_field_component.dart';
 import 'package:cryptopedia/screen/components/snackbar.dart';
 import 'package:cryptopedia/utils/constant/api_constant.dart';
+import 'package:cryptopedia/utils/constant/app_colors.dart';
 import 'package:cryptopedia/utils/constant/app_text_style.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -84,46 +86,50 @@ class _RegistrationState extends State<Registration> {
                     SizedBox(height: 40.h),
                     Column(
                       children: [
-                        Container(
-                          padding: EdgeInsets.symmetric(
-                              horizontal: 16.w, vertical: 20.h),
-                          decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.circular(10),
-                              boxShadow: const <BoxShadow>[
-                                AppShadow.shadow1,
-                              ]),
-                          child: Column(
-                            children: [
-                              FormFieldComponent(
-                                name: "Email",
-                                placeholder: widget.userEmail!,
-                                controller: emailC,
-                                initialValue: widget.userEmail,
-                                validation: () {},
-                                isDisable: true,
-                              ),
-                              SizedBox(
-                                height: 12.h,
-                              ),
-                              FormFieldComponent(
-                                name: "Fullname",
-                                placeholder: "John doe",
-                                controller: fullnameC,
-                                validation: validateInput,
-                                isDisable: false,
-                              ),
-                              SizedBox(
-                                height: 12.h,
-                              ),
-                              FormFieldComponent(
-                                name: "Username",
-                                placeholder: "johndoe22",
-                                controller: usernameC,
-                                validation: validateInput,
-                                isDisable: false,
-                              ),
-                            ],
+                        Consumer<ThemeProvider>(
+                          builder: (context, value, child) => Container(
+                            padding: EdgeInsets.symmetric(
+                                horizontal: 16.w, vertical: 20.h),
+                            decoration: BoxDecoration(
+                                color: value.themeValue == false
+                                    ? AppColors.lightColor
+                                    : AppColors.darkModeFrame,
+                                borderRadius: BorderRadius.circular(10),
+                                boxShadow: const <BoxShadow>[
+                                  AppShadow.shadow1,
+                                ]),
+                            child: Column(
+                              children: [
+                                FormFieldComponent(
+                                  name: "Email",
+                                  placeholder: widget.userEmail!,
+                                  controller: emailC,
+                                  initialValue: widget.userEmail,
+                                  validation: () {},
+                                  isDisable: true,
+                                ),
+                                SizedBox(
+                                  height: 12.h,
+                                ),
+                                FormFieldComponent(
+                                  name: "Fullname",
+                                  placeholder: "John doe",
+                                  controller: fullnameC,
+                                  validation: validateInput,
+                                  isDisable: false,
+                                ),
+                                SizedBox(
+                                  height: 12.h,
+                                ),
+                                FormFieldComponent(
+                                  name: "Username",
+                                  placeholder: "johndoe22",
+                                  controller: usernameC,
+                                  validation: validateInput,
+                                  isDisable: false,
+                                ),
+                              ],
+                            ),
                           ),
                         ),
                         SizedBox(
