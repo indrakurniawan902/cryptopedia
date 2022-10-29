@@ -115,7 +115,6 @@ class _OnBoardingState extends State<OnBoarding> {
                     alignment: Alignment(0.w, 0.85.h),
                     child: SizedBox(
                       width: 327.w,
-                      height: 46.h,
                       child: ButtonComponent(
                           text: 'Continue With Google',
                           onClickFunction: () {

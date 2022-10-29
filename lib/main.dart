@@ -1,9 +1,15 @@
 import 'package:cryptopedia/provider/auth_provider.dart';
 import 'package:cryptopedia/provider/on_boarding_provider.dart';
 import 'package:cryptopedia/screen/add_post/add_post.dart';
+import 'package:cryptopedia/provider/theme_provider.dart';
+import 'package:cryptopedia/screen/about_app/about_app.dart';
+import 'package:cryptopedia/screen/edit_profile/edit_profile.dart';
 import 'package:cryptopedia/screen/homepage.dart';
+import 'package:cryptopedia/screen/my_profile/my_profile.dart';
+import 'package:cryptopedia/screen/profile/profile.dart';
 import 'package:cryptopedia/screen/registration/registration_success.dart';
 import 'package:cryptopedia/screen/auth_wrapper.dart';
+import 'package:cryptopedia/utils/constant/theme_styles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -30,23 +36,28 @@ class MyApp extends StatelessWidget {
       providers: [
         ChangeNotifierProvider(create: (context) => OnBoardingProvider()),
         ChangeNotifierProvider(create: (context) => AuthProvider()),
+        ChangeNotifierProvider(
+          create: (context) => ThemeProvider()..getPrefTheme(),
+        ),
       ],
       child: ScreenUtilInit(
         designSize: const Size(375, 812),
-        builder: (context, child) => MaterialApp(
-          debugShowCheckedModeBanner: false,
-          theme: ThemeData(
-            primarySwatch: Colors.blue,
-            fontFamily: "Poppins",
+        builder: (context, child) => Consumer<ThemeProvider>(
+          builder: (context, value, child) => MaterialApp(
+            debugShowCheckedModeBanner: false,
+            theme: ThemeStyles.switchTheme(value.themeValue, context),
+            routes: {
+              '/': (context) => const AuthWrapper(),
+              '/register-success': (context) => const RegistrationSuccess(),
+              '/home': (context) => const Homepage(),
+              '/profile': (context) => const Profile(),
+              '/my-profile': (context) => const MyProfile(),
+              '/about-app': (context) => const AboutApp(),
+              '/edit-profile': (context) => const EditProfile(),
+              '/add-post': (context) => const AddPost(),
+            },
+            initialRoute: '/',
           ),
-          routes: {
-            '/': (context) => const AuthWrapper(),
-            '/register-success': (context) => const RegistrationSuccess(),
-            '/home': (context) => const Homepage(),
-            '/add-post': (context) => const AddPost(),
-          },
-          initialRoute: '/',
-          // initialRoute: '/add-post',
         ),
       ),
     );

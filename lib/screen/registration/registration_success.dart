@@ -23,7 +23,7 @@ class _RegistrationSuccessState extends State<RegistrationSuccess> {
     return Scaffold(
       body: Stack(
         children: [
-          Container(
+          SizedBox(
             width: double.infinity,
             child: Image.asset(
               'assets/images/top-cloud.png',
