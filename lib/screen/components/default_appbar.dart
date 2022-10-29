@@ -29,6 +29,7 @@ class DefaultAppbar extends StatelessWidget with PreferredSizeWidget {
         toolbarHeight: size.h,
         shadowColor: Colors.transparent,
         backgroundColor: Colors.transparent,
+        elevation: 0,
         title: Text(
           title,
           style: TextStyle(
