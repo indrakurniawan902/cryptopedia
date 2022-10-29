@@ -31,8 +31,12 @@ class ButtonComponent extends StatelessWidget {
           shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(12.w))),
       child: isLoading == true
-          ? CircularProgressIndicator(
-              color: AppColors.lightColor,
+          ? SizedBox(
+              width: 26.w,
+              height: 26.h,
+              child: CircularProgressIndicator(
+                color: AppColors.lightColor,
+              ),
             )
           : Text(
               text,
