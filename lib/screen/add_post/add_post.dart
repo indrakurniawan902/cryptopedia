@@ -9,10 +9,12 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:http/http.dart' as http;
 import 'package:provider/provider.dart';
 import '../../provider/auth_provider.dart';
+import '../../provider/theme_provider.dart';
 import '../../utils/constant/api_constant.dart';
 import '../../utils/constant/app_shadow.dart';
 import '../../utils/constant/app_text_style.dart';
 import '../components/button_component.dart';
+import '../components/default_appbar.dart';
 import '../components/pop_up_dialog.dart';
 // ignore: unused_import
 import '../components/snackbar.dart';
@@ -66,6 +68,12 @@ class _AddPostState extends State<AddPost> {
     }
 
     return Scaffold(
+      appBar: const DefaultAppbar(
+        size: 65,
+        title: 'Add Post',
+        isBack: true,
+        fontSize: 24,
+      ),
       body: SafeArea(
         child: SingleChildScrollView(
           child: Container(
@@ -73,137 +81,139 @@ class _AddPostState extends State<AddPost> {
               key: formKey,
               child: Column(
                 children: [
-                  Container(
-                    padding:
-                        EdgeInsets.symmetric(horizontal: 20.w, vertical: 12.h),
-                    width: double.infinity,
-                    decoration: const BoxDecoration(
-                      shape: BoxShape.rectangle,
-                      color: AppColors.primaryBrand,
-                      borderRadius: BorderRadius.only(
-                        bottomLeft: Radius.circular(20),
-                        bottomRight: Radius.circular(20),
-                      ),
-                    ),
-                    child: Text(
-                      "Add Forum",
-                      textAlign: TextAlign.center,
-                      style: headerStyleWhite,
-                    ),
-                  ),
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 20),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        SizedBox(height: 24.h),
+                        SizedBox(height: 40.h),
                         Column(
                           children: [
-                            Container(
-                              padding: EdgeInsets.symmetric(
-                                  horizontal: 16.w, vertical: 20.h),
-                              decoration: BoxDecoration(
-                                  color: Colors.white,
-                                  borderRadius: BorderRadius.circular(10),
-                                  boxShadow: const <BoxShadow>[
-                                    AppShadow.shadow1,
-                                  ]),
-                              child: Column(
-                                children: [
-                                  FormFieldComponent(
-                                    name: "Title",
-                                    placeholder: "Enter the forum title",
-                                    validation: () {},
-                                    controller: titleC,
-                                    isDisable: false,
-                                    height: 1,
-                                  ),
-                                  SizedBox(
-                                    height: 12.h,
-                                  ),
-                                  Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      const Text(
-                                        "Category",
-                                        textAlign: TextAlign.left,
-                                      ),
-                                      SizedBox(
-                                        height: 8.h,
-                                      ),
-                                      DropdownButtonFormField(
-                                        value: category,
-                                        style: const TextStyle(
-                                          color: AppColors.darkColor,
-                                          fontFamily: "Poppins",
+                            Consumer<ThemeProvider>(
+                              builder: (context, value, child) => Container(
+                                padding: EdgeInsets.symmetric(
+                                    horizontal: 16.w, vertical: 20.h),
+                                decoration: BoxDecoration(
+                                    color: value.themeValue == false
+                                        ? AppColors.lightColor
+                                        : AppColors.darkModeFrame,
+                                    borderRadius: BorderRadius.circular(10),
+                                    boxShadow: const <BoxShadow>[
+                                      AppShadow.shadow1,
+                                    ]),
+                                child: Column(
+                                  children: [
+                                    FormFieldComponent(
+                                      name: "Title",
+                                      placeholder: "Enter the forum title",
+                                      validation: () {},
+                                      controller: titleC,
+                                      isDisable: false,
+                                      height: 1,
+                                    ),
+                                    SizedBox(
+                                      height: 12.h,
+                                    ),
+                                    Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        const Text(
+                                          "Category",
+                                          textAlign: TextAlign.left,
                                         ),
-                                        decoration: InputDecoration(
-                                          errorStyle: TextStyle(
-                                            fontSize: 14.sp,
-                                          ),
-                                          prefix: Padding(
-                                              padding:
-                                                  EdgeInsets.only(left: 16.w)),
-                                          contentPadding: EdgeInsets.symmetric(
-                                              vertical: 12.h),
-                                          fillColor: const Color(0xffFFFFFF),
-                                          filled: true,
-                                          hintText:
-                                              "Select your forum category",
-                                          focusedBorder:
-                                              const OutlineInputBorder(
-                                            borderSide: BorderSide(
-                                                color: AppColors.primaryBrand,
-                                                width: 1.0),
-                                          ),
-                                          hintStyle: const TextStyle(
-                                              color: AppColors.gray4),
-                                          border: OutlineInputBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(5.0),
-                                          ),
+                                        SizedBox(
+                                          height: 8.h,
                                         ),
-                                        items: cryptoCategory
-                                            .map<DropdownMenuItem<String>>(
-                                                (String value) {
-                                          return DropdownMenuItem<String>(
-                                            value: value,
-                                            child: Text(value),
-                                          );
-                                        }).toList(),
-                                        onChanged: (String? value) {
-                                          // This is called when the user selects an item.
-                                          setState(() {
-                                            category = value!;
-                                          });
-                                        },
-                                      ),
-                                    ],
-                                  ),
-                                  SizedBox(
-                                    height: 12.h,
-                                  ),
-                                  FormFieldComponent(
-                                    name: "Content",
-                                    placeholder: "Enter the forum content here",
-                                    validation: () {},
-                                    controller: contentC,
-                                    isDisable: false,
-                                    height: 4,
-                                  ),
-                                  SizedBox(
-                                    height: 12.h,
-                                  ),
-                                  FormFieldComponent(
-                                    name: "Tag",
-                                    placeholder: "Forum tags, seperate with ,",
-                                    validation: () {},
-                                    controller: tagC,
-                                    isDisable: false,
-                                    height: 1,
-                                  ),
-                                ],
+                                        DropdownButtonFormField(
+                                          value: category,
+                                          style: TextStyle(
+                                            color: value.themeValue == false
+                                                ? AppColors.darkModeFrame
+                                                : AppColors.lightColor,
+                                            fontFamily: "Poppins",
+                                          ),
+                                          decoration: InputDecoration(
+                                            errorStyle: TextStyle(
+                                              fontSize: 14.sp,
+                                            ),
+                                            enabledBorder: OutlineInputBorder(
+                                              borderSide: BorderSide(
+                                                  color: value.themeValue ==
+                                                          false
+                                                      ? AppColors.gray4
+                                                      : AppColors.darkModeFrame,
+                                                  width: 1.0),
+                                            ),
+                                            prefix: Padding(
+                                                padding: EdgeInsets.only(
+                                                    left: 16.w)),
+                                            contentPadding:
+                                                EdgeInsets.symmetric(
+                                              vertical: 12.h,
+                                            ),
+                                            fillColor: value.themeValue == false
+                                                ? AppColors.lightColor
+                                                : AppColors.gray2,
+                                            filled: true,
+                                            hintText:
+                                                "Select your forum category",
+                                            focusedBorder:
+                                                const OutlineInputBorder(
+                                              borderSide: BorderSide(
+                                                  color: AppColors.primaryBrand,
+                                                  width: 1.0),
+                                            ),
+                                            hintStyle: const TextStyle(
+                                                color: AppColors.gray4),
+                                            border: OutlineInputBorder(
+                                              borderRadius:
+                                                  BorderRadius.circular(5.0),
+                                            ),
+                                          ),
+                                          items: cryptoCategory
+                                              .map<DropdownMenuItem<String>>(
+                                                  (String value) {
+                                            return DropdownMenuItem<String>(
+                                              value: value,
+                                              child: Text(value),
+                                            );
+                                          }).toList(),
+                                          onChanged: (String? value) {
+                                            // This is called when the user selects an item.
+                                            setState(() {
+                                              category = value!;
+                                            });
+                                          },
+                                        ),
+                                      ],
+                                    ),
+                                    SizedBox(
+                                      height: 12.h,
+                                    ),
+                                    FormFieldComponent(
+                                      name: "Content",
+                                      placeholder:
+                                          "Enter the forum content here",
+                                      validation: () {},
+                                      controller: contentC,
+                                      isDisable: false,
+                                      height: 4,
+                                    ),
+                                    SizedBox(
+                                      height: 12.h,
+                                    ),
+                                    FormFieldComponent(
+                                      name: "Tag",
+                                      placeholder:
+                                          "Forum tags, seperate with ,",
+                                      validation: () {},
+                                      controller: tagC,
+                                      isDisable: false,
+                                      height: 1,
+                                    ),
+                                  ],
+                                ),
                               ),
                             ),
                             SizedBox(
@@ -221,7 +231,7 @@ class _AddPostState extends State<AddPost> {
                                         if (formKey.currentState!.validate()) {
                                           _postForum(context, () {
                                             Navigator.popAndPushNamed(
-                                                context, "/register-success");
+                                                context, "/home");
                                             showDialog(
                                               context: context,
                                               builder: (BuildContext context) {

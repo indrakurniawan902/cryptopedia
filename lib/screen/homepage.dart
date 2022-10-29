@@ -27,7 +27,13 @@ class Homepage extends StatelessWidget {
               onClickFunction: () {
                 Navigator.pushNamed(context, '/profile');
               },
-              isDisable: false)
+              isDisable: false),
+          ButtonComponent(
+              text: 'Add Post',
+              onClickFunction: () {
+                Navigator.pushNamed(context, '/add-post');
+              },
+              isDisable: false),
         ],
       )),
     );

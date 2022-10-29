@@ -55,12 +55,24 @@ class FormFieldComponent extends StatelessWidget {
               contentPadding: EdgeInsets.symmetric(vertical: 12.h),
               fillColor: value.themeValue == false
                   ? AppColors.lightColor
-                  : AppColors.gray4,
+                  : AppColors.gray2,
               filled: true,
               hintText: placeholder,
+              hintStyle: TextStyle(
+                color: value.themeValue == false
+                    ? AppColors.gray4
+                    : AppColors.gray4,
+              ),
               focusedBorder: const OutlineInputBorder(
                 borderSide:
                     BorderSide(color: AppColors.primaryBrand, width: 1.0),
+              ),
+              enabledBorder: OutlineInputBorder(
+                borderSide: BorderSide(
+                    color: value.themeValue == false
+                        ? AppColors.gray4
+                        : AppColors.darkModeFrame,
+                    width: 1.0),
               ),
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(5.0),

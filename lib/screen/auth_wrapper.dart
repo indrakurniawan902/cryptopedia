@@ -63,7 +63,7 @@ class _AuthWrapperState extends State<AuthWrapper> {
                       );
                     } else {
                       if (snapshot.hasData && snapshot.data!) {
-                        return const AddPost();
+                        return const Homepage();
                       } else {
                         return Registration(
                           userEmail: snapshotStream.data!.email,
