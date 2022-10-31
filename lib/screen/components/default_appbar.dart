@@ -45,7 +45,7 @@ class DefaultAppbar extends StatelessWidget with PreferredSizeWidget {
                 Padding(
                     padding: EdgeInsets.fromLTRB(0.w, 23.h, 20.w, 23.h),
                     child: Text(
-                      user!,
+                      user == null ? 'username' : user!,
                       style: userStyle,
                     ))
               ]

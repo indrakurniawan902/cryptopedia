@@ -2,7 +2,7 @@ import 'package:cryptopedia/utils/constant/shared_pref_theme.dart';
 import 'package:flutter/cupertino.dart';
 
 class ThemeProvider extends ChangeNotifier {
-  bool _isDarkTheme = true;
+  bool _isDarkTheme = false;
 
   bool get themeValue => _isDarkTheme;
   SharedPrefTheme changeTheme = SharedPrefTheme();

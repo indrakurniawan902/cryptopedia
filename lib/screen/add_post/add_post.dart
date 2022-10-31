@@ -72,7 +72,6 @@ class _AddPostState extends State<AddPost> {
       appBar: const DefaultAppbar(
         size: 65,
         title: 'Add Post',
-        isBack: true,
         fontSize: 24,
       ),
       body: SafeArea(

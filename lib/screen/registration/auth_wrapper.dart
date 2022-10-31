@@ -1,17 +1,16 @@
 import 'dart:async';
 import 'dart:convert';
-
 import 'package:cryptopedia/provider/auth_provider.dart';
-import 'package:cryptopedia/screen/add_post/add_post.dart';
-import 'package:cryptopedia/screen/homepage.dart';
+import 'package:cryptopedia/screen/navbar/navbar.dart';
 import 'package:cryptopedia/screen/on_boarding/on_boarding.dart';
 import 'package:cryptopedia/screen/registration/registration.dart';
+import 'package:cryptopedia/utils/constant/api_constant.dart';
 import 'package:cryptopedia/utils/constant/app_colors.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:http/http.dart' as http;
-import '../utils/constant/api_constant.dart';
+// import '../utils/constant/api_constant.dart';
 
 class AuthWrapper extends StatefulWidget {
   const AuthWrapper({Key? key}) : super(key: key);
@@ -63,7 +62,7 @@ class _AuthWrapperState extends State<AuthWrapper> {
                       );
                     } else {
                       if (snapshot.hasData && snapshot.data!) {
-                        return const Homepage();
+                        return const Navbar();
                       } else {
                         return Registration(
                           userEmail: snapshotStream.data!.email,

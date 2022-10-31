@@ -42,3 +42,11 @@ TextStyle aboutText = TextStyle(
   fontSize: 14.sp,
   height: 1.5.sp,
 );
+TextStyle headerTitle = TextStyle(
+  fontFamily: 'Poppins-SemiBold',
+  fontSize: 32.sp,
+);
+TextStyle headerTitleSmall = TextStyle(
+  fontFamily: 'Poppins',
+  fontSize: 16.sp,
+);

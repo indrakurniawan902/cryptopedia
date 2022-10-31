@@ -28,163 +28,172 @@ class _ProfileState extends State<Profile> {
           isBack: false,
           fontSize: 24,
         ),
-        body: Container(
-          padding: EdgeInsets.symmetric(
-            horizontal: 20.w,
-          ),
-          child: Column(
-            children: [
-              SizedBox(
-                height: 21.h,
-              ),
-              const CircleAvatar(
-                maxRadius: 60,
-                minRadius: 60,
-              ),
-              SizedBox(
-                height: 3.h,
-              ),
-              Text(
-                'Fullname',
-                style: TextStyle(
-                  fontSize: 16.sp,
-                  fontFamily: 'Poppins',
-                  fontWeight: FontWeight.bold,
+        body: SingleChildScrollView(
+          child: Container(
+            padding: EdgeInsets.symmetric(
+              horizontal: 20.w,
+            ),
+            child: Column(
+              children: [
+                SizedBox(
+                  height: 21.h,
                 ),
-              ),
-              SizedBox(
-                height: 3.h,
-              ),
-              Consumer<ThemeProvider>(
-                builder: (context, value, child) => Text(
-                  '@Username',
+                const CircleAvatar(
+                  maxRadius: 60,
+                  minRadius: 60,
+                ),
+                SizedBox(
+                  height: 3.h,
+                ),
+                Text(
+                  'Fullname',
                   style: TextStyle(
-                    fontSize: 12.sp,
-                    color: value.themeValue == false
-                        ? AppColors.gray2
-                        : AppColors.lightColor,
+                    fontSize: 16.sp,
                     fontFamily: 'Poppins',
+                    fontWeight: FontWeight.bold,
                   ),
                 ),
-              ),
-              SizedBox(
-                height: 21.h,
-              ),
-              Consumer<ThemeProvider>(
-                builder: (context, value, child) => Container(
-                  decoration: BoxDecoration(
-                    boxShadow: const <BoxShadow>[
-                      AppShadow.shadow1,
-                    ],
-                    borderRadius: BorderRadius.circular(10),
-                    color: value.themeValue == false
-                        ? AppColors.lightColor
-                        : AppColors.darkModeFrame,
+                SizedBox(
+                  height: 3.h,
+                ),
+                Consumer<ThemeProvider>(
+                  builder: (context, value, child) => Text(
+                    '@Username',
+                    style: TextStyle(
+                      fontSize: 12.sp,
+                      color: value.themeValue == false
+                          ? AppColors.gray2
+                          : AppColors.lightColor,
+                      fontFamily: 'Poppins',
+                    ),
                   ),
-                  height: 307.h,
-                  padding:
-                      EdgeInsets.symmetric(vertical: 20.w, horizontal: 10.h),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      MenuItemProfile(
-                        title: 'My Profile',
-                        onTilepress: () =>
-                            Navigator.pushNamed(context, '/my-profile'),
-                        leading: FeatherIcons.user,
-                        trailing: FeatherIcons.chevronRight,
-                      ),
-                      SizedBox(
-                        height: 15.h,
-                      ),
-                      const MenuItemProfile(
-                        title: 'My Post',
-                        leading: FeatherIcons.archive,
-                        trailing: FeatherIcons.chevronRight,
-                      ),
-                      SizedBox(
-                        height: 15.h,
-                      ),
-                      const MenuItemProfile(
-                        title: 'My Bookmark',
-                        leading: FeatherIcons.bookmark,
-                        trailing: FeatherIcons.chevronRight,
-                      ),
-                      SizedBox(
-                        height: 15.h,
-                      ),
-                      const MenuItemProfile(
-                        isToogle: true,
-                        title: 'Dark Mode',
-                        leading: FeatherIcons.moon,
-                      ),
-                      SizedBox(
-                        height: 2.h,
-                      ),
-                      Consumer<ThemeProvider>(
-                        builder: (context, value, child) => Divider(
-                          color: value.themeValue == false
-                              ? AppColors.gray4
-                              : AppColors.lightColor,
-                          thickness: 0.8,
+                ),
+                SizedBox(
+                  height: 21.h,
+                ),
+                Consumer<ThemeProvider>(
+                  builder: (context, value, child) => Container(
+                    decoration: BoxDecoration(
+                      boxShadow: const <BoxShadow>[
+                        AppShadow.shadow1,
+                      ],
+                      borderRadius: BorderRadius.circular(10),
+                      color: value.themeValue == false
+                          ? AppColors.lightColor
+                          : AppColors.darkModeFrame,
+                    ),
+                    height: 307.h,
+                    padding:
+                        EdgeInsets.symmetric(vertical: 20.w, horizontal: 10.h),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        MenuItemProfile(
+                          title: 'My Profile',
+                          onTilepress: () =>
+                              Navigator.pushNamed(context, '/my-profile'),
+                          leading: FeatherIcons.user,
+                          trailing: FeatherIcons.chevronRight,
                         ),
-                      ),
-                      SizedBox(
-                        height: 2.h,
-                      ),
-                      MenuItemProfile(
-                        title: 'About App',
-                        onTilepress: () =>
-                            Navigator.pushNamed(context, '/about-app'),
-                        leading: FeatherIcons.info,
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-              SizedBox(
-                height: 20.h,
-              ),
-              Consumer<ThemeProvider>(
-                builder: (context, value, child) => Container(
-                  decoration: BoxDecoration(
-                    boxShadow: const <BoxShadow>[
-                      AppShadow.shadow1,
-                    ],
-                    borderRadius: BorderRadius.circular(10),
-                    color: value.themeValue == false
-                        ? AppColors.lightColor
-                        : AppColors.darkModeFrame,
-                  ),
-                  height: 62.h,
-                  padding:
-                      EdgeInsets.symmetric(vertical: 10.w, horizontal: 10.h),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      Consumer<AuthProvider>(
-                        builder: (context, value, child) => MenuItemProfile(
-                          onTilepress: () {
-                            value.logout();
-                          },
-                          isLogout: true,
-                          title: 'Log oout',
-                          leading: FeatherIcons.logOut,
+                        SizedBox(
+                          height: 15.h,
                         ),
-                      ),
-                    ],
+                        MenuItemProfile(
+                          title: 'My Post',
+                          leading: FeatherIcons.archive,
+                          trailing: FeatherIcons.chevronRight,
+                          onTilepress: () =>
+                              Navigator.pushNamed(context, '/my-post'),
+                        ),
+                        SizedBox(
+                          height: 15.h,
+                        ),
+                        MenuItemProfile(
+                          title: 'My Bookmark',
+                          leading: FeatherIcons.bookmark,
+                          trailing: FeatherIcons.chevronRight,
+                          onTilepress: () =>
+                              Navigator.pushNamed(context, '/bookmark'),
+                        ),
+                        SizedBox(
+                          height: 15.h,
+                        ),
+                        const MenuItemProfile(
+                          isToogle: true,
+                          title: 'Dark Mode',
+                          leading: FeatherIcons.moon,
+                        ),
+                        SizedBox(
+                          height: 2.h,
+                        ),
+                        Consumer<ThemeProvider>(
+                          builder: (context, value, child) => Divider(
+                            color: value.themeValue == false
+                                ? AppColors.gray4
+                                : AppColors.lightColor,
+                            thickness: 0.8,
+                          ),
+                        ),
+                        SizedBox(
+                          height: 2.h,
+                        ),
+                        MenuItemProfile(
+                          title: 'About App',
+                          onTilepress: () =>
+                              Navigator.pushNamed(context, '/about-app'),
+                          leading: FeatherIcons.info,
+                        ),
+                      ],
+                    ),
                   ),
                 ),
-              ),
-              SizedBox(
-                height: 64.h,
-              ),
-              Text(
-                '© 2022 cryptopedia',
-                textAlign: TextAlign.center,
-                style: copyRight,
-              ),
-            ],
+                SizedBox(
+                  height: 20.h,
+                ),
+                Consumer<ThemeProvider>(
+                  builder: (context, value, child) => Container(
+                    decoration: BoxDecoration(
+                      boxShadow: const <BoxShadow>[
+                        AppShadow.shadow1,
+                      ],
+                      borderRadius: BorderRadius.circular(10),
+                      color: value.themeValue == false
+                          ? AppColors.lightColor
+                          : AppColors.darkModeFrame,
+                    ),
+                    height: 62.h,
+                    padding:
+                        EdgeInsets.symmetric(vertical: 10.w, horizontal: 10.h),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        Consumer<AuthProvider>(
+                          builder: (context, value, child) => MenuItemProfile(
+                            onTilepress: () {
+                              value.logout();
+                            },
+                            isLogout: true,
+                            title: 'Log oout',
+                            leading: FeatherIcons.logOut,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  height: 64.h,
+                ),
+                Text(
+                  '© 2022 cryptopedia',
+                  textAlign: TextAlign.center,
+                  style: copyRight,
+                ),
+                SizedBox(
+                  height: 11.h,
+                )
+              ],
+            ),
           ),
         ),
       ),

@@ -1,21 +1,24 @@
 import 'package:cryptopedia/provider/auth_provider.dart';
+import 'package:cryptopedia/provider/bottom_navbar_provider.dart';
 import 'package:cryptopedia/provider/on_boarding_provider.dart';
 import 'package:cryptopedia/screen/add_post/add_post.dart';
 import 'package:cryptopedia/provider/theme_provider.dart';
 import 'package:cryptopedia/screen/about_app/about_app.dart';
+import 'package:cryptopedia/screen/bookmark/bookmark.dart';
 import 'package:cryptopedia/screen/edit_profile/edit_profile.dart';
-import 'package:cryptopedia/screen/homepage.dart';
+import 'package:cryptopedia/screen/homepage/homepage.dart';
+import 'package:cryptopedia/screen/my_post/my_post.dart';
 import 'package:cryptopedia/screen/my_profile/my_profile.dart';
 import 'package:cryptopedia/screen/profile/profile.dart';
 import 'package:cryptopedia/screen/registration/registration_success.dart';
-import 'package:cryptopedia/screen/auth_wrapper.dart';
+import 'package:cryptopedia/screen/registration/auth_wrapper.dart';
 import 'package:cryptopedia/utils/constant/theme_styles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'firebase_options.dart';
+import 'utils/firebase/firebase_options.dart';
 
 final navigatorKey = GlobalKey<NavigatorState>();
 
@@ -38,6 +41,7 @@ class MyApp extends StatelessWidget {
       providers: [
         ChangeNotifierProvider(create: (context) => OnBoardingProvider()),
         ChangeNotifierProvider(create: (context) => AuthProvider()),
+        ChangeNotifierProvider(create: (context) => BottomNavbarProvider()),
         ChangeNotifierProvider(
           create: (context) => ThemeProvider()..getPrefTheme(),
         ),
@@ -58,6 +62,8 @@ class MyApp extends StatelessWidget {
               '/about-app': (context) => const AboutApp(),
               '/edit-profile': (context) => const EditProfile(),
               '/add-post': (context) => const AddPost(),
+              '/bookmark': (context) => const Bookmark(),
+              '/my-post': (context) => const MyPost(),
             },
             initialRoute: '/',
           ),
