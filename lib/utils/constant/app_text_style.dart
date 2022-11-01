@@ -28,6 +28,11 @@ TextStyle textProfile = TextStyle(
   fontFamily: 'Poppins-Medium',
   fontWeight: FontWeight.w500,
 );
+TextStyle selectedindex = TextStyle(
+  fontSize: 14.sp,
+  fontFamily: 'Poppins-Medium',
+  fontWeight: FontWeight.w700,
+);
 TextStyle userStyle = TextStyle(
   fontFamily: 'Poppins',
   fontSize: 12.sp,
@@ -44,9 +49,13 @@ TextStyle aboutText = TextStyle(
 );
 TextStyle headerTitle = TextStyle(
   fontFamily: 'Poppins-SemiBold',
-  fontSize: 32.sp,
+  fontSize: 28.sp,
 );
-TextStyle headerTitleSmall = TextStyle(
-  fontFamily: 'Poppins',
-  fontSize: 16.sp,
+TextStyle tabTitle = TextStyle(
+  fontFamily: 'Poppins-Medium',
+  fontSize: 14.sp,
+);
+TextStyle subtitleStyle = TextStyle(
+  fontFamily: 'Poppins-Regular',
+  fontSize: 14.sp,
 );

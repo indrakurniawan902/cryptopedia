@@ -14,7 +14,7 @@ class _RegistrationSuccessState extends State<RegistrationSuccess> {
   void initState() {
     super.initState();
     Future<void>.delayed(const Duration(seconds: 2), () {
-      Navigator.popAndPushNamed(context, "/home");
+      Navigator.popAndPushNamed(context, "/navbar");
     });
   }
 

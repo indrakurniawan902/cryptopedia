@@ -51,14 +51,12 @@ class DefaultAppbar extends StatelessWidget with PreferredSizeWidget {
               ]
             : [const SizedBox()],
         leading: isBack == true
-            ? Consumer<ThemeProvider>(
-                builder: (context, value, child) => IconButton(
-                  color: value.themeValue == false
-                      ? AppColors.lightColor
-                      : AppColors.darkModeBg,
-                  icon: const Icon(FeatherIcons.chevronLeft),
-                  onPressed: () => Navigator.pop(context),
-                ),
+            ? IconButton(
+                color: value.themeValue == false
+                    ? AppColors.lightColor
+                    : AppColors.darkModeBg,
+                icon: const Icon(FeatherIcons.chevronLeft),
+                onPressed: () => Navigator.pop(context),
               )
             : isHomepage == true
                 ? Padding(

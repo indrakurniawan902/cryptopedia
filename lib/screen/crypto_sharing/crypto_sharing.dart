@@ -1,4 +1,7 @@
+import 'package:cryptopedia/screen/components/post_appbar.dart';
+import 'package:cryptopedia/utils/constant/helper.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class CryptoSharing extends StatefulWidget {
   const CryptoSharing({super.key});
@@ -10,8 +13,23 @@ class CryptoSharing extends StatefulWidget {
 class _CryptoSharingState extends State<CryptoSharing> {
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(),
+    return DefaultTabController(
+      length: 2,
+      initialIndex: 0,
+      child: SafeArea(
+        child: Scaffold(
+          appBar: PreferredSize(
+              preferredSize: Size.fromHeight(171.h),
+              child: PostAppbar(
+                size: 171.h,
+                isContent: true,
+                title: 'Crypto Sharing',
+                subTitle: ' Lorem ipsum dolor sit amet, consectetur',
+                secondSubTitle: ' adipiscing elit.',
+              )),
+          body: TabBarView(children: Helper.tabViewMyPost),
+        ),
+      ),
     );
   }
 }
