@@ -5,11 +5,11 @@ import 'package:cryptopedia/screen/add_post/add_post.dart';
 import 'package:cryptopedia/provider/theme_provider.dart';
 import 'package:cryptopedia/screen/about_app/about_app.dart';
 import 'package:cryptopedia/screen/bookmark/bookmark.dart';
-import 'package:cryptopedia/screen/components/bottom_navbar.dart';
 import 'package:cryptopedia/screen/edit_profile/edit_profile.dart';
 import 'package:cryptopedia/screen/homepage/homepage.dart';
 import 'package:cryptopedia/screen/my_post/my_post.dart';
 import 'package:cryptopedia/screen/my_profile/my_profile.dart';
+import 'package:cryptopedia/screen/navbar/navbar.dart';
 import 'package:cryptopedia/screen/profile/profile.dart';
 import 'package:cryptopedia/screen/registration/registration_success.dart';
 import 'package:cryptopedia/screen/registration/auth_wrapper.dart';
@@ -65,7 +65,7 @@ class MyApp extends StatelessWidget {
               '/add-post': (context) => const AddPost(),
               '/bookmark': (context) => const Bookmark(),
               '/my-post': (context) => const MyPost(),
-              '/navbar': (context) => const BottomNavbar(),
+              '/navbar': (context) => const Navbar(),
             },
             initialRoute: '/',
           ),

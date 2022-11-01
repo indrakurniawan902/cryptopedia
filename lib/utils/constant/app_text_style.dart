@@ -59,3 +59,30 @@ TextStyle subtitleStyle = TextStyle(
   fontFamily: 'Poppins-Regular',
   fontSize: 14.sp,
 );
+
+TextStyle postTitleStyle = TextStyle(
+  fontFamily: 'Poppins-SemiBold',
+  fontSize: 15.sp,
+  fontWeight: FontWeight.w600,
+);
+TextStyle categoryTitleStyle = TextStyle(
+  fontFamily: 'Poppins-SemiBold',
+  fontSize: 12.sp,
+  fontWeight: FontWeight.w600,
+);
+TextStyle postBodyStyle = TextStyle(
+    fontFamily: 'Poppins-Regular',
+    fontSize: 12.sp,
+    fontWeight: FontWeight.w400);
+
+TextStyle tagStyle = TextStyle(
+    fontFamily: 'Poppins-SemiBold',
+    fontSize: 13.sp,
+    fontWeight: FontWeight.w600,
+    color: AppColors.primaryBrand);
+
+TextStyle userPostStyle = TextStyle(
+  fontFamily: 'Poppins-Medium',
+  fontSize: 13.sp,
+  fontWeight: FontWeight.w500,
+);

@@ -1,3 +1,4 @@
+import 'package:cryptopedia/screen/components/post_card.dart';
 import 'package:flutter/material.dart';
 
 class Crypto101Bookmark extends StatefulWidget {
@@ -11,8 +12,17 @@ class _Crypto101BookmarkState extends State<Crypto101Bookmark> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: Text('data'),
+      body: SafeArea(
+        child: Container(
+            padding: EdgeInsets.all(10),
+            child: PostCard(
+              postTitle: 'asdasdasdasdasdsad',
+              category: 'Bitcoin',
+              isBookmark: true,
+              isPost: true,
+              postBody: 'asdasdasdasdsad',
+              username: 'USername',
+            )),
       ),
     );
   }
