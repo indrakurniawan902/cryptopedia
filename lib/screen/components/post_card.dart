@@ -36,6 +36,7 @@ class PostCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Consumer<ThemeProvider>(
       builder: (context, value, child) => Container(
+        margin: EdgeInsets.symmetric(vertical: 5.h),
         // width: double.infinity,
         padding: EdgeInsets.all(12.w),
         decoration: BoxDecoration(
@@ -80,7 +81,7 @@ class PostCard extends StatelessWidget {
                   color: AppColors.primaryBrand),
               padding: EdgeInsets.symmetric(vertical: 2.h, horizontal: 5.w),
               child: Text(
-                'Category',
+                category!,
                 style: categoryTitleStyle,
               ),
             ),

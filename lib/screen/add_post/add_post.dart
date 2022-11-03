@@ -239,7 +239,7 @@ class _AddPostState extends State<AddPost> {
                                           );
                                           _postForum(buildContext, () {
                                             Navigator.of(buildContext)
-                                                .popAndPushNamed("/home");
+                                                .popAndPushNamed("/navbar");
                                             showDialog(
                                               context:
                                                   navigatorKey.currentContext!,

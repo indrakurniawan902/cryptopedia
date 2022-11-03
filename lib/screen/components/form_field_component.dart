@@ -1,5 +1,6 @@
 import 'package:cryptopedia/provider/theme_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_feather_icons/flutter_feather_icons.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 
@@ -9,6 +10,7 @@ class FormFieldComponent extends StatelessWidget {
   const FormFieldComponent(
       {Key? key,
       this.name,
+      this.isSearchBar,
       this.placeholder,
       this.validation,
       this.controller,
@@ -16,7 +18,7 @@ class FormFieldComponent extends StatelessWidget {
       this.initialValue,
       this.height})
       : super(key: key);
-
+  final bool? isSearchBar;
   final String? name;
   final String? placeholder;
   final Function()? validation;
@@ -48,6 +50,12 @@ class FormFieldComponent extends StatelessWidget {
               return null;
             },
             decoration: InputDecoration(
+              suffixIcon: isSearchBar == true
+                  ? const Icon(
+                      FeatherIcons.search,
+                      size: 18,
+                    )
+                  : null,
               errorStyle: TextStyle(
                 fontSize: 14.sp,
               ),
