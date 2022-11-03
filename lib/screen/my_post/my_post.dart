@@ -1,3 +1,4 @@
+import 'package:cryptopedia/screen/components/default_appbar.dart';
 import 'package:cryptopedia/screen/components/post_appbar.dart';
 import 'package:cryptopedia/utils/constant/helper.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -18,10 +19,13 @@ class _MyPostState extends State<MyPost> {
       initialIndex: 0,
       child: SafeArea(
           child: Scaffold(
-        appBar: PreferredSize(
-            preferredSize: const Size.fromHeight(124),
-            child: PostAppbar(size: 124.h, isContent: false, title: 'My Post')),
-        body: TabBarView(children: Helper.tabViewMyPost),
+        appBar: DefaultAppbar(
+          size: 79.h,
+          title: 'My Post',
+          fontSize: 32,
+          isBack: true,
+        ),
+        body: Container(),
       )),
     );
   }

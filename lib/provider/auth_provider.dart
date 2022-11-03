@@ -1,24 +1,28 @@
+import 'dart:convert';
+
+import 'package:cryptopedia/utils/constant/api_constant.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:http/http.dart' as http;
 
 class AuthProvider with ChangeNotifier {
-  var auth = FirebaseAuth.instance;
+  final _auth = FirebaseAuth.instance;
 
   Stream<User?> changeState() {
-    return auth.idTokenChanges();
+    return _auth.idTokenChanges();
   }
 
   void logout() async {
     try {
-      await auth.signOut();
+      await _auth.signOut();
     } on FirebaseAuthException catch (e) {
       print(e);
     }
   }
 
   User? getUser() {
-    final User? user = auth.currentUser;
+    final User? user = _auth.currentUser;
     return user;
   }
 
@@ -34,5 +38,22 @@ class AuthProvider with ChangeNotifier {
     );
 
     return await FirebaseAuth.instance.signInWithCredential(credential);
+  }
+
+  Future<void> postRegister(BuildContext context, VoidCallback onSuccess,
+      String email, String fullname, String username) async {
+    try {
+      var res = await http.post(Uri.parse(
+          "${ApiConstants.baseUrl}${ApiConstants.register}?email=$email&name=$fullname&username=$username"));
+      if (res.statusCode == 200) {
+        var dataResponse = jsonDecode(res.body);
+        print(dataResponse);
+        if (dataResponse != null) {
+          onSuccess.call();
+        }
+      }
+    } catch (e) {
+      print(e);
+    }
   }
 }

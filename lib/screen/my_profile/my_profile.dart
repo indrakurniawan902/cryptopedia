@@ -1,4 +1,6 @@
+import 'package:cryptopedia/provider/auth_provider.dart';
 import 'package:cryptopedia/provider/theme_provider.dart';
+import 'package:cryptopedia/provider/user_provider.dart';
 import 'package:cryptopedia/screen/components/button_component.dart';
 import 'package:cryptopedia/screen/components/default_appbar.dart';
 import 'package:cryptopedia/screen/components/form_field_component.dart';
@@ -17,15 +19,18 @@ class MyProfile extends StatefulWidget {
 }
 
 final formKey = GlobalKey<FormState>();
-bool isDisable = true;
-TextEditingController emailC = TextEditingController();
-TextEditingController fullnameC = TextEditingController();
-TextEditingController usernameC = TextEditingController();
-void validateInput() {
-  if (fullnameC.text != "") {}
-}
 
 class _MyProfileState extends State<MyProfile> {
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+      final data = Provider.of<AuthProvider>(context, listen: false);
+      Provider.of<UserProvider>(context, listen: false)
+          .getUserData(data.getUser()!.email!);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -44,9 +49,12 @@ class _MyProfileState extends State<MyProfile> {
                 SizedBox(
                   height: 21.h,
                 ),
-                const CircleAvatar(
-                  maxRadius: 60,
-                  minRadius: 60,
+                Consumer<AuthProvider>(
+                  builder: (context, auth, _) => CircleAvatar(
+                    backgroundImage: NetworkImage(auth.getUser()!.photoURL!),
+                    maxRadius: 60,
+                    minRadius: 60,
+                  ),
                 ),
                 SizedBox(
                   height: 21.h,
@@ -72,33 +80,35 @@ class _MyProfileState extends State<MyProfile> {
                                   ]),
                               child: Column(
                                 children: [
-                                  FormFieldComponent(
-                                    name: "Email",
-                                    // placeholder: widget.userEmail!,
-                                    controller: emailC,
-                                    // initialValue: widget.userEmail,
-                                    validation: () {},
-                                    isDisable: true,
+                                  Consumer<UserProvider>(
+                                    builder: (context, value, child) =>
+                                        FormFieldComponent(
+                                      name: "Email",
+                                      initialValue: value.users.email,
+                                      isDisable: true,
+                                    ),
                                   ),
                                   SizedBox(
                                     height: 12.h,
                                   ),
-                                  FormFieldComponent(
-                                    name: "Fullname",
-                                    // placeholder: "John doe",
-                                    controller: fullnameC,
-                                    validation: validateInput,
-                                    isDisable: false,
+                                  Consumer<UserProvider>(
+                                    builder: (context, value, child) =>
+                                        FormFieldComponent(
+                                      name: "Fullname",
+                                      initialValue: value.users.name,
+                                      isDisable: true,
+                                    ),
                                   ),
                                   SizedBox(
                                     height: 12.h,
                                   ),
-                                  FormFieldComponent(
-                                    name: "Username",
-                                    // placeholder: "johndoe22",
-                                    controller: usernameC,
-                                    validation: validateInput,
-                                    isDisable: true,
+                                  Consumer<UserProvider>(
+                                    builder: (context, value, child) =>
+                                        FormFieldComponent(
+                                      name: "Username",
+                                      initialValue: value.users.username,
+                                      isDisable: true,
+                                    ),
                                   ),
                                 ],
                               ),

@@ -12,7 +12,7 @@ class PostCard extends StatelessWidget {
   const PostCard(
       {super.key,
       required this.postTitle,
-      required this.category,
+      this.category,
       this.username,
       this.like,
       this.dislike,
@@ -29,7 +29,7 @@ class PostCard extends StatelessWidget {
   final String? comment;
   final List<String>? tag;
   final String postTitle;
-  final String category;
+  final String? category;
   final String? postBody;
 
   @override

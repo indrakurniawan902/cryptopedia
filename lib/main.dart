@@ -1,6 +1,7 @@
 import 'package:cryptopedia/provider/auth_provider.dart';
 import 'package:cryptopedia/provider/bottom_navbar_provider.dart';
 import 'package:cryptopedia/provider/on_boarding_provider.dart';
+import 'package:cryptopedia/provider/user_provider.dart';
 import 'package:cryptopedia/screen/add_post/add_post.dart';
 import 'package:cryptopedia/provider/theme_provider.dart';
 import 'package:cryptopedia/screen/about_app/about_app.dart';
@@ -43,6 +44,7 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (context) => OnBoardingProvider()),
         ChangeNotifierProvider(create: (context) => AuthProvider()),
         ChangeNotifierProvider(create: (context) => BottomNavbarProvider()),
+        ChangeNotifierProvider(create: (context) => UserProvider()),
         ChangeNotifierProvider(
           create: (context) => ThemeProvider()..getPrefTheme(),
         ),

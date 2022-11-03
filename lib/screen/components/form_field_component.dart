@@ -1,6 +1,5 @@
 import 'package:cryptopedia/provider/theme_provider.dart';
 import 'package:flutter/material.dart';
-import 'dart:ffi';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 
@@ -12,7 +11,7 @@ class FormFieldComponent extends StatelessWidget {
       this.name,
       this.placeholder,
       this.validation,
-      required this.controller,
+      this.controller,
       required this.isDisable,
       this.initialValue,
       this.height})
@@ -22,7 +21,7 @@ class FormFieldComponent extends StatelessWidget {
   final String? placeholder;
   final Function()? validation;
   final bool isDisable;
-  final TextEditingController controller;
+  final TextEditingController? controller;
   final String? initialValue;
   final int? height;
 
@@ -37,6 +36,7 @@ class FormFieldComponent extends StatelessWidget {
         ),
         Consumer<ThemeProvider>(
           builder: (context, value, child) => TextFormField(
+            initialValue: initialValue,
             enabled: !isDisable,
             controller: controller,
             validator: (value) {

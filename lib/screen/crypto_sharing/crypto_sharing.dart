@@ -27,7 +27,7 @@ class _CryptoSharingState extends State<CryptoSharing> {
                 subTitle: ' Lorem ipsum dolor sit amet, consectetur',
                 secondSubTitle: ' adipiscing elit.',
               )),
-          body: TabBarView(children: Helper.tabViewMyPost),
+          body: TabBarView(children: Helper.tabViewSharing),
         ),
       ),
     );

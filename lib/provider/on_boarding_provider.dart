@@ -1,4 +1,4 @@
-import 'package:cryptopedia/model/on_boarding_model.dart';
+import 'package:cryptopedia/model/on_boarding/on_boarding_model.dart';
 import 'package:flutter/material.dart';
 
 class OnBoardingProvider extends ChangeNotifier {

@@ -10,10 +10,6 @@ class CryptoSharingBookmark extends StatefulWidget {
 class _CryptoSharingBookmarkState extends State<CryptoSharingBookmark> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Center(
-        child: Text('data'),
-      ),
-    );
+    return Scaffold();
   }
 }

@@ -1,4 +1,5 @@
 import 'package:cryptopedia/provider/theme_provider.dart';
+import 'package:cryptopedia/provider/user_provider.dart';
 import 'package:cryptopedia/utils/constant/app_colors.dart';
 import 'package:cryptopedia/utils/constant/app_text_style.dart';
 import 'package:flutter/material.dart';
@@ -44,9 +45,11 @@ class DefaultAppbar extends StatelessWidget with PreferredSizeWidget {
             ? [
                 Padding(
                     padding: EdgeInsets.fromLTRB(0.w, 23.h, 20.w, 23.h),
-                    child: Text(
-                      user == null ? 'username' : user!,
-                      style: userStyle,
+                    child: Consumer<UserProvider>(
+                      builder: (context, value, child) => Text(
+                        user == null ? value.users.username : user!,
+                        style: userStyle,
+                      ),
                     ))
               ]
             : [const SizedBox()],

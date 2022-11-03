@@ -1,8 +1,8 @@
-import 'package:cryptopedia/screen/bookmark/crypto_101_bookmark.dart';
-import 'package:cryptopedia/screen/bookmark/crypto_sharing_bookmark.dart';
+import 'package:cryptopedia/screen/bookmark/bookmark_crypto_101.dart';
+import 'package:cryptopedia/screen/bookmark/bookmark_crypto_sharing.dart';
 import 'package:cryptopedia/screen/crypto_sharing/crypto_sharing.dart';
-import 'package:cryptopedia/screen/my_post/crypto_101_mypost.dart';
-import 'package:cryptopedia/screen/my_post/crypto_sharing_mypost.dart';
+import 'package:cryptopedia/screen/crypto_sharing/crypto_sharing_all.dart';
+import 'package:cryptopedia/screen/crypto_sharing/crypto_sharing_bookmark.dart';
 import 'package:flutter/material.dart';
 
 class Helper {
@@ -17,12 +17,12 @@ class Helper {
   ];
 
   static List<Widget> tabViewBookmark = [
-    const CryptoSharingBookmark(),
-    const Crypto101Bookmark(),
+    const BookmarkCryptoSharing(),
+    const BookmarkCrypto101(),
   ];
 
-  static List<Widget> tabViewMyPost = [
-    const CryptoSharingMyPost(),
-    const Crypto101MyPost(),
+  static List<Widget> tabViewSharing = [
+    const CryptoSharingAll(),
+    const CryptoSharingBookmark(),
   ];
 }

@@ -1,5 +1,7 @@
+import 'package:cryptopedia/model/user/user_model.dart';
 import 'package:cryptopedia/provider/auth_provider.dart';
 import 'package:cryptopedia/provider/theme_provider.dart';
+import 'package:cryptopedia/provider/user_provider.dart';
 import 'package:cryptopedia/screen/components/default_appbar.dart';
 import 'package:cryptopedia/screen/profile/widget/menu_item_profile.dart';
 import 'package:cryptopedia/utils/constant/app_colors.dart';
@@ -38,33 +40,40 @@ class _ProfileState extends State<Profile> {
                 SizedBox(
                   height: 21.h,
                 ),
-                const CircleAvatar(
-                  maxRadius: 60,
-                  minRadius: 60,
-                ),
-                SizedBox(
-                  height: 3.h,
-                ),
-                Text(
-                  'Fullname',
-                  style: TextStyle(
-                    fontSize: 16.sp,
-                    fontFamily: 'Poppins',
-                    fontWeight: FontWeight.bold,
+                Consumer<AuthProvider>(
+                  builder: (context, auth, _) => CircleAvatar(
+                    backgroundImage: NetworkImage(auth.getUser()!.photoURL!),
+                    maxRadius: 60,
+                    minRadius: 60,
                   ),
                 ),
                 SizedBox(
                   height: 3.h,
                 ),
-                Consumer<ThemeProvider>(
-                  builder: (context, value, child) => Text(
-                    '@Username',
+                Consumer<UserProvider>(
+                  builder: (context, user, child) => Text(
+                    user.users.name,
                     style: TextStyle(
-                      fontSize: 12.sp,
-                      color: value.themeValue == false
-                          ? AppColors.gray2
-                          : AppColors.lightColor,
+                      fontSize: 16.sp,
                       fontFamily: 'Poppins',
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  height: 3.h,
+                ),
+                Consumer<UserProvider>(
+                  builder: (context, user, child) => Consumer<ThemeProvider>(
+                    builder: (context, value, child) => Text(
+                      '@${user.users.username}',
+                      style: TextStyle(
+                        fontSize: 12.sp,
+                        color: value.themeValue == false
+                            ? AppColors.gray2
+                            : AppColors.lightColor,
+                        fontFamily: 'Poppins',
+                      ),
                     ),
                   ),
                 ),

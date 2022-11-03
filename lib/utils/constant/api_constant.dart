@@ -4,4 +4,5 @@ class ApiConstants {
   static String checkRegister = '/isRegistered';
   static String register = '/registerUser';
   static String addPost = '/v2/addPost';
+  static String getUser = '/v2/getUser';
 }

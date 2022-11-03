@@ -25,9 +25,6 @@ class Registration extends StatefulWidget {
 }
 
 class _RegistrationState extends State<Registration> {
-  bool isDisable = true;
-  bool isFetching = false;
-
   TextEditingController emailC = TextEditingController();
   TextEditingController fullnameC = TextEditingController();
   TextEditingController usernameC = TextEditingController();
@@ -39,23 +36,6 @@ class _RegistrationState extends State<Registration> {
       ScaffoldMessenger.of(context).showSnackBar(registSnackBar);
     });
     emailC.text = widget.userEmail!;
-  }
-
-  Future<void> _postRegister(
-      BuildContext context, VoidCallback onSuccess) async {
-    try {
-      var res = await http.post(Uri.parse(
-          "${ApiConstants.baseUrl}${ApiConstants.register}?email=${emailC.text}&name=${fullnameC.text}&username=${usernameC.text}"));
-      if (res.statusCode == 200) {
-        var dataResponse = jsonDecode(res.body);
-        print(dataResponse);
-        if (dataResponse != null) {
-          onSuccess.call();
-        }
-      }
-    } catch (e) {
-      print(e);
-    }
   }
 
   @override
@@ -139,17 +119,22 @@ class _RegistrationState extends State<Registration> {
                         ),
                         SizedBox(
                           width: double.infinity,
-                          child: ButtonComponent(
-                              text: "Save",
-                              onClickFunction: () {
-                                if (formKey.currentState!.validate()) {
-                                  _postRegister(context, () {
-                                    Navigator.popAndPushNamed(
-                                        context, "/register-success");
-                                  });
-                                }
-                              },
-                              isDisable: false),
+                          child: Consumer<AuthProvider>(
+                            builder: (context, value, child) => ButtonComponent(
+                                text: "Save",
+                                onClickFunction: () {
+                                  if (formKey.currentState!.validate()) {
+                                    value.postRegister(
+                                        context,
+                                        () => Navigator.popAndPushNamed(
+                                            context, "/register-success"),
+                                        emailC.text,
+                                        fullnameC.text,
+                                        usernameC.text);
+                                  }
+                                },
+                                isDisable: false),
+                          ),
                         ),
                       ],
                     )
