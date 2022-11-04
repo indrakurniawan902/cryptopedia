@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:convert';
 import 'package:cryptopedia/provider/auth_provider.dart';
+import 'package:cryptopedia/provider/user_provider.dart';
 import 'package:cryptopedia/screen/navbar/navbar.dart';
 import 'package:cryptopedia/screen/on_boarding/on_boarding.dart';
 import 'package:cryptopedia/screen/registration/registration.dart';

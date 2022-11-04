@@ -3,6 +3,7 @@ import 'dart:convert';
 // ignore: unused_import
 import 'package:cryptopedia/provider/auth_provider.dart';
 import 'package:cryptopedia/provider/theme_provider.dart';
+import 'package:cryptopedia/provider/user_provider.dart';
 import 'package:cryptopedia/screen/components/button_component.dart';
 import 'package:cryptopedia/screen/components/form_field_component.dart';
 import 'package:cryptopedia/screen/components/snackbar.dart';

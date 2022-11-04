@@ -1,13 +1,13 @@
 class UserModel {
-  String id;
+  String? id;
   String username;
   String name;
   String email;
   List? createdPost;
   UserModel(
-      {required this.id,
+      {this.id,
       required this.username,
       required this.email,
       required this.name,
-      required this.createdPost});
+      this.createdPost});
 }
