@@ -10,7 +10,7 @@ class FormFieldComponent extends StatelessWidget {
   const FormFieldComponent(
       {Key? key,
       this.name,
-      this.isSearchBar,
+      this.isSearchBar = false,
       this.placeholder,
       this.validation,
       this.controller,
@@ -38,7 +38,7 @@ class FormFieldComponent extends StatelessWidget {
         ),
         Consumer<ThemeProvider>(
           builder: (context, value, child) => TextFormField(
-            initialValue: initialValue,
+            // initialValue: initialValue,
             enabled: !isDisable,
             controller: controller,
             validator: (value) {
@@ -77,9 +77,11 @@ class FormFieldComponent extends StatelessWidget {
               ),
               enabledBorder: OutlineInputBorder(
                 borderSide: BorderSide(
-                    color: value.themeValue == false
-                        ? AppColors.gray4
-                        : AppColors.darkModeFrame,
+                    color: isSearchBar!
+                        ? Colors.transparent
+                        : value.themeValue == false
+                            ? AppColors.gray4
+                            : AppColors.darkModeFrame,
                     width: 1.0),
               ),
               border: OutlineInputBorder(

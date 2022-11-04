@@ -32,8 +32,8 @@ class PostAppbar extends StatelessWidget with PreferredSizeWidget {
           toolbarHeight: isContent == true ? 171.h : 79.h,
           title: isContent
               ? Container(
-                  height: 126.h,
-                  padding: EdgeInsets.fromLTRB(20.w, 30.h, 20.w, 0.h),
+                  // height: 126.h,
+                  padding: EdgeInsets.fromLTRB(20.w, 30.h, 20.w, 20.h),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [

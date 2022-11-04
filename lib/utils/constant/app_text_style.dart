@@ -25,12 +25,12 @@ TextStyle appHeaderText = TextStyle(
 
 TextStyle textProfile = TextStyle(
   fontSize: 14.sp,
-  fontFamily: 'Poppins-Medium',
+  fontFamily: 'Poppins',
   fontWeight: FontWeight.w500,
 );
 TextStyle selectedindex = TextStyle(
   fontSize: 14.sp,
-  fontFamily: 'Poppins-Medium',
+  fontFamily: 'Poppins',
   fontWeight: FontWeight.w700,
 );
 TextStyle userStyle = TextStyle(
@@ -39,50 +39,50 @@ TextStyle userStyle = TextStyle(
   fontWeight: FontWeight.bold,
 );
 TextStyle copyRight = TextStyle(
-  fontFamily: 'Poppins-Medium',
+  fontFamily: 'Poppins',
   fontSize: 10.sp,
 );
 TextStyle aboutText = TextStyle(
-  fontFamily: 'Poppins-Regular',
+  fontFamily: 'Poppins',
   fontSize: 14.sp,
   height: 1.5.sp,
 );
 TextStyle headerTitle = TextStyle(
-  fontFamily: 'Poppins-SemiBold',
+  fontFamily: 'Poppins',
   fontSize: 28.sp,
+  fontWeight: FontWeight.w700,
 );
 TextStyle tabTitle = TextStyle(
-  fontFamily: 'Poppins-Medium',
+  fontFamily: 'Poppins',
   fontSize: 14.sp,
+  fontWeight: FontWeight.w500,
 );
 TextStyle subtitleStyle = TextStyle(
-  fontFamily: 'Poppins-Regular',
+  fontFamily: 'Poppins',
   fontSize: 14.sp,
 );
 
 TextStyle postTitleStyle = TextStyle(
-  fontFamily: 'Poppins-SemiBold',
+  fontFamily: 'Poppins',
   fontSize: 15.sp,
   fontWeight: FontWeight.w600,
 );
 TextStyle categoryTitleStyle = TextStyle(
-  fontFamily: 'Poppins-SemiBold',
+  fontFamily: 'Poppins',
   fontSize: 12.sp,
   fontWeight: FontWeight.w600,
 );
 TextStyle postBodyStyle = TextStyle(
-    fontFamily: 'Poppins-Regular',
-    fontSize: 12.sp,
-    fontWeight: FontWeight.w400);
+    fontFamily: 'Poppins', fontSize: 12.sp, fontWeight: FontWeight.w400);
 
 TextStyle tagStyle = TextStyle(
-    fontFamily: 'Poppins-SemiBold',
+    fontFamily: 'Poppins',
     fontSize: 13.sp,
     fontWeight: FontWeight.w600,
     color: AppColors.primaryBrand);
 
 TextStyle userPostStyle = TextStyle(
-  fontFamily: 'Poppins-Medium',
+  fontFamily: 'Poppins',
   fontSize: 13.sp,
   fontWeight: FontWeight.w500,
 );
