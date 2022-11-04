@@ -1,6 +1,9 @@
+import 'package:cryptopedia/provider/crypto_101_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:provider/provider.dart';
 
+import '../../provider/auth_provider.dart';
 import '../components/form_field_component.dart';
 import '../components/post_card.dart';
 
@@ -14,6 +17,9 @@ class Crypto101All extends StatefulWidget {
 class _Crypto101AllState extends State<Crypto101All> {
   @override
   Widget build(BuildContext context) {
+    final crypto101 = Provider.of<Crypto101Provider>(context);
+    crypto101.get101Data();
+
     return SingleChildScrollView(
       physics:
           const BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
@@ -32,7 +38,7 @@ class _Crypto101AllState extends State<Crypto101All> {
           ListView.builder(
             physics: const NeverScrollableScrollPhysics(),
             shrinkWrap: true,
-            itemCount: 20,
+            itemCount: crypto101.articles.length,
             itemBuilder: (context, index) => InkWell(
               splashColor: Colors.transparent,
               splashFactory: NoSplash.splashFactory,

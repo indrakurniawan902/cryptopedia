@@ -6,8 +6,8 @@ import 'package:cryptopedia/model/user/user_model.dart';
 import 'package:flutter/cupertino.dart';
 
 class Crypto101Provider extends ChangeNotifier {
-  // List<Crypto101Model> crypto101 = [];
-  List _crypto101 = [];
+  List<Crypto101Model> _crypto101 = [];
+  // List _crypto101 = [];
 
   List get articles => _crypto101;
 

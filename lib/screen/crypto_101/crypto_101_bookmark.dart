@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:provider/provider.dart';
 
+import '../../provider/auth_provider.dart';
+import '../../provider/crypto_101_provider.dart';
 import '../components/form_field_component.dart';
 import '../components/post_card.dart';
 
@@ -14,6 +17,11 @@ class Crypto101Bookmark extends StatefulWidget {
 class _Crypto101BookmarkState extends State<Crypto101Bookmark> {
   @override
   Widget build(BuildContext context) {
+    final crypto101 = Provider.of<Crypto101Provider>(context);
+    final data = Provider.of<AuthProvider>(context, listen: false);
+
+    crypto101.get101BookmarkData(data.getUser()!.email!);
+
     return SingleChildScrollView(
       physics:
           const BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
@@ -32,7 +40,7 @@ class _Crypto101BookmarkState extends State<Crypto101Bookmark> {
           ListView.builder(
             physics: const NeverScrollableScrollPhysics(),
             shrinkWrap: true,
-            itemCount: 20,
+            itemCount: crypto101.articles.length,
             itemBuilder: (context, index) => const PostCard(
               isBookmark: true,
               isPost: true,
