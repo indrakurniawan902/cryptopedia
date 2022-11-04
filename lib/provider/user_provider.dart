@@ -14,8 +14,8 @@ class UserProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  updateUserData(String email, String name, String username) async {
-    final result = await UserApi.putUserDetail(email, name, username);
+  updateUserData(String username, String email, String name) async {
+    final result = await UserApi.putUserDetail(username, email, name);
     _user = result;
     notifyListeners();
   }

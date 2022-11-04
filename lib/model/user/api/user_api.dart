@@ -24,7 +24,7 @@ class UserApi {
   }
 
   static Future<UserModel> putUserDetail(
-      String email, String name, String username) async {
+      String username, String email, String name) async {
     try {
       final response = await Dio()
           .put('${ApiConstants.baseUrl}${ApiConstants.editProfile}', data: {
@@ -40,8 +40,8 @@ class UserApi {
       } else {
         throw Exception('Failed to save Data');
       }
-    } catch (e) {
-      debugPrint(e.toString());
+    } on DioError catch (e) {
+      debugPrint(e.response!.statusMessage.toString());
       rethrow;
     }
   }

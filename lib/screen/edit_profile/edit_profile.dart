@@ -121,15 +121,16 @@ class _EditProfileState extends State<EditProfile> {
                               builder: (context, value, child) =>
                                   ButtonComponent(
                                       text: "Save",
-                                      onClickFunction: () async {
-                                        UserModel? result =
-                                            await value.updateUserData(
-                                                value.users.email,
-                                                _fullnameC.text,
-                                                value.users.username);
-                                        if (result != null) {
-                                          Navigator.pop(context);
-                                        }
+                                      onClickFunction: () {
+                                        value.updateUserData(
+                                          value.users.username,
+                                          value.users.email,
+                                          _fullnameC.text,
+                                        );
+                                        Navigator.pushNamedAndRemoveUntil(
+                                            context,
+                                            '/profile',
+                                            (route) => false);
                                       },
                                       isDisable: false),
                             ),

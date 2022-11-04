@@ -34,7 +34,7 @@ class ButtonComponent extends StatelessWidget {
           ? SizedBox(
               width: 26.w,
               height: 26.h,
-              child: CircularProgressIndicator(
+              child: const CircularProgressIndicator(
                 color: AppColors.lightColor,
               ),
             )
