@@ -1,11 +1,13 @@
 import 'package:cryptopedia/provider/auth_provider.dart';
 import 'package:cryptopedia/provider/bottom_navbar_provider.dart';
+import 'package:cryptopedia/provider/crypto_101_provider.dart';
 import 'package:cryptopedia/provider/on_boarding_provider.dart';
 import 'package:cryptopedia/provider/user_provider.dart';
 import 'package:cryptopedia/screen/add_post/add_post.dart';
 import 'package:cryptopedia/provider/theme_provider.dart';
 import 'package:cryptopedia/screen/about_app/about_app.dart';
 import 'package:cryptopedia/screen/bookmark/bookmark.dart';
+import 'package:cryptopedia/screen/crypto_101/crypto_101.dart';
 import 'package:cryptopedia/screen/edit_profile/edit_profile.dart';
 import 'package:cryptopedia/screen/homepage/homepage.dart';
 import 'package:cryptopedia/screen/my_post/my_post.dart';
@@ -45,6 +47,7 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (context) => AuthProvider()),
         ChangeNotifierProvider(create: (context) => BottomNavbarProvider()),
         ChangeNotifierProvider(create: (context) => UserProvider()),
+        ChangeNotifierProvider(create: (context) => Crypto101Provider()),
         ChangeNotifierProvider(
           create: (context) => ThemeProvider()..getPrefTheme(),
         ),
