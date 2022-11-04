@@ -16,11 +16,21 @@ class Crypto101Bookmark extends StatefulWidget {
 
 class _Crypto101BookmarkState extends State<Crypto101Bookmark> {
   @override
+  initState() {
+    super.initState();
+    final data = Provider.of<AuthProvider>(context, listen: false);
+    Provider.of<Crypto101Provider>(context, listen: false)
+        .get101BookmarkData(data.getUser()!.email!);
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     final crypto101 = Provider.of<Crypto101Provider>(context);
-    final data = Provider.of<AuthProvider>(context, listen: false);
-
-    crypto101.get101BookmarkData(data.getUser()!.email!);
 
     return SingleChildScrollView(
       physics:
@@ -37,18 +47,32 @@ class _Crypto101BookmarkState extends State<Crypto101Bookmark> {
           SizedBox(
             height: 20.h,
           ),
-          ListView.builder(
-            physics: const NeverScrollableScrollPhysics(),
-            shrinkWrap: true,
-            itemCount: crypto101.articles.length,
-            itemBuilder: (context, index) => const PostCard(
-              isBookmark: true,
-              isPost: true,
-              category: 'YEY',
-              postTitle: 'postTitle',
-              postBody: 'da',
-            ),
-          ),
+          crypto101.articles.length == 0
+              ? Center(
+                  child: Text(
+                  "Currently, no bookmark for crypto 101 here",
+                ))
+              : SizedBox(),
+          crypto101.loading
+              ? Center(child: CircularProgressIndicator())
+              : ListView.builder(
+                  physics: const NeverScrollableScrollPhysics(),
+                  shrinkWrap: true,
+                  itemCount: crypto101.articles.length,
+                  itemBuilder: (context, index) {
+                    final article = crypto101.articles[index];
+                    return InkWell(
+                      splashColor: Colors.transparent,
+                      splashFactory: NoSplash.splashFactory,
+                      onTap: () {},
+                      child: PostCard(
+                        isBookmark: true,
+                        postTitle: article.title,
+                        postBody: article.body,
+                      ),
+                    );
+                  },
+                ),
         ],
       ),
     );

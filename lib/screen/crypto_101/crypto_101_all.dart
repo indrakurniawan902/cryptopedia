@@ -16,9 +16,20 @@ class Crypto101All extends StatefulWidget {
 
 class _Crypto101AllState extends State<Crypto101All> {
   @override
+  initState() {
+    super.initState();
+    Provider.of<Crypto101Provider>(context, listen: false).get101Data();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     final crypto101 = Provider.of<Crypto101Provider>(context);
-    crypto101.get101Data();
+    final data = Provider.of<AuthProvider>(context, listen: false);
 
     return SingleChildScrollView(
       physics:
@@ -35,23 +46,36 @@ class _Crypto101AllState extends State<Crypto101All> {
           SizedBox(
             height: 20.h,
           ),
-          ListView.builder(
-            physics: const NeverScrollableScrollPhysics(),
-            shrinkWrap: true,
-            itemCount: crypto101.articles.length,
-            itemBuilder: (context, index) => InkWell(
-              splashColor: Colors.transparent,
-              splashFactory: NoSplash.splashFactory,
-              onTap: () {},
-              child: const PostCard(
-                isBookmark: true,
-                isPost: true,
-                category: 'YEY',
-                postTitle: 'postTitle',
-                postBody: 'da',
-              ),
-            ),
-          ),
+          crypto101.articles.length == 0
+              ? Center(
+                  child: Text(
+                  "Currently, no bookmark for crypto 101 here",
+                ))
+              : SizedBox(),
+          crypto101.loading
+              ? Center(child: CircularProgressIndicator())
+              : ListView.builder(
+                  physics: const NeverScrollableScrollPhysics(),
+                  shrinkWrap: true,
+                  itemCount: crypto101.articles.length,
+                  itemBuilder: (context, index) {
+                    final article = crypto101.articles[index];
+                    List<String> userBookmarked =
+                        List<String>.from(article.userBookmarked as List);
+
+                    return InkWell(
+                      splashColor: Colors.transparent,
+                      splashFactory: NoSplash.splashFactory,
+                      onTap: () {},
+                      child: PostCard(
+                        isBookmark:
+                            userBookmarked.contains(data.getUser()!.email),
+                        postTitle: article.title,
+                        postBody: article.body,
+                      ),
+                    );
+                  },
+                ),
         ],
       ),
     );

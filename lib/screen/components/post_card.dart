@@ -38,9 +38,9 @@ class PostCard extends StatelessWidget {
       builder: (context, value, child) => Container(
         margin: EdgeInsets.symmetric(vertical: 5.h),
         // width: double.infinity,
-        padding: EdgeInsets.all(12.w),
+        padding: EdgeInsets.all(12),
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(15),
+          borderRadius: BorderRadius.circular(12),
           boxShadow: const <BoxShadow>[
             AppShadow.shadow1,
           ],
@@ -63,28 +63,29 @@ class PostCard extends StatelessWidget {
                   ),
                 ),
                 isBookmark == true
-                    ? IconButton(
-                        onPressed: () {},
-                        icon: const Icon(
-                          size: 24,
-                          Icons.bookmark,
-                          // Icons.bookmark_outline,
-                          color: AppColors.primaryBrand,
-                        ))
+                    ? Icon(
+                        size: 24,
+                        Icons.bookmark,
+                        // Icons.bookmark_outline,
+                        color: AppColors.primaryBrand,
+                      )
                     : const SizedBox()
               ],
             ),
-            Container(
-              margin: EdgeInsets.only(bottom: 8.h),
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(5),
-                  color: AppColors.primaryBrand),
-              padding: EdgeInsets.symmetric(vertical: 2.h, horizontal: 5.w),
-              child: Text(
-                category!,
-                style: categoryTitleStyle,
-              ),
-            ),
+            isPost != null
+                ? Container(
+                    margin: EdgeInsets.only(bottom: 8.h),
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(5),
+                        color: AppColors.primaryBrand),
+                    padding:
+                        EdgeInsets.symmetric(vertical: 2.h, horizontal: 5.w),
+                    child: Text(
+                      category!,
+                      style: categoryTitleStyle,
+                    ),
+                  )
+                : SizedBox(),
             SizedBox(
               width: 303.w,
               child: Text(

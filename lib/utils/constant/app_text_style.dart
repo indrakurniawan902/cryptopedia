@@ -71,6 +71,7 @@ TextStyle categoryTitleStyle = TextStyle(
   fontFamily: 'Poppins',
   fontSize: 12.sp,
   fontWeight: FontWeight.w600,
+  color: AppColors.lightColor,
 );
 TextStyle postBodyStyle = TextStyle(
     fontFamily: 'Poppins', fontSize: 12.sp, fontWeight: FontWeight.w400);
