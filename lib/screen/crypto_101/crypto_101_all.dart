@@ -66,7 +66,14 @@ class _Crypto101AllState extends State<Crypto101All> {
                     return InkWell(
                       splashColor: Colors.transparent,
                       splashFactory: NoSplash.splashFactory,
-                      onTap: () {},
+                      onTap: () {
+                        Navigator.pushNamed(context, "/101-detail",
+                            arguments: {
+                              'id': article.id,
+                              'title': article.title,
+                              'body': article.body,
+                            });
+                      },
                       child: PostCard(
                         isBookmark:
                             userBookmarked.contains(data.getUser()!.email),

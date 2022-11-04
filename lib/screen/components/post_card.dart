@@ -87,10 +87,15 @@ class PostCard extends StatelessWidget {
                   )
                 : SizedBox(),
             SizedBox(
+              height: 6.h,
+            ),
+            SizedBox(
               width: 303.w,
               child: Text(
                 postBody!,
                 style: postBodyStyle,
+                overflow: TextOverflow.ellipsis,
+                maxLines: 3,
               ),
             ),
             isPost == true
