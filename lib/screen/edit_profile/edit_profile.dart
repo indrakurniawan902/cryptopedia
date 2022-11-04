@@ -1,3 +1,4 @@
+import 'package:cryptopedia/model/user/user_model.dart';
 import 'package:cryptopedia/provider/auth_provider.dart';
 import 'package:cryptopedia/provider/theme_provider.dart';
 import 'package:cryptopedia/provider/user_provider.dart';
@@ -18,9 +19,9 @@ class EditProfile extends StatefulWidget {
 }
 
 final formKey = GlobalKey<FormState>();
-TextEditingController fullnameC = TextEditingController();
+TextEditingController _fullnameC = TextEditingController();
 void validateInput() {
-  if (fullnameC.text != "") {}
+  if (_fullnameC.text != "") {}
 }
 
 class _EditProfileState extends State<EditProfile> {
@@ -90,7 +91,7 @@ class _EditProfileState extends State<EditProfile> {
                                         FormFieldComponent(
                                       name: "Fullname",
                                       placeholder: value.users.name,
-                                      controller: fullnameC,
+                                      controller: _fullnameC,
                                       validation: validateInput,
                                       isDisable: false,
                                     ),
@@ -116,12 +117,22 @@ class _EditProfileState extends State<EditProfile> {
                           ),
                           SizedBox(
                             width: double.infinity,
-                            child: ButtonComponent(
-                                text: "Save",
-                                onClickFunction: () {
-                                  Navigator.pop(context);
-                                },
-                                isDisable: false),
+                            child: Consumer<UserProvider>(
+                              builder: (context, value, child) =>
+                                  ButtonComponent(
+                                      text: "Save",
+                                      onClickFunction: () async {
+                                        UserModel? result =
+                                            await value.updateUserData(
+                                                value.users.email,
+                                                _fullnameC.text,
+                                                value.users.username);
+                                        if (result != null) {
+                                          Navigator.pop(context);
+                                        }
+                                      },
+                                      isDisable: false),
+                            ),
                           ),
                         ],
                       )
