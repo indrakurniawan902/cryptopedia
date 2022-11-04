@@ -25,7 +25,6 @@ class Registration extends StatefulWidget {
 }
 
 class _RegistrationState extends State<Registration> {
-  TextEditingController emailC = TextEditingController();
   TextEditingController fullnameC = TextEditingController();
   TextEditingController usernameC = TextEditingController();
 
@@ -35,7 +34,6 @@ class _RegistrationState extends State<Registration> {
     Future<void>.delayed(Duration.zero, () {
       ScaffoldMessenger.of(context).showSnackBar(registSnackBar);
     });
-    emailC.text = widget.userEmail!;
   }
 
   @override
@@ -82,13 +80,14 @@ class _RegistrationState extends State<Registration> {
                                 ]),
                             child: Column(
                               children: [
-                                FormFieldComponent(
-                                  name: "Email",
-                                  placeholder: widget.userEmail!,
-                                  controller: emailC,
-                                  initialValue: widget.userEmail,
-                                  validation: () {},
-                                  isDisable: true,
+                                Consumer<AuthProvider>(
+                                  builder: (context, value, child) =>
+                                      FormFieldComponent(
+                                    name: "Email",
+                                    initialValue: value.getUser()!.email!,
+                                    validation: () {},
+                                    isDisable: true,
+                                  ),
                                 ),
                                 SizedBox(
                                   height: 12.h,
@@ -128,7 +127,7 @@ class _RegistrationState extends State<Registration> {
                                         context,
                                         () => Navigator.popAndPushNamed(
                                             context, "/register-success"),
-                                        emailC.text,
+                                        value.getUser()!.email!,
                                         fullnameC.text,
                                         usernameC.text);
                                   }

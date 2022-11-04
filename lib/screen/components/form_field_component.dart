@@ -38,7 +38,7 @@ class FormFieldComponent extends StatelessWidget {
         ),
         Consumer<ThemeProvider>(
           builder: (context, value, child) => TextFormField(
-            // initialValue: initialValue,
+            initialValue: initialValue,
             enabled: !isDisable,
             controller: controller,
             validator: (value) {
