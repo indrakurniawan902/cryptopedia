@@ -1,5 +1,6 @@
 import 'package:cryptopedia/provider/auth_provider.dart';
 import 'package:cryptopedia/provider/bottom_navbar_provider.dart';
+import 'package:cryptopedia/provider/coin_provider.dart';
 import 'package:cryptopedia/provider/crypto_101_provider.dart';
 import 'package:cryptopedia/provider/on_boarding_provider.dart';
 import 'package:cryptopedia/provider/user_provider.dart';
@@ -44,6 +45,7 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (context) => OnBoardingProvider()),
+        ChangeNotifierProvider(create: (context) => CoinProvider()),
         ChangeNotifierProvider(create: (context) => AuthProvider()),
         ChangeNotifierProvider(create: (context) => BottomNavbarProvider()),
         ChangeNotifierProvider(create: (context) => UserProvider()),

@@ -87,3 +87,18 @@ TextStyle userPostStyle = TextStyle(
   fontSize: 13.sp,
   fontWeight: FontWeight.w500,
 );
+TextStyle assetName = TextStyle(
+  fontSize: 10.sp,
+  fontFamily: 'Poppins',
+  fontWeight: FontWeight.w500,
+);
+TextStyle titleInCoin = TextStyle(
+  fontSize: 11.sp,
+  fontFamily: 'Poppins',
+  fontWeight: FontWeight.bold,
+);
+TextStyle myPost = TextStyle(
+  fontSize: 17.sp,
+  fontFamily: 'Poppins',
+  fontWeight: FontWeight.bold,
+);
