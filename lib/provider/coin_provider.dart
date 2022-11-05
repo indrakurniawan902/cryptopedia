@@ -18,9 +18,11 @@ class CoinProvider extends ChangeNotifier {
       _isLoading = true;
       final c = await CoinApi.fethData();
       _coinList = c;
-      notifyListeners();
+    } catch (e) {
+      throw e.toString();
     } finally {
       _isLoading = false;
+      notifyListeners();
     }
   }
 
@@ -35,9 +37,9 @@ class CoinProvider extends ChangeNotifier {
         },
       );
       _coinListSortPrice = c;
-      notifyListeners();
     } finally {
       _isLoading = false;
+      notifyListeners();
     }
   }
 
@@ -52,9 +54,9 @@ class CoinProvider extends ChangeNotifier {
         },
       );
       _coinListSortMarket = c;
-      notifyListeners();
     } finally {
       _isLoading = false;
+      notifyListeners();
     }
   }
 }

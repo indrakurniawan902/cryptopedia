@@ -1,4 +1,5 @@
 import 'package:cryptopedia/provider/coin_provider.dart';
+import 'package:cryptopedia/provider/post_provider.dart';
 import 'package:cryptopedia/provider/theme_provider.dart';
 import 'package:cryptopedia/screen/components/crypto_card.dart';
 import 'package:cryptopedia/screen/components/default_appbar.dart';
@@ -49,11 +50,10 @@ class _HomepageState extends State<Homepage> {
                     ),
                     padding: EdgeInsets.all(10.h),
                     child: Consumer<CoinProvider>(
-                      builder: (context, value, child) => value.loading
-                          ? const Center(
-                              child: CircularProgressIndicator(),
-                            )
-                          : Row(
+                      builder: (context, value, child) => value
+                                  .getListCoinSortMarket.isNotEmpty &
+                              value.getListCoinSortPrice.isNotEmpty
+                          ? Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 CryptoCard(
@@ -89,6 +89,9 @@ class _HomepageState extends State<Homepage> {
                                       : 'assets/images/trending_down.png',
                                 ),
                               ],
+                            )
+                          : const Center(
+                              child: CircularProgressIndicator(),
                             ),
                     ),
                   ),
@@ -114,11 +117,9 @@ class _HomepageState extends State<Homepage> {
                       itemCount: 4,
                       itemBuilder: (BuildContext context, int index) =>
                           Consumer<CoinProvider>(
-                        builder: (context, value, child) => value.loading
-                            ? const Center(
-                                child: CircularProgressIndicator(),
-                              )
-                            : Row(
+                        builder: (context, value, child) => value
+                                .getListCoin.isNotEmpty
+                            ? Row(
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
                                 children: [
@@ -131,22 +132,25 @@ class _HomepageState extends State<Homepage> {
                                         value.getListCoin[index].currentPrice,
                                   ),
                                   CryptoCard(
-                                    title: value.getListCoin[index + 1].symbol!,
-                                    percent: value.getListCoin[index + 1]
+                                    title: value.getListCoin[index + 3].symbol!,
+                                    percent: value.getListCoin[index + 3]
                                         .priceChangePercentage24h!,
                                     isRank: true,
                                     price: value
-                                        .getListCoin[index + 1].currentPrice,
+                                        .getListCoin[index + 3].currentPrice,
                                   ),
                                   CryptoCard(
-                                    title: value.getListCoin[index + 2].symbol!,
-                                    percent: value.getListCoin[index + 2]
+                                    title: value.getListCoin[index + 5].symbol!,
+                                    percent: value.getListCoin[index + 5]
                                         .priceChangePercentage24h!,
                                     isRank: true,
                                     price: value
-                                        .getListCoin[index + 2].currentPrice,
+                                        .getListCoin[index + 5].currentPrice,
                                   ),
                                 ],
+                              )
+                            : const Center(
+                                child: CircularProgressIndicator(),
                               ),
                       ),
                     ),
@@ -159,44 +163,114 @@ class _HomepageState extends State<Homepage> {
                 ),
                 SizedBox(height: 10.h),
                 Consumer<ThemeProvider>(
-                  builder: (context, value, child) => Container(
-                    height: 166.h,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10),
-                      boxShadow: const <BoxShadow>[
-                        AppShadow.shadow1,
-                      ],
-                      color: value.themeValue == false
-                          ? AppColors.lightColor
-                          : AppColors.darkModeFrame,
-                    ),
-                    padding: EdgeInsets.all(10.h),
-                    child: Center(
-                      child: Text('NO POST'),
-                    ),
+                  builder: (context, value, child) => Consumer<PostProvider>(
+                    builder: (context, post, child) => Center(
+                        child: post.myPostSharing.isEmpty & post.loading
+                            ? const CircularProgressIndicator()
+                            : post.myPostSharing.isNotEmpty
+                                ? Column(
+                                    children: [
+                                      PostCard(
+                                          postTitle: post.myPostSharing
+                                              .elementAt(
+                                                  post.myPostSharing.length - 1)
+                                              .postTitle!,
+                                          category: post.myPostSharing
+                                              .elementAt(
+                                                  post.myPostSharing.length - 1)
+                                              .category!,
+                                          dislike: post.myPostSharing
+                                              .elementAt(
+                                                  post.myPostSharing.length - 1)
+                                              .dislike!
+                                              .toString(),
+                                          like: post.myPostSharing
+                                              .elementAt(
+                                                  post.myPostSharing.length - 1)
+                                              .like!
+                                              .toString(),
+                                          isBookmark: true,
+                                          isPost: true,
+                                          postBody: post.myPostSharing
+                                              .elementAt(
+                                                  post.myPostSharing.length - 1)
+                                              .postBody!,
+                                          username: post.myPostSharing
+                                              .elementAt(
+                                                  post.myPostSharing.length - 1)
+                                              .username!),
+                                      SizedBox(
+                                        height: 5.h,
+                                      ),
+                                      SizedBox(
+                                        height: 35.h,
+                                        width: 335.w,
+                                        child: ElevatedButton(
+                                            style: TextButton.styleFrom(
+                                                backgroundColor:
+                                                    value.themeValue == false
+                                                        ? AppColors.lightColor
+                                                        : AppColors
+                                                            .darkModeFrame),
+                                            onPressed: () {
+                                              Navigator.pushNamed(
+                                                  context, '/my-post');
+                                            },
+                                            child: Text('See More')),
+                                      )
+                                    ],
+                                  )
+                                : Consumer<ThemeProvider>(
+                                    builder: (context, value, child) =>
+                                        Container(
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(10),
+                                        boxShadow: const <BoxShadow>[
+                                          AppShadow.shadow1,
+                                        ],
+                                        color: value.themeValue == false
+                                            ? AppColors.lightColor
+                                            : AppColors.darkModeFrame,
+                                      ),
+                                      padding: EdgeInsets.all(10.h),
+                                      child: Column(
+                                        children: [
+                                          Image.asset(
+                                            'assets/images/no_post.png',
+                                            height: 120.h,
+                                            width: 158.w,
+                                          ),
+                                          // SizedBox(height: 5.h),
+                                          Text(
+                                            'You don’t have post yet',
+                                            style: noPost,
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  )),
                   ),
                 ),
                 SizedBox(
                   height: 20.h,
                 ),
-                const PostCard(
-                  postTitle: 'Trend cyrpto in 2023 ',
-                  isPost: true,
-                  category: 'Category',
-                  comment: '1',
-                  like: '1',
-                  dislike: '1',
-                  isBookmark: true,
-                  username: 'Indra',
-                  postBody:
-                      'To find out the fundamentals of a coin/token we can do an analysis through the coinmarketcap website where we can take information from a coin...',
+                Consumer<PostProvider>(
+                  builder: (context, value, child) => ListView.builder(
+                    physics: const NeverScrollableScrollPhysics(),
+                    shrinkWrap: true,
+                    itemCount: value.allSharing.length,
+                    itemBuilder: (context, index) => PostCard(
+                      isBookmark: true,
+                      isPost: true,
+                      category: value.allSharing[index].category!,
+                      postTitle: value.allSharing[index].postTitle!,
+                      postBody: value.allSharing[index].postBody,
+                      dislike: value.allSharing[index].dislike.toString(),
+                      like: value.allSharing[index].like.toString(),
+                      username: value.allSharing[index].username,
+                    ),
+                  ),
                 ),
-                SizedBox(
-                  height: 20.h,
-                ),
-                Consumer<CoinProvider>(
-                    builder: (context, value, child) =>
-                        Text(value.getListCoin.length.toString())),
               ],
             ),
           ),

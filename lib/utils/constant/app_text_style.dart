@@ -102,3 +102,8 @@ TextStyle myPost = TextStyle(
   fontFamily: 'Poppins',
   fontWeight: FontWeight.bold,
 );
+TextStyle noPost = TextStyle(
+  fontSize: 14.sp,
+  fontFamily: 'Poppins',
+  fontWeight: FontWeight.bold,
+);

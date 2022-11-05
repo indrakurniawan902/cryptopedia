@@ -1,6 +1,7 @@
 import 'package:cryptopedia/provider/auth_provider.dart';
 import 'package:cryptopedia/provider/bottom_navbar_provider.dart';
 import 'package:cryptopedia/provider/coin_provider.dart';
+import 'package:cryptopedia/provider/post_provider.dart';
 import 'package:cryptopedia/provider/theme_provider.dart';
 import 'package:cryptopedia/provider/user_provider.dart';
 import 'package:cryptopedia/utils/constant/app_colors.dart';
@@ -21,12 +22,16 @@ class _NavbarState extends State<Navbar> {
   void didChangeDependencies() {
     super.didChangeDependencies();
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-      final data = Provider.of<AuthProvider>(context, listen: false);
-      Provider.of<UserProvider>(context, listen: false)
-          .getUserData(data.getUser()!.email!);
       Provider.of<CoinProvider>(context, listen: false).getAllCoin();
       Provider.of<CoinProvider>(context, listen: false).coinSortPriceChange();
       Provider.of<CoinProvider>(context, listen: false).coinSortMarketCap();
+      final data = Provider.of<AuthProvider>(context, listen: false);
+      Provider.of<UserProvider>(context, listen: false)
+          .getUserData(data.getUser()!.email!);
+
+      Provider.of<PostProvider>(context, listen: false).getAllPostData();
+      Provider.of<PostProvider>(context, listen: false)
+          .getMyPostData(data.getUser()!.email!);
     });
   }
 
