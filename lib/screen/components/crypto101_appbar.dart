@@ -8,21 +8,24 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 
 class Crypto101Appbar extends StatelessWidget with PreferredSizeWidget {
-  const Crypto101Appbar(
-      {super.key,
-      required this.size,
-      required this.title,
-      this.user,
-      this.isBack,
-      this.isHomepage,
-      required this.fontSize});
+  const Crypto101Appbar({
+    super.key,
+    required this.size,
+    required this.title,
+    this.user,
+    this.isHomepage,
+    this.isBookmarked,
+    required this.articleId,
+    required this.bookmarkFunction,
+  });
 
   final double size;
-  final double fontSize;
   final String title;
+  final String articleId;
   final String? user;
-  final bool? isBack;
   final bool? isHomepage;
+  final bool? isBookmarked;
+  final Function() bookmarkFunction;
   @override
   Widget build(BuildContext context) {
     return Consumer<ThemeProvider>(
@@ -46,27 +49,19 @@ class Crypto101Appbar extends StatelessWidget with PreferredSizeWidget {
             color: value.themeValue == false
                 ? AppColors.lightColor
                 : AppColors.darkModeBg,
-            icon: const Icon(Icons.bookmark_add_outlined),
-            onPressed: () => Navigator.pop(context),
+            icon: Icon(isBookmarked == true
+                ? Icons.bookmark
+                : Icons.bookmark_add_outlined),
+            onPressed: bookmarkFunction,
           )
         ],
-        leading: isBack == true
-            ? IconButton(
-                color: value.themeValue == false
-                    ? AppColors.lightColor
-                    : AppColors.darkModeBg,
-                icon: const Icon(FeatherIcons.chevronLeft),
-                onPressed: () => Navigator.pop(context),
-              )
-            : isHomepage == true
-                ? Padding(
-                    padding: EdgeInsets.fromLTRB(20.w, 17.h, 0, 17.h),
-                    child: Image.asset(
-                        cacheHeight: 32.h.toInt(),
-                        cacheWidth: 35.w.toInt(),
-                        'assets/images/icon_home.png'),
-                  )
-                : const SizedBox(),
+        leading: IconButton(
+          color: value.themeValue == false
+              ? AppColors.lightColor
+              : AppColors.darkModeBg,
+          icon: const Icon(FeatherIcons.chevronLeft),
+          onPressed: () => Navigator.pop(context),
+        ),
         flexibleSpace: Container(
           decoration: const BoxDecoration(
             color: AppColors.primaryBrand,

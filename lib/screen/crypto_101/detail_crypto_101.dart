@@ -1,3 +1,4 @@
+import 'package:cryptopedia/model/crypto_101/api/bookmark_api.dart';
 import 'package:cryptopedia/screen/components/crypto101_appbar.dart';
 import 'package:cryptopedia/screen/components/default_appbar.dart';
 import 'package:cryptopedia/utils/constant/app_colors.dart';
@@ -8,6 +9,7 @@ import 'package:provider/provider.dart';
 
 import '../../provider/auth_provider.dart';
 import '../../provider/crypto_101_provider.dart';
+import '../components/pop_up_dialog.dart';
 import '../components/post_card.dart';
 
 class DetailCrypto101 extends StatefulWidget {
@@ -18,6 +20,8 @@ class DetailCrypto101 extends StatefulWidget {
 }
 
 class _DetailCrypto101State extends State<DetailCrypto101> {
+  bool isLoading = false;
+
   @override
   initState() {
     super.initState();
@@ -36,24 +40,50 @@ class _DetailCrypto101State extends State<DetailCrypto101> {
 
     Map<String, dynamic> argsArticle =
         ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
-
     String id = argsArticle['id'];
 
+    List userBookmarked = argsArticle['userBookmarked'];
+    bool isBookmarked =
+        argsArticle['userBookmarked'].contains(data.getUser()!.email);
+
     return Scaffold(
-      appBar: const Crypto101Appbar(
+      appBar: Crypto101Appbar(
         size: 65,
         title: 'Crypto 101',
-        fontSize: 24,
-        isBack: true,
+        articleId: id,
+        isBookmarked: isBookmarked,
+        bookmarkFunction: () async {
+          setState(() {
+            isLoading = true;
+          });
+          await Crypto101AddBookmarkApi.addBookmark(data.getUser()!.email!, id);
+          setState(() {
+            isBookmarked = !isBookmarked;
+            isLoading = false;
+          });
+          showDialog(
+            context: context,
+            builder: (BuildContext context) {
+              return PopUpDialog(
+                type: 'success',
+                title: 'Success!',
+                description: isBookmarked
+                    ? 'This article added to bookmark!'
+                    : 'This article removed from bookmark!',
+              );
+            },
+          );
+          print(isBookmarked);
+        },
       ),
-      body: SingleChildScrollView(
-        child: Stack(children: [
-          Container(
-            width: double.infinity,
-            height: 80.h,
-            color: AppColors.primaryBrand,
-          ),
-          Padding(
+      body: Stack(children: [
+        Container(
+          width: double.infinity,
+          height: 80.h,
+          color: AppColors.primaryBrand,
+        ),
+        SingleChildScrollView(
+          child: Padding(
             padding: EdgeInsets.symmetric(horizontal: 20.w),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -122,9 +152,19 @@ class _DetailCrypto101State extends State<DetailCrypto101> {
                 ),
               ],
             ),
-          )
-        ]),
-      ),
+          ),
+        ),
+        isLoading
+            ? Container(
+                width: double.infinity,
+                color: Color.fromARGB(120, 255, 255, 255),
+                child: Center(
+                  child:
+                      CircularProgressIndicator(color: AppColors.primaryBrand),
+                ),
+              )
+            : SizedBox(),
+      ]),
     );
   }
 }

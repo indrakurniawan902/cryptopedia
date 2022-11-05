@@ -72,6 +72,7 @@ class _Crypto101AllState extends State<Crypto101All> {
                               'id': article.id,
                               'title': article.title,
                               'body': article.body,
+                              'userBookmarked': userBookmarked,
                             });
                       },
                       child: PostCard(
