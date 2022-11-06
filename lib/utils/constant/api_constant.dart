@@ -7,6 +7,7 @@ class ApiConstants {
   static String getUser = '/v2/getUser';
   static String get101 = '/v2/getArticle';
   static String get101Bookmark = '/v2/users/bookmark/article';
+  static String bookmark101 = '/v2/posts-action/bookmark/article';
   static String editProfile = '/v2/editProfile';
   static String addComment = '/v2/posts-action/comment/';
   static String getSharing = '/v2/getPost';

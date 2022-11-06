@@ -64,7 +64,13 @@ class _Crypto101BookmarkState extends State<Crypto101Bookmark> {
                     return InkWell(
                       splashColor: Colors.transparent,
                       splashFactory: NoSplash.splashFactory,
-                      onTap: () {},
+                      onTap: () {
+                        Navigator.pushNamed(context, "/101-detail", arguments: {
+                          'id': article.id,
+                          'title': article.title,
+                          'body': article.body,
+                        });
+                      },
                       child: PostCard(
                         isBookmark: true,
                         postTitle: article.title,

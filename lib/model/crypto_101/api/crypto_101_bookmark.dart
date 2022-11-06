@@ -14,7 +14,7 @@ class Crypto101BookmarkApi {
       if (response.statusCode == 200) {
         List<Crypto101Model> articles = (response.data as List)
             .map((e) => Crypto101Model(
-                id: e['_uid'],
+                id: e['_id'],
                 title: e['article_title'],
                 body: e['article_body'],
                 userBookmarked: e['user_bookmarked']))

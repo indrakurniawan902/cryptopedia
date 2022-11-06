@@ -107,3 +107,16 @@ TextStyle noPost = TextStyle(
   fontFamily: 'Poppins',
   fontWeight: FontWeight.bold,
 );
+
+TextStyle articleTitleStyle = TextStyle(
+  fontFamily: 'Poppins',
+  fontSize: 20.sp,
+  fontWeight: FontWeight.w600,
+  color: AppColors.darkColor,
+);
+
+TextStyle articleBodyStyle = TextStyle(
+  fontFamily: 'Poppins',
+  fontSize: 14.sp,
+  color: AppColors.darkColor,
+);
