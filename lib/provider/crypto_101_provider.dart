@@ -29,14 +29,15 @@ class Crypto101Provider extends ChangeNotifier {
   }
 
   void search101(String keyword) async {
+    notifyListeners();
     _isLoading = true;
     final result = await Crypto101AllApi.search101(keyword.toLowerCase());
     _crypto101 = result;
     _isLoading = false;
-    notifyListeners();
   }
 
   void search101Bookmark(String email, String keyword) async {
+    notifyListeners();
     _isLoading = true;
     final result = await Crypto101BookmarkApi.get101Bookmark(email);
     final filteredArticles = result.where((article) {
@@ -48,6 +49,5 @@ class Crypto101Provider extends ChangeNotifier {
 
     _crypto101 = filteredArticles;
     _isLoading = false;
-    notifyListeners();
   }
 }

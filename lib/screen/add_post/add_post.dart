@@ -199,6 +199,7 @@ class _AddPostState extends State<AddPost> {
                                       controller: contentC,
                                       isDisable: false,
                                       height: 4,
+                                      maxLines: 4,
                                     ),
                                     SizedBox(
                                       height: 12.h,
