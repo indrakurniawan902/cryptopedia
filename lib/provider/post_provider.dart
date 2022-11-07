@@ -37,6 +37,17 @@ class PostProvider extends ChangeNotifier {
     }
   }
 
+  changeBookmarkStatus(String email, String id) async {
+    try {
+      _isLoading = true;
+      await PostApi.addSharingBookmark(email, id);
+      _isLoading = false;
+      notifyListeners();
+    } catch (e) {
+      e.toString();
+    }
+  }
+
   getSharingBookmarkData(String email) async {
     try {
       _isLoading = true;

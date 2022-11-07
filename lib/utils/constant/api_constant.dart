@@ -11,9 +11,10 @@ class ApiConstants {
   static String editProfile = '/v2/editProfile';
   static String addComment = '/v2/posts-action/comment/';
   static String getSharing = '/v2/getPost';
-  static String getLikePost = '/v2/posts-action/like/';
-  static String getDislikePost = '/v2/posts-action/dislike/';
+  static String getLikePost = '/v2/posts-action/like';
+  static String getDislikePost = '/v2/posts-action/dislike';
   static String getSharingBookmark = '/v2/users/bookmark/post';
+  static String addSharingBookmark = '/v2/posts-action/bookmark/post';
   static String getCoinData =
       'https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=100&page=1&sparkline=false';
 }

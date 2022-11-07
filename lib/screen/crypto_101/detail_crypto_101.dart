@@ -1,6 +1,5 @@
 import 'package:cryptopedia/model/crypto_101/api/bookmark_api.dart';
 import 'package:cryptopedia/screen/components/crypto101_appbar.dart';
-import 'package:cryptopedia/screen/components/default_appbar.dart';
 import 'package:cryptopedia/utils/constant/app_colors.dart';
 import 'package:cryptopedia/utils/constant/app_text_style.dart';
 import 'package:flutter/material.dart';

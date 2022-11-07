@@ -202,6 +202,12 @@ class _HomepageState extends State<Homepage> {
                                         width: 335.w,
                                         child: ElevatedButton(
                                             style: TextButton.styleFrom(
+                                                textStyle: TextStyle(
+                                                    color: value.themeValue ==
+                                                            false
+                                                        ? AppColors.darkColor
+                                                        : AppColors.lightColor,
+                                                    fontFamily: 'Poppins'),
                                                 backgroundColor:
                                                     value.themeValue == false
                                                         ? AppColors.lightColor

@@ -11,7 +11,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 class PostCard extends StatelessWidget {
   const PostCard(
       {super.key,
-      required this.postTitle,
+      this.postTitle,
       this.category,
       this.username,
       this.like,
@@ -20,15 +20,19 @@ class PostCard extends StatelessWidget {
       this.postBody,
       this.isBookmark,
       this.isPost,
+      this.isDetail,
+      this.isDetailBody,
       this.tag});
   final String? username;
+  final bool? isDetail;
+  final bool? isDetailBody;
   final bool? isBookmark;
   final bool? isPost;
   final String? like;
   final String? dislike;
   final List? comment;
   final List<String>? tag;
-  final String postTitle;
+  final String? postTitle;
   final String? category;
   final String? postBody;
 
@@ -56,10 +60,14 @@ class PostCard extends StatelessWidget {
               children: [
                 SizedBox(
                   width: 260.w,
-                  child: Text(
-                    postTitle,
-                    style: postTitleStyle,
-                  ),
+                  child: isDetailBody == true
+                      ? null
+                      : Text(
+                          postTitle!,
+                          style: isDetail == true
+                              ? articleTitleStyle
+                              : postTitleStyle,
+                        ),
                 ),
                 isBookmark == true
                     ? Icon(
@@ -71,7 +79,7 @@ class PostCard extends StatelessWidget {
                     : const SizedBox()
               ],
             ),
-            isPost != null
+            isPost != null || isDetail == true
                 ? Container(
                     margin: EdgeInsets.only(bottom: 8.h),
                     decoration: BoxDecoration(
@@ -90,14 +98,16 @@ class PostCard extends StatelessWidget {
             ),
             SizedBox(
               width: 303.w,
-              child: Text(
-                postBody!,
-                style: postBodyStyle,
-                overflow: TextOverflow.ellipsis,
-                maxLines: 3,
-              ),
+              child: postBody != null
+                  ? Text(
+                      postBody!,
+                      style: postBodyStyle,
+                      overflow: TextOverflow.ellipsis,
+                      maxLines: isDetailBody == true ? 20 : 3,
+                    )
+                  : null,
             ),
-            isPost == true
+            isPost == true || isDetailBody == true
                 ? Padding(
                     padding: EdgeInsets.only(top: 8.h, bottom: 5.h),
                     child: Row(
@@ -110,7 +120,7 @@ class PostCard extends StatelessWidget {
                     ),
                   )
                 : const SizedBox(),
-            isPost == true
+            isPost == true || isDetailBody == true
                 ? Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -118,59 +128,61 @@ class PostCard extends StatelessWidget {
                         username!,
                         style: userPostStyle,
                       ),
-                      Row(
-                        children: [
-                          Row(
-                            children: [
-                              SvgPicture.asset(
-                                'assets/images/comment.svg',
-                                semanticsLabel: 'Comment Logo',
-                                color: value.themeValue == false
-                                    ? AppColors.grey
-                                    : AppColors.lightColor,
-                              ),
-                              SizedBox(
-                                width: 4.w,
-                              ),
-                              Text(comment == null
-                                  ? '0'
-                                  : comment!.length.toString())
-                            ],
-                          ),
-                          SizedBox(
-                            width: 8.w,
-                          ),
-                          Row(
-                            children: [
-                              Icon(
-                                FeatherIcons.thumbsUp,
-                                color: AppColors.primaryBrand,
-                                size: 12.w,
-                              ),
-                              SizedBox(
-                                width: 4.w,
-                              ),
-                              Text(like.toString())
-                            ],
-                          ),
-                          SizedBox(
-                            width: 8.w,
-                          ),
-                          Row(
-                            children: [
-                              Icon(
-                                FeatherIcons.thumbsDown,
-                                size: 12.w,
-                                color: AppColors.error,
-                              ),
-                              SizedBox(
-                                width: 4.w,
-                              ),
-                              Text(dislike.toString())
-                            ],
-                          )
-                        ],
-                      )
+                      isDetailBody == true
+                          ? SizedBox()
+                          : Row(
+                              children: [
+                                Row(
+                                  children: [
+                                    SvgPicture.asset(
+                                      'assets/images/comment.svg',
+                                      semanticsLabel: 'Comment Logo',
+                                      color: value.themeValue == false
+                                          ? AppColors.grey
+                                          : AppColors.lightColor,
+                                    ),
+                                    SizedBox(
+                                      width: 4.w,
+                                    ),
+                                    Text(comment == null
+                                        ? '0'
+                                        : comment!.length.toString())
+                                  ],
+                                ),
+                                SizedBox(
+                                  width: 8.w,
+                                ),
+                                Row(
+                                  children: [
+                                    Icon(
+                                      FeatherIcons.thumbsUp,
+                                      color: AppColors.primaryBrand,
+                                      size: 12.w,
+                                    ),
+                                    SizedBox(
+                                      width: 4.w,
+                                    ),
+                                    Text(like.toString())
+                                  ],
+                                ),
+                                SizedBox(
+                                  width: 8.w,
+                                ),
+                                Row(
+                                  children: [
+                                    Icon(
+                                      FeatherIcons.thumbsDown,
+                                      size: 12.w,
+                                      color: AppColors.error,
+                                    ),
+                                    SizedBox(
+                                      width: 4.w,
+                                    ),
+                                    Text(dislike.toString())
+                                  ],
+                                )
+                              ],
+                            )
                     ],
                   )
                 : const SizedBox(),

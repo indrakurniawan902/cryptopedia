@@ -1,3 +1,5 @@
+import 'dart:convert';
+import 'package:http/http.dart' as http;
 import 'package:cryptopedia/model/post_model/post_model.dart';
 import 'package:cryptopedia/utils/constant/api_constant.dart';
 import 'package:dio/dio.dart';
@@ -94,6 +96,65 @@ class PostApi {
             .toList();
         print(posts);
         return posts;
+      } else {
+        throw Exception('Failed to load Data');
+      }
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  static Future addSharingBookmark(String email, String id) async {
+    try {
+      Map data = {'email': email};
+
+      final response = await http.post(
+          Uri.parse(
+              '${ApiConstants.baseUrl}${ApiConstants.addSharingBookmark}/$id'),
+          headers: {"Content-Type": "application/json"},
+          body: json.encode(data));
+
+      if (response.statusCode == 200) {
+        return "success";
+      } else {
+        throw Exception('Failed to load Data');
+      }
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  static Future addSharingLike(String email, String id) async {
+    try {
+      Map data = {'email': email};
+
+      final response = await http.post(
+          Uri.parse('${ApiConstants.baseUrl}${ApiConstants.getLikePost}/$id'),
+          headers: {"Content-Type": "application/json"},
+          body: json.encode(data));
+
+      if (response.statusCode == 200) {
+        return "success";
+      } else {
+        throw Exception('Failed to load Data');
+      }
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  static Future addSharingDislike(String email, String id) async {
+    try {
+      Map data = {'email': email};
+
+      final response = await http.post(
+          Uri.parse(
+              '${ApiConstants.baseUrl}${ApiConstants.getDislikePost}/$id'),
+          headers: {"Content-Type": "application/json"},
+          body: json.encode(data));
+
+      if (response.statusCode == 200) {
+        return "success";
       } else {
         throw Exception('Failed to load Data');
       }
