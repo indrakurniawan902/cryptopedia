@@ -1,4 +1,5 @@
 import 'package:cryptopedia/model/crypto_101/api/bookmark_api.dart';
+import 'package:cryptopedia/provider/theme_provider.dart';
 import 'package:cryptopedia/screen/components/crypto101_appbar.dart';
 import 'package:cryptopedia/screen/components/default_appbar.dart';
 import 'package:cryptopedia/utils/constant/app_colors.dart';
@@ -46,125 +47,145 @@ class _DetailCrypto101State extends State<DetailCrypto101> {
     bool isBookmarked =
         argsArticle['userBookmarked'].contains(data.getUser()!.email);
 
-    return Scaffold(
-      appBar: Crypto101Appbar(
-        size: 65,
-        title: 'Crypto 101',
-        articleId: id,
-        isBookmarked: isBookmarked,
-        bookmarkFunction: () async {
-          setState(() {
-            isLoading = true;
-          });
-          await Crypto101AddBookmarkApi.addBookmark(data.getUser()!.email!, id);
-          setState(() {
-            isBookmarked = !isBookmarked;
-            isLoading = false;
-          });
-          showDialog(
-            context: context,
-            builder: (BuildContext context) {
-              return PopUpDialog(
-                type: 'success',
-                title: 'Success!',
-                description: isBookmarked
-                    ? 'This article added to bookmark!'
-                    : 'This article removed from bookmark!',
-              );
-            },
-          );
-          print(isBookmarked);
-        },
-      ),
-      body: Stack(children: [
-        Container(
-          width: double.infinity,
-          height: 80.h,
-          color: AppColors.primaryBrand,
+    return Consumer<ThemeProvider>(
+      builder: (context, value, child) => Scaffold(
+        appBar: Crypto101Appbar(
+          size: 65,
+          title: 'Crypto 101',
+          articleId: id,
+          isBookmarked: isBookmarked,
+          bookmarkFunction: () async {
+            setState(() {
+              isLoading = true;
+            });
+            await Crypto101AddBookmarkApi.addBookmark(
+                data.getUser()!.email!, id);
+            setState(() {
+              isBookmarked = !isBookmarked;
+              isLoading = false;
+            });
+            showDialog(
+              context: context,
+              builder: (BuildContext context) {
+                return PopUpDialog(
+                  type: 'success',
+                  title: 'Success!',
+                  description: isBookmarked
+                      ? 'This article added to bookmark!'
+                      : 'This article removed from bookmark!',
+                );
+              },
+            );
+            print(isBookmarked);
+          },
         ),
-        SingleChildScrollView(
-          child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: 20.w),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Container(
-                  padding: EdgeInsets.all(16),
-                  width: double.infinity,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(12),
-                    color: AppColors.lightColor,
+        body: Stack(children: [
+          Container(
+            width: double.infinity,
+            height: 80.h,
+            color: AppColors.primaryBrand,
+          ),
+          SingleChildScrollView(
+            child: Padding(
+              padding: EdgeInsets.symmetric(horizontal: 20.w),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Container(
+                    padding: EdgeInsets.all(16),
+                    width: double.infinity,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(12),
+                      color: value.themeValue == false
+                          ? AppColors.lightColor
+                          : AppColors.darkModeFrame,
+                    ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          argsArticle['title'],
+                          style: TextStyle(
+                            fontFamily: 'Poppins',
+                            fontSize: 20.sp,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
+                        SizedBox(
+                          height: 20.h,
+                        ),
+                        Text(
+                          argsArticle['body'],
+                          style: TextStyle(
+                            fontFamily: 'Poppins',
+                            fontSize: 14.sp,
+                            color: value.themeValue == false
+                                ? AppColors.darkModeFrame
+                                : AppColors.gray5,
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        argsArticle['title'],
-                        style: articleTitleStyle,
-                      ),
-                      SizedBox(
-                        height: 20.h,
-                      ),
-                      Text(
-                        argsArticle['body'],
-                        style: articleBodyStyle,
-                      ),
-                    ],
+                  SizedBox(
+                    height: 24.h,
                   ),
-                ),
-                SizedBox(
-                  height: 24.h,
-                ),
-                Text(
-                  "Other helpful guide",
-                  style: articleTitleStyle,
-                ),
-                SizedBox(
-                  height: 12.h,
-                ),
-                ListView.builder(
-                  physics: const NeverScrollableScrollPhysics(),
-                  shrinkWrap: true,
-                  itemCount: crypto101.articles.length,
-                  itemBuilder: (context, index) {
-                    final article = crypto101.articles[index];
-                    List<String> userBookmarked =
-                        List<String>.from(article.userBookmarked as List);
+                  Text(
+                    "Other helpful guide",
+                    style: TextStyle(
+                      fontFamily: 'Poppins',
+                      fontSize: 16.sp,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                  SizedBox(
+                    height: 12.h,
+                  ),
+                  ListView.builder(
+                    physics: const NeverScrollableScrollPhysics(),
+                    shrinkWrap: true,
+                    itemCount: crypto101.articles.length,
+                    itemBuilder: (context, index) {
+                      final article = crypto101.articles[index];
+                      List<String> userBookmarked =
+                          List<String>.from(article.userBookmarked as List);
 
-                    return InkWell(
-                      splashColor: Colors.transparent,
-                      splashFactory: NoSplash.splashFactory,
-                      onTap: () {
-                        Navigator.pushNamed(context, "/101-detail", arguments: {
-                          'id': article.id,
-                          'title': article.title,
-                          'body': article.body,
-                        });
-                      },
-                      child: PostCard(
-                        isBookmark:
-                            userBookmarked.contains(data.getUser()!.email),
-                        postTitle: article.title,
-                        postBody: article.body,
-                      ),
-                    );
-                  },
-                ),
-              ],
+                      return InkWell(
+                        splashColor: Colors.transparent,
+                        splashFactory: NoSplash.splashFactory,
+                        onTap: () {
+                          Navigator.pushNamed(context, "/101-detail",
+                              arguments: {
+                                'id': article.id,
+                                'title': article.title,
+                                'body': article.body,
+                              });
+                        },
+                        child: PostCard(
+                          isBookmark:
+                              userBookmarked.contains(data.getUser()!.email),
+                          postTitle: article.title,
+                          postBody: article.body,
+                        ),
+                      );
+                    },
+                  ),
+                ],
+              ),
             ),
           ),
-        ),
-        isLoading
-            ? Container(
-                width: double.infinity,
-                color: Color.fromARGB(120, 255, 255, 255),
-                child: Center(
-                  child:
-                      CircularProgressIndicator(color: AppColors.primaryBrand),
-                ),
-              )
-            : SizedBox(),
-      ]),
+          isLoading
+              ? Container(
+                  width: double.infinity,
+                  color: Color.fromARGB(120, 255, 255, 255),
+                  child: Center(
+                    child: CircularProgressIndicator(
+                        color: AppColors.primaryBrand),
+                  ),
+                )
+              : SizedBox(),
+        ]),
+      ),
     );
   }
 }

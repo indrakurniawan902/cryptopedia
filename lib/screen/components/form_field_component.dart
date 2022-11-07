@@ -16,12 +16,14 @@ class FormFieldComponent extends StatelessWidget {
       this.controller,
       required this.isDisable,
       this.initialValue,
+      this.changeHandler,
       this.height})
       : super(key: key);
   final bool? isSearchBar;
   final String? name;
   final String? placeholder;
   final Function()? validation;
+  final void Function(String)? changeHandler;
   final bool isDisable;
   final TextEditingController? controller;
   final String? initialValue;
@@ -41,6 +43,7 @@ class FormFieldComponent extends StatelessWidget {
             initialValue: initialValue,
             enabled: !isDisable,
             controller: controller,
+            onChanged: changeHandler,
             validator: (value) {
               if (value == null || value.isEmpty) {
                 return 'Please enter some text';

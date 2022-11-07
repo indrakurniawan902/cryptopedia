@@ -29,4 +29,28 @@ class Crypto101AllApi {
       rethrow;
     }
   }
+
+  static Future<List<Crypto101Model>> search101(String keyword) async {
+    try {
+      final response =
+          await Dio().get('${ApiConstants.baseUrl}${ApiConstants.get101}?search=$keyword');
+
+      if (response.statusCode == 200) {
+        List<Crypto101Model> articles = (response.data as List)
+            .map((e) => Crypto101Model(
+                id: e['_id'],
+                title: e['article_title'],
+                body: e['article_body'],
+                userBookmarked: e['user_bookmarked']))
+            .toList();
+
+        print(articles);
+        return articles;
+      } else {
+        throw Exception('Failed to load Data');
+      }
+    } catch (e) {
+      rethrow;
+    }
+  }
 }

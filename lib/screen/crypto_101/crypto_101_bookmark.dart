@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 
 import '../../provider/auth_provider.dart';
 import '../../provider/crypto_101_provider.dart';
+import '../../utils/constant/app_colors.dart';
 import '../components/form_field_component.dart';
 import '../components/post_card.dart';
 
@@ -31,6 +32,11 @@ class _Crypto101BookmarkState extends State<Crypto101Bookmark> {
   @override
   Widget build(BuildContext context) {
     final crypto101 = Provider.of<Crypto101Provider>(context);
+    final data = Provider.of<AuthProvider>(context, listen: false);
+
+    void handleSearch(String keyword) {
+      crypto101.search101Bookmark(data.getUser()!.email!, keyword);
+    }
 
     return SingleChildScrollView(
       physics:
@@ -38,11 +44,12 @@ class _Crypto101BookmarkState extends State<Crypto101Bookmark> {
       padding: EdgeInsets.symmetric(horizontal: 20.w),
       child: Column(
         children: [
-          const FormFieldComponent(
+          FormFieldComponent(
             isDisable: false,
             isSearchBar: true,
             placeholder: 'Search',
             name: '',
+            changeHandler: handleSearch,
           ),
           SizedBox(
             height: 20.h,
@@ -54,7 +61,9 @@ class _Crypto101BookmarkState extends State<Crypto101Bookmark> {
                 ))
               : SizedBox(),
           crypto101.loading
-              ? Center(child: CircularProgressIndicator())
+              ? Center(
+                  child:
+                      CircularProgressIndicator(color: AppColors.primaryBrand))
               : ListView.builder(
                   physics: const NeverScrollableScrollPhysics(),
                   shrinkWrap: true,

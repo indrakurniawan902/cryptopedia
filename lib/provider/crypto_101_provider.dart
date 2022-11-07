@@ -27,4 +27,27 @@ class Crypto101Provider extends ChangeNotifier {
     _isLoading = false;
     notifyListeners();
   }
+
+  void search101(String keyword) async {
+    _isLoading = true;
+    final result = await Crypto101AllApi.search101(keyword.toLowerCase());
+    _crypto101 = result;
+    _isLoading = false;
+    notifyListeners();
+  }
+
+  void search101Bookmark(String email, String keyword) async {
+    _isLoading = true;
+    final result = await Crypto101BookmarkApi.get101Bookmark(email);
+    final filteredArticles = result.where((article) {
+      final articleTitle = article.title.toLowerCase();
+      final articleBody = article.body.toLowerCase();
+      final input = keyword.toLowerCase();
+      return articleTitle.contains(input) || articleBody.contains(input);
+    }).toList();
+
+    _crypto101 = filteredArticles;
+    _isLoading = false;
+    notifyListeners();
+  }
 }
