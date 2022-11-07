@@ -211,7 +211,14 @@ class _HomepageState extends State<Homepage> {
                                               Navigator.pushNamed(
                                                   context, '/my-post');
                                             },
-                                            child: Text('See More')),
+                                            child: Text(
+                                              'See More',
+                                              style: TextStyle(
+                                                color: value.themeValue == false
+                                                    ? AppColors.darkColor
+                                                    : AppColors.lightColor,
+                                              ),
+                                            )),
                                       )
                                     ],
                                   )

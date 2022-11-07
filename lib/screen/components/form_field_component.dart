@@ -16,16 +16,20 @@ class FormFieldComponent extends StatelessWidget {
       this.controller,
       required this.isDisable,
       this.initialValue,
+      this.changeHandler,
+      this.maxLines = 1,
       this.height})
       : super(key: key);
   final bool? isSearchBar;
   final String? name;
   final String? placeholder;
   final Function()? validation;
+  final void Function(String)? changeHandler;
   final bool isDisable;
   final TextEditingController? controller;
   final String? initialValue;
   final int? height;
+  final int? maxLines;
 
   @override
   Widget build(BuildContext context) {
@@ -41,6 +45,8 @@ class FormFieldComponent extends StatelessWidget {
             initialValue: initialValue,
             enabled: !isDisable,
             controller: controller,
+            onChanged: changeHandler,
+            maxLines: maxLines,
             validator: (value) {
               if (value == null || value.isEmpty) {
                 return 'Please enter some text';

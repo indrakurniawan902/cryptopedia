@@ -1,4 +1,5 @@
 import 'package:cryptopedia/provider/crypto_101_provider.dart';
+import 'package:cryptopedia/utils/constant/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
@@ -31,16 +32,21 @@ class _Crypto101AllState extends State<Crypto101All> {
     final crypto101 = Provider.of<Crypto101Provider>(context);
     final data = Provider.of<AuthProvider>(context, listen: false);
 
+    void handleSearch(String keyword) {
+      crypto101.search101(keyword);      
+    }
+
     return SingleChildScrollView(
       physics:
           const BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
       padding: EdgeInsets.symmetric(horizontal: 20.w),
       child: Column(
         children: [
-          const FormFieldComponent(
+          FormFieldComponent(
             isDisable: false,
             isSearchBar: true,
             placeholder: 'Search',
+            changeHandler: handleSearch,
             name: '',
           ),
           SizedBox(
@@ -49,11 +55,14 @@ class _Crypto101AllState extends State<Crypto101All> {
           crypto101.articles.length == 0
               ? Center(
                   child: Text(
-                  "Currently, no bookmark for crypto 101 here",
+                  "Currently, no crypto 101 here",
                 ))
               : SizedBox(),
           crypto101.loading
-              ? Center(child: CircularProgressIndicator())
+              ? Center(
+                  child: CircularProgressIndicator(
+                  color: AppColors.primaryBrand,
+                ))
               : ListView.builder(
                   physics: const NeverScrollableScrollPhysics(),
                   shrinkWrap: true,
@@ -67,13 +76,12 @@ class _Crypto101AllState extends State<Crypto101All> {
                       splashColor: Colors.transparent,
                       splashFactory: NoSplash.splashFactory,
                       onTap: () {
-                        Navigator.pushNamed(context, "/101-detail",
-                            arguments: {
-                              'id': article.id,
-                              'title': article.title,
-                              'body': article.body,
-                              'userBookmarked': userBookmarked,
-                            });
+                        Navigator.pushNamed(context, "/101-detail", arguments: {
+                          'id': article.id,
+                          'title': article.title,
+                          'body': article.body,
+                          'userBookmarked': userBookmarked,
+                        });
                       },
                       child: PostCard(
                         isBookmark:
