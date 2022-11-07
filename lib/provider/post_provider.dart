@@ -17,6 +17,7 @@ class PostProvider extends ChangeNotifier {
     try {
       _isLoading = true;
       final c = await PostApi.getAllPost();
+      c.sort((a, b) => b.date!.compareTo(a.date!));
       _allSharing = c;
     } finally {
       _isLoading = false;
@@ -28,6 +29,7 @@ class PostProvider extends ChangeNotifier {
     try {
       _isLoading = true;
       final c = await PostApi.getMyPost(email);
+      c.sort((a, b) => b.date!.compareTo(a.date!));
       _myPostSharing = c;
     } finally {
       _isLoading = false;
@@ -39,6 +41,7 @@ class PostProvider extends ChangeNotifier {
     try {
       _isLoading = true;
       final c = await PostApi.getMySharingBookmark(email);
+      c.sort((a, b) => b.date!.compareTo(a.date!));
       _sharingBookmark = c;
     } finally {
       _isLoading = false;

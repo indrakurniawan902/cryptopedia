@@ -73,10 +73,10 @@ class _HomepageState extends State<Homepage> {
                                   assetPath: 'assets/images/hot.png',
                                   isTrend: true,
                                   coinName: value.getListCoinSortPrice
-                                      .elementAt(1)
+                                      .elementAt(0)
                                       .name,
                                   networkPath: value.getListCoinSortPrice
-                                      .elementAt(1)
+                                      .elementAt(0)
                                       .image,
                                 ),
                                 CryptoCard(
@@ -173,32 +173,26 @@ class _HomepageState extends State<Homepage> {
                                     children: [
                                       PostCard(
                                           postTitle: post.myPostSharing
-                                              .elementAt(
-                                                  post.myPostSharing.length - 1)
+                                              .elementAt(0)
                                               .postTitle!,
                                           category: post.myPostSharing
-                                              .elementAt(
-                                                  post.myPostSharing.length - 1)
+                                              .elementAt(0)
                                               .category!,
                                           dislike: post.myPostSharing
-                                              .elementAt(
-                                                  post.myPostSharing.length - 1)
+                                              .elementAt(0)
                                               .dislike!
                                               .toString(),
                                           like: post.myPostSharing
-                                              .elementAt(
-                                                  post.myPostSharing.length - 1)
+                                              .elementAt(0)
                                               .like!
                                               .toString(),
                                           isBookmark: true,
                                           isPost: true,
                                           postBody: post.myPostSharing
-                                              .elementAt(
-                                                  post.myPostSharing.length - 1)
+                                              .elementAt(0)
                                               .postBody!,
                                           username: post.myPostSharing
-                                              .elementAt(
-                                                  post.myPostSharing.length - 1)
+                                              .elementAt(0)
                                               .username!),
                                       SizedBox(
                                         height: 5.h,

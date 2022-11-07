@@ -1,6 +1,7 @@
 import 'package:cryptopedia/provider/auth_provider.dart';
 import 'package:cryptopedia/provider/bottom_navbar_provider.dart';
 import 'package:cryptopedia/provider/coin_provider.dart';
+import 'package:cryptopedia/provider/crypto_101_provider.dart';
 import 'package:cryptopedia/provider/post_provider.dart';
 import 'package:cryptopedia/provider/theme_provider.dart';
 import 'package:cryptopedia/provider/user_provider.dart';
@@ -28,7 +29,7 @@ class _NavbarState extends State<Navbar> {
       final data = Provider.of<AuthProvider>(context, listen: false);
       Provider.of<UserProvider>(context, listen: false)
           .getUserData(data.getUser()!.email!);
-
+      Provider.of<Crypto101Provider>(context, listen: false).get101Data();
       Provider.of<PostProvider>(context, listen: false).getAllPostData();
       Provider.of<PostProvider>(context, listen: false)
           .getMyPostData(data.getUser()!.email!);

@@ -36,16 +36,40 @@ class _CryptoSharingAllState extends State<CryptoSharingAll> {
                 physics: const NeverScrollableScrollPhysics(),
                 shrinkWrap: true,
                 itemCount: value.allSharing.length,
-                itemBuilder: (context, index) => PostCard(
-                  isBookmark: true,
-                  isPost: true,
-                  category: value.allSharing[index].category!,
-                  postTitle: value.allSharing[index].postTitle!,
-                  postBody: value.allSharing[index].postBody,
-                  dislike: value.allSharing[index].dislike.toString(),
-                  like: value.allSharing[index].like.toString(),
-                  username: value.allSharing[index].username,
-                ),
+                itemBuilder: (context, index) {
+                  final sharing = value.allSharing[index];
+                  List<String> userBookmarked =
+                      List<String>.from(sharing.userBookmarked as List);
+                  return InkWell(
+                    splashColor: Colors.transparent,
+                    splashFactory: NoSplash.splashFactory,
+                    onTap: () {
+                      Navigator.pushNamed(context, "/sharing-detail",
+                          arguments: {
+                            'id': sharing.id,
+                            'title': sharing.postTitle,
+                            'body': sharing.postBody,
+                            'like': sharing.like,
+                            'dislike': sharing.dislike,
+                            'category': sharing.category,
+                            'comment': sharing.comment,
+                            'tag': sharing.tags,
+                            'username': sharing.username,
+                            'userBookmarked': userBookmarked,
+                          });
+                    },
+                    child: PostCard(
+                      isBookmark: true,
+                      isPost: true,
+                      category: value.allSharing[index].category!,
+                      postTitle: value.allSharing[index].postTitle!,
+                      postBody: value.allSharing[index].postBody,
+                      dislike: value.allSharing[index].dislike.toString(),
+                      like: value.allSharing[index].like.toString(),
+                      username: value.allSharing[index].username,
+                    ),
+                  );
+                },
               ),
             ),
           ],
