@@ -11,6 +11,7 @@ import 'package:cryptopedia/screen/about_app/about_app.dart';
 import 'package:cryptopedia/screen/bookmark/bookmark.dart';
 import 'package:cryptopedia/screen/crypto_101/crypto_101.dart';
 import 'package:cryptopedia/screen/crypto_101/detail_crypto_101.dart';
+import 'package:cryptopedia/screen/crypto_sharing/detail_crypto_sharing.dart';
 import 'package:cryptopedia/screen/edit_profile/edit_profile.dart';
 import 'package:cryptopedia/screen/homepage/homepage.dart';
 import 'package:cryptopedia/screen/my_post/my_post.dart';
@@ -77,6 +78,7 @@ class MyApp extends StatelessWidget {
               '/my-post': (context) => const MyPost(),
               '/navbar': (context) => const Navbar(),
               '/101-detail': (context) => const DetailCrypto101(),
+              '/sharing-detail': (context) => const DetailCryptoSharing(),
             },
             initialRoute: '/',
           ),

@@ -52,7 +52,8 @@ class _HomepageState extends State<Homepage> {
                     child: Consumer<CoinProvider>(
                       builder: (context, value, child) => value
                                   .getListCoinSortMarket.isNotEmpty &
-                              value.getListCoinSortPrice.isNotEmpty
+                              value.getListCoinSortPrice.isNotEmpty &
+                              value.getListCoin.isNotEmpty
                           ? Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
@@ -251,8 +252,13 @@ class _HomepageState extends State<Homepage> {
                                   )),
                   ),
                 ),
+                SizedBox(height: 20.h),
+                Text(
+                  'All Post',
+                  style: myPost,
+                ),
                 SizedBox(
-                  height: 20.h,
+                  height: 10.h,
                 ),
                 Consumer<PostProvider>(
                   builder: (context, value, child) => ListView.builder(
@@ -260,7 +266,7 @@ class _HomepageState extends State<Homepage> {
                     shrinkWrap: true,
                     itemCount: value.allSharing.length,
                     itemBuilder: (context, index) => PostCard(
-                      isBookmark: true,
+                      isBookmark: false,
                       isPost: true,
                       category: value.allSharing[index].category!,
                       postTitle: value.allSharing[index].postTitle!,

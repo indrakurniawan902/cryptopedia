@@ -1,10 +1,11 @@
-import 'package:cryptopedia/model/user/user_model.dart';
+import 'package:cryptopedia/model/user/api/user_api.dart';
 import 'package:cryptopedia/provider/auth_provider.dart';
 import 'package:cryptopedia/provider/theme_provider.dart';
 import 'package:cryptopedia/provider/user_provider.dart';
 import 'package:cryptopedia/screen/components/button_component.dart';
 import 'package:cryptopedia/screen/components/default_appbar.dart';
 import 'package:cryptopedia/screen/components/form_field_component.dart';
+import 'package:cryptopedia/screen/components/pop_up_dialog.dart';
 import 'package:cryptopedia/utils/constant/app_colors.dart';
 import 'package:cryptopedia/utils/constant/app_shadow.dart';
 import 'package:flutter/material.dart';
@@ -122,14 +123,19 @@ class _EditProfileState extends State<EditProfile> {
                                   ButtonComponent(
                                       text: "Save",
                                       onClickFunction: () {
-                                        value.updateUserData(
+                                        UserApi.putUserDetail(
                                           value.users.username,
                                           value.users.email,
                                           _fullnameC.text,
                                         );
+                                        const PopUpDialog(
+                                          type: 'success',
+                                          title: 'Success!',
+                                          description: 'Profile Changed',
+                                        );
                                         Navigator.pushNamedAndRemoveUntil(
                                             context,
-                                            '/profile',
+                                            '/navbar',
                                             (route) => false);
                                       },
                                       isDisable: false),

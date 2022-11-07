@@ -26,7 +26,7 @@ class PostCard extends StatelessWidget {
   final bool? isPost;
   final String? like;
   final String? dislike;
-  final String? comment;
+  final List? comment;
   final List<String>? tag;
   final String postTitle;
   final String? category;
@@ -37,7 +37,6 @@ class PostCard extends StatelessWidget {
     return Consumer<ThemeProvider>(
       builder: (context, value, child) => Container(
         margin: EdgeInsets.symmetric(vertical: 5.h),
-        // width: double.infinity,
         padding: EdgeInsets.all(12),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(12),
@@ -116,7 +115,7 @@ class PostCard extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        'Username',
+                        username!,
                         style: userPostStyle,
                       ),
                       Row(
@@ -133,7 +132,9 @@ class PostCard extends StatelessWidget {
                               SizedBox(
                                 width: 4.w,
                               ),
-                              const Text('1')
+                              Text(comment == null
+                                  ? '0'
+                                  : comment!.length.toString())
                             ],
                           ),
                           SizedBox(
@@ -149,7 +150,7 @@ class PostCard extends StatelessWidget {
                               SizedBox(
                                 width: 4.w,
                               ),
-                              const Text('1')
+                              Text(like.toString())
                             ],
                           ),
                           SizedBox(
@@ -165,7 +166,7 @@ class PostCard extends StatelessWidget {
                               SizedBox(
                                 width: 4.w,
                               ),
-                              const Text('1')
+                              Text(dislike.toString())
                             ],
                           )
                         ],

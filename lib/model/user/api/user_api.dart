@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:cryptopedia/model/user/user_model.dart';
 import 'package:cryptopedia/utils/constant/api_constant.dart';
 import 'package:dio/dio.dart';
@@ -23,21 +25,20 @@ class UserApi {
     }
   }
 
-  static Future<UserModel> putUserDetail(
+  static Future putUserDetail(
       String username, String email, String name) async {
     try {
       final response = await Dio()
-          .put('${ApiConstants.baseUrl}${ApiConstants.editProfile}', data: {
+          .post('${ApiConstants.baseUrl}${ApiConstants.editProfile}', data: {
         "email": email,
         "username": username,
         "name": name,
       });
       if (response.statusCode == 200) {
-        return UserModel(
-            username: response.data['username'],
-            email: response.data['email'],
-            name: response.data['name']);
+        print(response.data);
+        return response.data;
       } else {
+        print(response.data);
         throw Exception('Failed to save Data');
       }
     } on DioError catch (e) {
