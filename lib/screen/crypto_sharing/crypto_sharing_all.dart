@@ -37,24 +37,23 @@ class _CryptoSharingAllState extends State<CryptoSharingAll> {
                 shrinkWrap: true,
                 itemCount: value.allSharing.length,
                 itemBuilder: (context, index) {
-                  final sharing = value.allSharing[index];
-                  List<String> userBookmarked =
-                      List<String>.from(sharing.userBookmarked as List);
+                  List<String> userBookmarked = List<String>.from(
+                      value.allSharing[index].userBookmarked as List);
                   return InkWell(
                     splashColor: Colors.transparent,
                     splashFactory: NoSplash.splashFactory,
                     onTap: () {
                       Navigator.pushNamed(context, "/sharing-detail",
                           arguments: {
-                            'id': sharing.id,
-                            'title': sharing.postTitle,
-                            'body': sharing.postBody,
-                            'like': sharing.like,
-                            'dislike': sharing.dislike,
-                            'category': sharing.category,
-                            'comment': sharing.comment,
-                            'tag': sharing.tags,
-                            'username': sharing.username,
+                            'id': value.allSharing[index].id,
+                            'title': value.allSharing[index].postTitle,
+                            'body': value.allSharing[index].postBody,
+                            'like': value.allSharing[index].like,
+                            'dislike': value.allSharing[index].dislike,
+                            'category': value.allSharing[index].category,
+                            'comment': value.allSharing[index].comment,
+                            'tag': value.allSharing[index].tags,
+                            'username': value.allSharing[index].username,
                             'userBookmarked': userBookmarked,
                           });
                     },

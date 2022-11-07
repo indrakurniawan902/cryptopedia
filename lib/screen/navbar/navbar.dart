@@ -29,7 +29,6 @@ class _NavbarState extends State<Navbar> {
       final data = Provider.of<AuthProvider>(context, listen: false);
       Provider.of<UserProvider>(context, listen: false)
           .getUserData(data.getUser()!.email!);
-      Provider.of<Crypto101Provider>(context, listen: false).get101Data();
       Provider.of<PostProvider>(context, listen: false).getAllPostData();
       Provider.of<PostProvider>(context, listen: false)
           .getMyPostData(data.getUser()!.email!);
