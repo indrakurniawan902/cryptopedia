@@ -154,6 +154,7 @@ class PostApi {
           body: json.encode(data));
 
       if (response.statusCode == 200) {
+        print('object');
         return "success";
       } else {
         throw Exception('Failed to load Data');

@@ -22,6 +22,20 @@ class DetailCryptoSharing extends StatefulWidget {
 
 class _DetailCryptoSharingState extends State<DetailCryptoSharing> {
   @override
+  initState() {
+    super.initState();
+    final data = Provider.of<AuthProvider>(context, listen: false);
+    Provider.of<PostProvider>(context, listen: false)
+        .getSharingBookmarkData(data.getUser()!.email!);
+    Provider.of<PostProvider>(context, listen: false).getAllPostData();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     final action = Provider.of<PostProvider>(context);
     final data = Provider.of<AuthProvider>(context, listen: false);
@@ -94,13 +108,13 @@ class _DetailCryptoSharingState extends State<DetailCryptoSharing> {
                       height: 5.h,
                     ),
                     Consumer<ThemeProvider>(
-                      builder: (context, value, child) => Container(
+                      builder: (context, theme, child) => Container(
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(10),
                           boxShadow: const <BoxShadow>[
                             AppShadow.shadow1,
                           ],
-                          color: value.themeValue == false
+                          color: theme.themeValue == false
                               ? AppColors.lightColor
                               : AppColors.darkModeFrame,
                         ),
@@ -112,7 +126,7 @@ class _DetailCryptoSharingState extends State<DetailCryptoSharing> {
                               style: ElevatedButton.styleFrom(
                                   elevation: 0,
                                   maximumSize: Size(167.w, 45.h),
-                                  backgroundColor: value.themeValue == false
+                                  backgroundColor: theme.themeValue == false
                                       ? AppColors.lightColor
                                       : AppColors.darkModeFrame),
                               onPressed: () async {
@@ -133,7 +147,7 @@ class _DetailCryptoSharingState extends State<DetailCryptoSharing> {
                                   Text(
                                     argsSharing['like'].toString(),
                                     style: TextStyle(
-                                        color: value.themeValue == false
+                                        color: theme.themeValue == false
                                             ? AppColors.darkColor
                                             : AppColors.lightColor,
                                         fontSize: 17.sp),
@@ -145,7 +159,7 @@ class _DetailCryptoSharingState extends State<DetailCryptoSharing> {
                               style: ElevatedButton.styleFrom(
                                   elevation: 0,
                                   maximumSize: Size(167.w, 45.h),
-                                  backgroundColor: value.themeValue == false
+                                  backgroundColor: theme.themeValue == false
                                       ? AppColors.lightColor
                                       : AppColors.darkModeFrame),
                               onPressed: () async {
@@ -166,7 +180,7 @@ class _DetailCryptoSharingState extends State<DetailCryptoSharing> {
                                   Text(
                                     argsSharing['dislike'].toString(),
                                     style: TextStyle(
-                                        color: value.themeValue == false
+                                        color: theme.themeValue == false
                                             ? AppColors.darkColor
                                             : AppColors.lightColor,
                                         fontSize: 17.sp),

@@ -1,3 +1,4 @@
+import 'package:cryptopedia/provider/auth_provider.dart';
 import 'package:cryptopedia/provider/post_provider.dart';
 import 'package:cryptopedia/screen/components/default_appbar.dart';
 import 'package:cryptopedia/screen/components/form_field_component.dart';
@@ -72,17 +73,54 @@ class _MyPostState extends State<MyPost> {
                             physics: const NeverScrollableScrollPhysics(),
                             shrinkWrap: true,
                             itemCount: value.myPostSharing.length,
-                            itemBuilder: (context, index) => PostCard(
-                              isBookmark: true,
-                              isPost: true,
-                              category: value.myPostSharing[index].category!,
-                              postTitle: value.myPostSharing[index].postTitle!,
-                              postBody: value.myPostSharing[index].postBody!,
-                              dislike: value.myPostSharing[index].dislike!
-                                  .toString(),
-                              like: value.myPostSharing[index].like!.toString(),
-                              username: value.myPostSharing[index].username!,
-                            ),
+                            itemBuilder: (context, index) {
+                              List<String> userBookmarked = List<String>.from(
+                                  value.allSharing[index].userBookmarked
+                                      as List);
+                              return InkWell(
+                                splashColor: Colors.transparent,
+                                splashFactory: NoSplash.splashFactory,
+                                onTap: () {
+                                  Navigator.pushNamed(
+                                      context, "/sharing-detail",
+                                      arguments: {
+                                        'index': index,
+                                        'id': value.allSharing[index].id,
+                                        'title':
+                                            value.allSharing[index].postTitle,
+                                        'body':
+                                            value.allSharing[index].postBody,
+                                        'like': value.allSharing[index].like,
+                                        'dislike':
+                                            value.allSharing[index].dislike,
+                                        'category':
+                                            value.allSharing[index].category,
+                                        'comment':
+                                            value.allSharing[index].comment,
+                                        'tag': value.allSharing[index].tags,
+                                        'username':
+                                            value.allSharing[index].username,
+                                        'userBookmarked': userBookmarked,
+                                      });
+                                },
+                                child: Consumer<AuthProvider>(
+                                  builder: (context, user, child) => PostCard(
+                                    isBookmark: userBookmarked
+                                        .contains(user.getUser()!.email),
+                                    isPost: true,
+                                    category: value.allSharing[index].category!,
+                                    postTitle:
+                                        value.allSharing[index].postTitle!,
+                                    postBody: value.allSharing[index].postBody,
+                                    dislike: value.allSharing[index].dislike
+                                        .toString(),
+                                    like:
+                                        value.allSharing[index].like.toString(),
+                                    username: value.allSharing[index].username,
+                                  ),
+                                ),
+                              );
+                            },
                           ),
                         ],
                       ),

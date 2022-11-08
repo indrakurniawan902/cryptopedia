@@ -1,3 +1,4 @@
+import 'package:cryptopedia/provider/auth_provider.dart';
 import 'package:cryptopedia/provider/coin_provider.dart';
 import 'package:cryptopedia/provider/post_provider.dart';
 import 'package:cryptopedia/provider/theme_provider.dart';
@@ -73,10 +74,10 @@ class _HomepageState extends State<Homepage> {
                                   assetPath: 'assets/images/hot.png',
                                   isTrend: true,
                                   coinName: value.getListCoinSortPrice
-                                      .elementAt(0)
+                                      .elementAt(1)
                                       .name,
                                   networkPath: value.getListCoinSortPrice
-                                      .elementAt(0)
+                                      .elementAt(1)
                                       .image,
                                 ),
                                 CryptoCard(
@@ -164,8 +165,9 @@ class _HomepageState extends State<Homepage> {
                 ),
                 SizedBox(height: 10.h),
                 Consumer<ThemeProvider>(
-                  builder: (context, value, child) => Consumer<PostProvider>(
-                    builder: (context, post, child) => Center(
+                  builder: (context, value, child) =>
+                      Consumer<PostProvider>(builder: (context, post, child) {
+                    return Center(
                         child: post.myPostSharing.isEmpty & post.loading
                             ? const CircularProgressIndicator()
                             : post.myPostSharing.isNotEmpty
@@ -256,17 +258,14 @@ class _HomepageState extends State<Homepage> {
                                         ],
                                       ),
                                     ),
-                                  )),
-                  ),
+                                  ));
+                  }),
                 ),
                 SizedBox(height: 20.h),
                 Text(
                   'All Post',
                   style: myPost,
                 ),
-                Consumer<PostProvider>(
-                    builder: (context, value, child) =>
-                        Text(value.sharingBookmark.length.toString())),
                 SizedBox(
                   height: 10.h,
                 ),
@@ -275,16 +274,43 @@ class _HomepageState extends State<Homepage> {
                     physics: const NeverScrollableScrollPhysics(),
                     shrinkWrap: true,
                     itemCount: value.allSharing.length,
-                    itemBuilder: (context, index) => PostCard(
-                      isBookmark: false,
-                      isPost: true,
-                      category: value.allSharing[index].category!,
-                      postTitle: value.allSharing[index].postTitle!,
-                      postBody: value.allSharing[index].postBody,
-                      dislike: value.allSharing[index].dislike.toString(),
-                      like: value.allSharing[index].like.toString(),
-                      username: value.allSharing[index].username,
-                    ),
+                    itemBuilder: (context, index) {
+                      List<String> userBookmarked = List<String>.from(
+                          value.allSharing[index].userBookmarked as List);
+                      return InkWell(
+                        splashColor: Colors.transparent,
+                        splashFactory: NoSplash.splashFactory,
+                        onTap: () {
+                          Navigator.pushNamed(context, "/sharing-detail",
+                              arguments: {
+                                'index': index,
+                                'id': value.allSharing[index].id,
+                                'title': value.allSharing[index].postTitle,
+                                'body': value.allSharing[index].postBody,
+                                'like': value.allSharing[index].like,
+                                'dislike': value.allSharing[index].dislike,
+                                'category': value.allSharing[index].category,
+                                'comment': value.allSharing[index].comment,
+                                'tag': value.allSharing[index].tags,
+                                'username': value.allSharing[index].username,
+                                'userBookmarked': userBookmarked,
+                              });
+                        },
+                        child: Consumer<AuthProvider>(
+                          builder: (context, user, child) => PostCard(
+                            isBookmark:
+                                userBookmarked.contains(user.getUser()!.email),
+                            isPost: true,
+                            category: value.allSharing[index].category!,
+                            postTitle: value.allSharing[index].postTitle!,
+                            postBody: value.allSharing[index].postBody,
+                            dislike: value.allSharing[index].dislike.toString(),
+                            like: value.allSharing[index].like.toString(),
+                            username: value.allSharing[index].username,
+                          ),
+                        ),
+                      );
+                    },
                   ),
                 ),
               ],

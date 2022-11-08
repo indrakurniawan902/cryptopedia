@@ -84,6 +84,7 @@ class _CryptoSharingAllState extends State<CryptoSharingAll> {
                               onTap: () {
                                 Navigator.pushNamed(context, "/sharing-detail",
                                     arguments: {
+                                      'index': index,
                                       'id': value.allSharing[index].id,
                                       'title':
                                           value.allSharing[index].postTitle,

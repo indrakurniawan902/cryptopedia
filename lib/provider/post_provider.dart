@@ -7,11 +7,13 @@ class PostProvider extends ChangeNotifier {
   List<PostModel> _myPostSharing = [];
   List<PostModel> _sharingBookmark = [];
   bool _isLoading = true;
+  var _action = {};
 
   List<PostModel> get allSharing => _allSharing;
   List<PostModel> get myPostSharing => _myPostSharing;
   List<PostModel> get sharingBookmark => _sharingBookmark;
   bool get loading => _isLoading;
+  get action => _action;
 
   getAllPostData() async {
     try {
@@ -57,6 +59,31 @@ class PostProvider extends ChangeNotifier {
     } finally {
       _isLoading = false;
       notifyListeners();
+    }
+  }
+
+  likeAction(String email, String id) async {
+    try {
+      _isLoading = true;
+      await PostApi.addSharingLike(email, id);
+      _isLoading = false;
+
+      notifyListeners();
+    } catch (e) {
+      e.toString();
+    }
+  }
+
+  dislikeAction(String email, String id) async {
+    try {
+      _isLoading = true;
+
+      await PostApi.addSharingDislike(email, id);
+      _isLoading = false;
+
+      notifyListeners();
+    } catch (e) {
+      e.toString();
     }
   }
 }
