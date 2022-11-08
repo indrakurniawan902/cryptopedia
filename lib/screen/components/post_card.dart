@@ -88,7 +88,7 @@ class PostCard extends StatelessWidget {
                     padding:
                         EdgeInsets.symmetric(vertical: 2.h, horizontal: 5.w),
                     child: Text(
-                      category!,
+                      category ?? '',
                       style: categoryTitleStyle,
                     ),
                   )

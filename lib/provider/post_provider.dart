@@ -52,7 +52,7 @@ class PostProvider extends ChangeNotifier {
     try {
       _isLoading = true;
       final c = await PostApi.getMySharingBookmark(email);
-      c.sort((a, b) => b.date!.compareTo(a.date!));
+      // c.sort((a, b) => b.date!.compareTo(a.date!));
       _sharingBookmark = c;
     } finally {
       _isLoading = false;

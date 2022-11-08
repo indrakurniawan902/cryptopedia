@@ -264,6 +264,9 @@ class _HomepageState extends State<Homepage> {
                   'All Post',
                   style: myPost,
                 ),
+                Consumer<PostProvider>(
+                    builder: (context, value, child) =>
+                        Text(value.sharingBookmark.length.toString())),
                 SizedBox(
                   height: 10.h,
                 ),

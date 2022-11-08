@@ -31,22 +31,6 @@ class Crypto101Provider extends ChangeNotifier {
     notifyListeners();
   }
 
-  changeBookmarkStatus(String email, String id, bool statusBookmark) async {
-    _isLoading = true;
-    await Crypto101AddBookmarkApi.addBookmark(email, id);
-    statusBookmark = !statusBookmark;
-    _isLoading = false;
-    notifyListeners();
-  }
-
-  getValueBookmark(String email) async {
-    final result = await Crypto101BookmarkApi.get101Bookmark(email);
-    if (result.contains(email)) {
-      _isBookmark = !_isBookmark;
-    }
-    notifyListeners();
-  }
-
   void search101(String keyword) async {
     notifyListeners();
     _isLoading = true;

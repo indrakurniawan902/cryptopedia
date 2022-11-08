@@ -23,6 +23,7 @@ class DetailCryptoSharing extends StatefulWidget {
 class _DetailCryptoSharingState extends State<DetailCryptoSharing> {
   @override
   Widget build(BuildContext context) {
+    final action = Provider.of<PostProvider>(context);
     final data = Provider.of<AuthProvider>(context, listen: false);
     Map<String, dynamic> argsSharing =
         ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
