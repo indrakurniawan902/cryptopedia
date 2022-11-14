@@ -1,3 +1,4 @@
+import 'package:cryptopedia/screen/navbar/navbar.dart';
 import 'package:cryptopedia/utils/constant/app_text_style.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -14,7 +15,7 @@ class _RegistrationSuccessState extends State<RegistrationSuccess> {
   void initState() {
     super.initState();
     Future<void>.delayed(const Duration(seconds: 2), () {
-      Navigator.popAndPushNamed(context, "/navbar");
+      Navigator.pushAndRemoveUntil(context, _createRoute(), (route) => false);
     });
   }
 
@@ -84,4 +85,17 @@ class _RegistrationSuccessState extends State<RegistrationSuccess> {
       ),
     );
   }
+}
+
+Route _createRoute() {
+  return PageRouteBuilder(
+      transitionDuration: const Duration(seconds: 2),
+      pageBuilder: (context, animation, secondaryAnimation) => const Navbar(),
+      transitionsBuilder: (context, animation, secondaryAnimation, child) {
+        final tween = Tween(begin: 0.0, end: 1.0);
+        return FadeTransition(
+          opacity: animation.drive(tween),
+          child: child,
+        );
+      });
 }

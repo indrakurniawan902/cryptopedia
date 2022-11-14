@@ -13,7 +13,6 @@ import '../../provider/auth_provider.dart';
 import '../../provider/theme_provider.dart';
 import '../../utils/constant/api_constant.dart';
 import '../../utils/constant/app_shadow.dart';
-import '../../utils/constant/app_text_style.dart';
 import '../components/button_component.dart';
 import '../components/default_appbar.dart';
 import '../components/pop_up_dialog.dart';
@@ -39,7 +38,7 @@ class _AddPostState extends State<AddPost> {
   Widget build(BuildContext buildContext) {
     final formKey = GlobalKey<FormState>();
 
-    AuthProvider auth = Provider.of<AuthProvider>(context);
+    AuthProvider auth = Provider.of<AuthProvider>(context, listen: false);
 
     Future<void> _postForum(
         BuildContext context, VoidCallback onSuccess, String email) async {

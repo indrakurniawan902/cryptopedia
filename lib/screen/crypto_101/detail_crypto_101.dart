@@ -34,7 +34,7 @@ class _DetailCrypto101State extends State<DetailCrypto101> {
 
   @override
   Widget build(BuildContext context) {
-    final crypto101 = Provider.of<Crypto101Provider>(context);
+    final crypto101 = Provider.of<Crypto101Provider>(context, listen: false);
     final data = Provider.of<AuthProvider>(context, listen: false);
 
     Map<String, dynamic> argsArticle =

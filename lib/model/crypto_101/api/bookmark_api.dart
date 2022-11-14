@@ -1,9 +1,5 @@
 import 'dart:convert';
-
-import 'package:cryptopedia/model/crypto_101/crypto_101_model.dart';
-import 'package:cryptopedia/model/user/user_model.dart';
 import 'package:cryptopedia/utils/constant/api_constant.dart';
-import 'package:dio/dio.dart';
 import 'package:http/http.dart' as http;
 
 class Crypto101AddBookmarkApi {

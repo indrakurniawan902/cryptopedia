@@ -45,7 +45,6 @@ TextStyle copyRight = TextStyle(
 TextStyle aboutText = TextStyle(
   fontFamily: 'Poppins',
   fontSize: 14.sp,
-  height: 1.5.sp,
 );
 TextStyle headerTitle = TextStyle(
   fontFamily: 'Poppins',

@@ -56,4 +56,21 @@ class AuthProvider with ChangeNotifier {
       print(e);
     }
   }
+
+  Future<bool> isRegistered(String? email) async {
+    try {
+      var res = await http.get(Uri.parse(
+          "${ApiConstants.baseUrl}${ApiConstants.checkRegister}?email=${email ?? ''}"));
+      if (res.statusCode == 200) {
+        var dataResponse = jsonDecode(res.body);
+
+        if (dataResponse == 1) {
+          return true;
+        }
+      }
+      return false;
+    } catch (e) {
+      return false;
+    }
+  }
 }

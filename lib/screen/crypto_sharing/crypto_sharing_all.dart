@@ -107,6 +107,7 @@ class _CryptoSharingAllState extends State<CryptoSharingAll> {
                                   isBookmark: userBookmarked
                                       .contains(user.getUser()!.email),
                                   isPost: true,
+                                  tag: value.allSharing[index].tags,
                                   category: value.allSharing[index].category!,
                                   postTitle: value.allSharing[index].postTitle!,
                                   postBody: value.allSharing[index].postBody,

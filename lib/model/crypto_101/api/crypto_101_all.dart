@@ -1,7 +1,4 @@
-import 'dart:convert';
-
 import 'package:cryptopedia/model/crypto_101/crypto_101_model.dart';
-import 'package:cryptopedia/model/user/user_model.dart';
 import 'package:cryptopedia/utils/constant/api_constant.dart';
 import 'package:dio/dio.dart';
 
@@ -32,8 +29,8 @@ class Crypto101AllApi {
 
   static Future<List<Crypto101Model>> search101(String keyword) async {
     try {
-      final response =
-          await Dio().get('${ApiConstants.baseUrl}${ApiConstants.get101}?search=$keyword');
+      final response = await Dio()
+          .get('${ApiConstants.baseUrl}${ApiConstants.get101}?search=$keyword');
 
       if (response.statusCode == 200) {
         List<Crypto101Model> articles = (response.data as List)

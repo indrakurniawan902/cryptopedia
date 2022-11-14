@@ -2,6 +2,7 @@ class CoinModel {
   String? name;
   String? image;
   String? symbol;
+  // ignore: prefer_typing_uninitialized_variables
   var currentPrice;
   double? priceChangePercentage24h;
   double? marketCapChangePercentage24h;

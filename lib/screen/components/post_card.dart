@@ -31,7 +31,7 @@ class PostCard extends StatelessWidget {
   final String? like;
   final String? dislike;
   final List? comment;
-  final List<String>? tag;
+  final String? tag;
   final String? postTitle;
   final String? category;
   final String? postBody;
@@ -113,7 +113,7 @@ class PostCard extends StatelessWidget {
                     child: Row(
                       children: [
                         Text(
-                          '#123 #456 #789',
+                          tag ?? '',
                           style: tagStyle,
                         )
                       ],

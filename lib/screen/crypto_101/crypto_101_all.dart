@@ -33,66 +33,69 @@ class _Crypto101AllState extends State<Crypto101All> {
     final data = Provider.of<AuthProvider>(context, listen: false);
 
     void handleSearch(String keyword) {
-      crypto101.search101(keyword);      
+      crypto101.search101(keyword);
     }
 
     return SingleChildScrollView(
       physics:
           const BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
       padding: EdgeInsets.symmetric(horizontal: 20.w),
-      child: Column(
-        children: [
-          FormFieldComponent(
-            isDisable: false,
-            isSearchBar: true,
-            placeholder: 'Search',
-            changeHandler: handleSearch,
-            name: '',
-          ),
-          SizedBox(
-            height: 20.h,
-          ),
-          crypto101.articles.length == 0
-              ? Center(
-                  child: Text(
-                  "Currently, no crypto 101 here",
-                ))
-              : SizedBox(),
-          crypto101.loading
-              ? Center(
-                  child: CircularProgressIndicator(
-                  color: AppColors.primaryBrand,
-                ))
-              : ListView.builder(
-                  physics: const NeverScrollableScrollPhysics(),
-                  shrinkWrap: true,
-                  itemCount: crypto101.articles.length,
-                  itemBuilder: (context, index) {
-                    final article = crypto101.articles[index];
-                    List<String> userBookmarked =
-                        List<String>.from(article.userBookmarked as List);
+      child: Consumer<Crypto101Provider>(
+        builder: (context, value, child) => Column(
+          children: [
+            FormFieldComponent(
+              isDisable: false,
+              isSearchBar: true,
+              placeholder: 'Search',
+              changeHandler: handleSearch,
+              name: '',
+            ),
+            SizedBox(
+              height: 20.h,
+            ),
+            value.articles.length == 0
+                ? Center(
+                    child: Text(
+                    "Currently, no crypto 101 here",
+                  ))
+                : SizedBox(),
+            value.loading
+                ? Center(
+                    child: CircularProgressIndicator(
+                    color: AppColors.primaryBrand,
+                  ))
+                : ListView.builder(
+                    physics: const NeverScrollableScrollPhysics(),
+                    shrinkWrap: true,
+                    itemCount: value.articles.length,
+                    itemBuilder: (context, index) {
+                      final article = value.articles[index];
+                      List<String> userBookmarked =
+                          List<String>.from(article.userBookmarked as List);
 
-                    return InkWell(
-                      splashColor: Colors.transparent,
-                      splashFactory: NoSplash.splashFactory,
-                      onTap: () {
-                        Navigator.pushNamed(context, "/101-detail", arguments: {
-                          'id': article.id,
-                          'title': article.title,
-                          'body': article.body,
-                          'userBookmarked': userBookmarked,
-                        });
-                      },
-                      child: PostCard(
-                        isBookmark:
-                            userBookmarked.contains(data.getUser()!.email),
-                        postTitle: article.title,
-                        postBody: article.body,
-                      ),
-                    );
-                  },
-                ),
-        ],
+                      return InkWell(
+                        splashColor: Colors.transparent,
+                        splashFactory: NoSplash.splashFactory,
+                        onTap: () {
+                          Navigator.pushNamed(context, "/101-detail",
+                              arguments: {
+                                'id': article.id,
+                                'title': article.title,
+                                'body': article.body,
+                                'userBookmarked': userBookmarked,
+                              });
+                        },
+                        child: PostCard(
+                          isBookmark:
+                              userBookmarked.contains(data.getUser()!.email),
+                          postTitle: article.title,
+                          postBody: article.body,
+                        ),
+                      );
+                    },
+                  ),
+          ],
+        ),
       ),
     );
   }

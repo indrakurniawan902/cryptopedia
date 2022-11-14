@@ -1,9 +1,7 @@
-import 'package:cryptopedia/model/crypto_101/api/bookmark_api.dart';
 import 'package:cryptopedia/model/crypto_101/api/crypto_101_all.dart';
 import 'package:cryptopedia/model/crypto_101/api/crypto_101_bookmark.dart';
 import 'package:cryptopedia/model/crypto_101/crypto_101_model.dart';
-import 'package:cryptopedia/model/user/api/user_api.dart';
-import 'package:cryptopedia/model/user/user_model.dart';
+
 import 'package:flutter/cupertino.dart';
 
 class Crypto101Provider extends ChangeNotifier {

@@ -37,7 +37,7 @@ class _DetailCryptoSharingState extends State<DetailCryptoSharing> {
 
   @override
   Widget build(BuildContext context) {
-    final action = Provider.of<PostProvider>(context);
+    final action = Provider.of<PostProvider>(context, listen: false);
     final data = Provider.of<AuthProvider>(context, listen: false);
     Map<String, dynamic> argsSharing =
         ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
@@ -100,6 +100,7 @@ class _DetailCryptoSharingState extends State<DetailCryptoSharing> {
                       height: 15.h,
                     ),
                     PostCard(
+                      tag: argsSharing['tag'],
                       isDetailBody: true,
                       postBody: argsSharing['body'],
                       username: argsSharing['username'],

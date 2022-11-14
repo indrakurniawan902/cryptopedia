@@ -1,10 +1,9 @@
 import 'package:cryptopedia/provider/auth_provider.dart';
 import 'package:cryptopedia/provider/post_provider.dart';
-import 'package:cryptopedia/provider/theme_provider.dart';
+
 import 'package:cryptopedia/screen/components/form_field_component.dart';
 import 'package:cryptopedia/screen/components/post_card.dart';
-import 'package:cryptopedia/utils/constant/app_colors.dart';
-import 'package:cryptopedia/utils/constant/app_shadow.dart';
+
 import 'package:cryptopedia/utils/constant/app_text_style.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter/material.dart';
@@ -112,6 +111,7 @@ class _CryptoSharingBookmarkState extends State<CryptoSharingBookmark> {
                                   isBookmark: userBookmarked
                                       .contains(user.getUser()!.email),
                                   isPost: true,
+                                  tag: value.allSharing[index].tags,
                                   category:
                                       value.sharingBookmark[index].category,
                                   postTitle:

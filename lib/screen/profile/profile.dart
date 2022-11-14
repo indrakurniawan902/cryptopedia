@@ -1,4 +1,3 @@
-import 'package:cryptopedia/model/user/user_model.dart';
 import 'package:cryptopedia/provider/auth_provider.dart';
 import 'package:cryptopedia/provider/theme_provider.dart';
 import 'package:cryptopedia/provider/user_provider.dart';

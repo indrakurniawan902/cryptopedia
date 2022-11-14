@@ -1,6 +1,3 @@
-import 'dart:convert';
-
-import 'package:cryptopedia/model/user/user_model.dart';
 import 'package:cryptopedia/utils/constant/api_constant.dart';
 import 'package:dio/dio.dart';
 
