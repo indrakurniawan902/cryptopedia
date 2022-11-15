@@ -61,7 +61,6 @@ class _CryptoSharingAllState extends State<CryptoSharingAll> {
                                     height: 120.h,
                                     width: 158.w,
                                   ),
-                                  // SizedBox(height: 5.h),
                                   Text(
                                     'You don’t have post yet',
                                     style: noPost,
@@ -104,6 +103,7 @@ class _CryptoSharingAllState extends State<CryptoSharingAll> {
                               },
                               child: Consumer<AuthProvider>(
                                 builder: (context, user, child) => PostCard(
+                                  comment: value.allSharing[index].comment,
                                   isBookmark: userBookmarked
                                       .contains(user.getUser()!.email),
                                   isPost: true,

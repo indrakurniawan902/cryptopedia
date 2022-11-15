@@ -163,4 +163,26 @@ class PostApi {
       rethrow;
     }
   }
+
+  static Future addComment(String id, String text, String username,
+      String email, String profileUrl) async {
+    try {
+      Map data = {
+        "text": text,
+        "username": username,
+        "email": email,
+        "profile": profileUrl,
+      };
+      final response = await http.post(
+        Uri.parse('${ApiConstants.baseUrl}${ApiConstants.addComment}$id'),
+        body: json.encode(data),
+        headers: {"Content-Type": "application/json; charset=utf-8"},
+      );
+
+      print(response.statusCode.toString());
+      return "success";
+    } catch (e) {
+      rethrow;
+    }
+  }
 }

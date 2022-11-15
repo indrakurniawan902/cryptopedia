@@ -105,6 +105,7 @@ class _MyPostState extends State<MyPost> {
                                 },
                                 child: Consumer<AuthProvider>(
                                   builder: (context, user, child) => PostCard(
+                                    comment: value.allSharing[index].comment,
                                     tag: value.allSharing[index].tags,
                                     isBookmark: userBookmarked
                                         .contains(user.getUser()!.email),

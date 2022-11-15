@@ -16,11 +16,13 @@ class FormFieldComponent extends StatelessWidget {
       this.controller,
       required this.isDisable,
       this.initialValue,
+      this.isComment,
       this.changeHandler,
       this.maxLines = 1,
       this.height})
       : super(key: key);
   final bool? isSearchBar;
+  final bool? isComment;
   final String? name;
   final String? placeholder;
   final Function()? validation;
@@ -36,10 +38,12 @@ class FormFieldComponent extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(name!),
-        SizedBox(
-          height: 8.h,
-        ),
+        Text(name ?? ''),
+        isComment == true
+            ? SizedBox()
+            : SizedBox(
+                height: 8.h,
+              ),
         Consumer<ThemeProvider>(
           builder: (context, value, child) => TextFormField(
             initialValue: initialValue,
@@ -65,18 +69,22 @@ class FormFieldComponent extends StatelessWidget {
               errorStyle: TextStyle(
                 fontSize: 14.sp,
               ),
-              prefix: Padding(padding: EdgeInsets.only(left: 16.w)),
-              contentPadding: EdgeInsets.symmetric(vertical: 12.h),
+              prefix: isComment == true
+                  ? Padding(padding: EdgeInsets.only(left: 10.w))
+                  : Padding(padding: EdgeInsets.only(left: 16.w)),
+              contentPadding: isComment == true
+                  ? EdgeInsets.symmetric(vertical: 12.h, horizontal: 10.w)
+                  : EdgeInsets.symmetric(vertical: 12.h),
               fillColor: value.themeValue == false
                   ? AppColors.lightColor
                   : AppColors.gray2,
               filled: true,
               hintText: placeholder,
               hintStyle: TextStyle(
-                color: value.themeValue == false
-                    ? AppColors.gray4
-                    : AppColors.gray4,
-              ),
+                  color: value.themeValue == false
+                      ? AppColors.gray4
+                      : AppColors.gray4,
+                  fontSize: isComment == true ? 10.sp : 14.sp),
               focusedBorder: const OutlineInputBorder(
                 borderSide:
                     BorderSide(color: AppColors.primaryBrand, width: 1.0),

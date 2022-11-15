@@ -86,4 +86,14 @@ class PostProvider extends ChangeNotifier {
       e.toString();
     }
   }
+
+  addComment(String id, String text, String username, String email,
+      String profileUrl) async {
+    try {
+      await PostApi.addComment(id, text, username, email, profileUrl);
+      notifyListeners();
+    } catch (e) {
+      e.toString();
+    }
+  }
 }

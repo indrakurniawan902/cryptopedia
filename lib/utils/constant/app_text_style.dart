@@ -117,3 +117,14 @@ TextStyle articleBodyStyle = TextStyle(
   fontFamily: 'Poppins',
   fontSize: 14.sp,
 );
+TextStyle commentFullname = TextStyle(
+  fontSize: 12.sp,
+  fontFamily: 'Poppins',
+  fontWeight: FontWeight.bold,
+);
+
+TextStyle commentUsername = TextStyle(
+    fontSize: 10.sp,
+    fontFamily: 'Poppins',
+    fontWeight: FontWeight.w500,
+    color: AppColors.primaryBrand);

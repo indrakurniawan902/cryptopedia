@@ -108,6 +108,7 @@ class _CryptoSharingBookmarkState extends State<CryptoSharingBookmark> {
                               },
                               child: Consumer<AuthProvider>(
                                 builder: (context, user, child) => PostCard(
+                                  comment: value.allSharing[index].comment,
                                   isBookmark: userBookmarked
                                       .contains(user.getUser()!.email),
                                   isPost: true,

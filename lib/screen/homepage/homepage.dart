@@ -174,6 +174,9 @@ class _HomepageState extends State<Homepage> {
                                 ? Column(
                                     children: [
                                       PostCard(
+                                          comment: post.myPostSharing
+                                              .elementAt(0)
+                                              .comment,
                                           tag: post.myPostSharing
                                               .elementAt(0)
                                               .tags,
@@ -301,6 +304,7 @@ class _HomepageState extends State<Homepage> {
                         },
                         child: Consumer<AuthProvider>(
                           builder: (context, user, child) => PostCard(
+                            comment: value.allSharing[index].comment,
                             tag: value.allSharing[index].tags!,
                             isBookmark:
                                 userBookmarked.contains(user.getUser()!.email),

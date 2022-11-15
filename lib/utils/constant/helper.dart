@@ -1,5 +1,3 @@
-import 'package:cryptopedia/screen/bookmark/bookmark_crypto_101.dart';
-import 'package:cryptopedia/screen/bookmark/bookmark_crypto_sharing.dart';
 import 'package:cryptopedia/screen/crypto_101/crypto_101_bookmark.dart';
 import 'package:cryptopedia/screen/crypto_sharing/crypto_sharing_all.dart';
 import 'package:cryptopedia/screen/crypto_sharing/crypto_sharing_bookmark.dart';
@@ -19,8 +17,8 @@ class Helper {
   ];
 
   static List<Widget> tabViewBookmark = [
-    const BookmarkCryptoSharing(),
-    const BookmarkCrypto101(),
+    const CryptoSharingBookmark(),
+    const Crypto101Bookmark(),
   ];
 
   static List<Widget> tabViewSharing = [
