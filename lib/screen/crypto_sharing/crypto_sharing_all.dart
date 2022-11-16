@@ -45,7 +45,8 @@ class _CryptoSharingAllState extends State<CryptoSharingAll> {
               height: 10.h,
             ),
             Consumer<PostProvider>(
-              builder: (context, value, child) => value.loading
+              builder: (context, value, child) => value.state ==
+                      PostViewState.loading
                   ? CircularProgressIndicator()
                   : value.allSharing.isEmpty
                       ? Column(

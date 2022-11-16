@@ -49,7 +49,8 @@ class _CryptoSharingBookmarkState extends State<CryptoSharingBookmark> {
               height: 10.h,
             ),
             Consumer<PostProvider>(
-              builder: (context, value, child) => value.loading
+              builder: (context, value, child) => value.state ==
+                      PostViewState.loading
                   ? CircularProgressIndicator()
                   : value.sharingBookmark.isEmpty
                       ? Column(

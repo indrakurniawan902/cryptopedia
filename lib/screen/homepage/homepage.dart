@@ -168,7 +168,7 @@ class _HomepageState extends State<Homepage> {
                   builder: (context, value, child) =>
                       Consumer<PostProvider>(builder: (context, post, child) {
                     return Center(
-                        child: post.myPostSharing.isEmpty & post.loading
+                        child: post.state == PostViewState.loading
                             ? const CircularProgressIndicator()
                             : post.myPostSharing.isNotEmpty
                                 ? Column(

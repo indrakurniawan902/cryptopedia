@@ -57,26 +57,21 @@ class _DetailCryptoSharingState extends State<DetailCryptoSharing> {
                 articleId: id,
                 isBookmarked: isBookmarked,
                 bookmarkFunction: () async {
-                  setState(() {
-                    isLoading = true;
-                  });
-                  await PostApi.addSharingBookmark(data.getUser()!.email!, id);
-                  setState(() {
-                    isBookmarked = !isBookmarked;
-                    isLoading = false;
-                  });
-                  showDialog(
-                    context: context,
-                    builder: (BuildContext context) {
-                      return PopUpDialog(
-                        type: 'success',
-                        title: 'Success!',
-                        description: isBookmarked
-                            ? 'This post added to bookmark!'
-                            : 'This post removed from bookmark!',
-                      );
-                    },
-                  );
+                  await value.changeBookmarkStatus(data.getUser()!.email!, id);
+                  value.state == PostViewState.loading
+                      ? CircularProgressIndicator()
+                      : showDialog(
+                          context: context,
+                          builder: (BuildContext context) {
+                            return PopUpDialog(
+                              type: 'success',
+                              title: 'Success!',
+                              description: isBookmarked
+                                  ? 'This post added to bookmark!'
+                                  : 'This post removed from bookmark!',
+                            );
+                          },
+                        );
                   print(isBookmarked);
                 },
               ),
@@ -137,7 +132,7 @@ class _DetailCryptoSharingState extends State<DetailCryptoSharing> {
                                                   ? AppColors.lightColor
                                                   : AppColors.darkModeFrame),
                                       onPressed: () async {
-                                        await PostApi.addSharingLike(
+                                        await value.likeAction(
                                             data.getUser()!.email!, id);
                                       },
                                       child: Row(
@@ -172,7 +167,7 @@ class _DetailCryptoSharingState extends State<DetailCryptoSharing> {
                                                   ? AppColors.lightColor
                                                   : AppColors.darkModeFrame),
                                       onPressed: () async {
-                                        await PostApi.addSharingDislike(
+                                        await value.dislikeAction(
                                             data.getUser()!.email!, id);
                                       },
                                       child: Row(
@@ -298,16 +293,6 @@ class _DetailCryptoSharingState extends State<DetailCryptoSharing> {
                         ),
                       ),
                     ),
-                    isLoading
-                        ? Container(
-                            width: double.infinity,
-                            color: const Color.fromARGB(120, 255, 255, 255),
-                            child: const Center(
-                              child: CircularProgressIndicator(
-                                  color: AppColors.primaryBrand),
-                            ),
-                          )
-                        : const SizedBox(),
                     Align(
                         alignment: Alignment.bottomCenter,
                         child: Consumer<ThemeProvider>(
@@ -349,7 +334,7 @@ class _DetailCryptoSharingState extends State<DetailCryptoSharing> {
                                                   vertical: 13.h),
                                             ),
                                             onPressed: () async {
-                                              await PostApi.addComment(
+                                              await value.addComment(
                                                   id,
                                                   _commentControler.text,
                                                   user.users.name,
