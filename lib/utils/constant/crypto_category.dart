@@ -1,1 +1,8 @@
-const List<String> cryptoCategory = <String>['One', 'Two', 'Three', 'Four'];
+const List<String> cryptoCategory = <String>[
+  'Finance',
+  'Dex',
+  'Cex',
+  'Nft',
+  'Defi',
+  'Metaverse'
+];
