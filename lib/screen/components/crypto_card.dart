@@ -24,7 +24,7 @@ class CryptoCard extends StatelessWidget {
   final String title;
   final String? coinName;
   final double? percent;
-  final price;
+  final num? price;
   final bool? isTrend;
   final bool? isOnlyTrend;
   final bool? isRank;
@@ -64,7 +64,7 @@ class CryptoCard extends StatelessWidget {
                       )
                     : isRank == true
                         ? Text(
-                            '${title.toUpperCase()}',
+                            title.toUpperCase(),
                             style: assetName,
                           )
                         : Text(
@@ -87,7 +87,7 @@ class CryptoCard extends StatelessWidget {
                                     ? AppColors.primaryBrand
                                     : AppColors.error),
                           )
-                        : Text(''),
+                        : const Text(''),
               ],
             ),
             isTrend == true
@@ -98,7 +98,7 @@ class CryptoCard extends StatelessWidget {
                   )
                 : isRank == true
                     ? Text(
-                        price.toStringAsFixed(2),
+                        price!.toStringAsFixed(2),
                         style: TextStyle(
                             fontSize: 14.sp, fontWeight: FontWeight.bold),
                       )
@@ -118,7 +118,7 @@ class CryptoCard extends StatelessWidget {
                         'Rp ${(price! * 15646).toStringAsFixed(1)}',
                         style: assetName,
                       )
-                    : Text(''),
+                    : const Text(''),
           ],
         ),
       ),

@@ -28,7 +28,7 @@ class PostApi {
                 username: e['username'],
                 userBookmarked: e['user_bookmarked']))
             .toList();
-        print(posts);
+
         return posts;
       } else {
         throw Exception('Failed to load Data');
@@ -61,7 +61,7 @@ class PostApi {
                 username: e['username'],
                 userBookmarked: e['user_bookmarked']))
             .toList();
-        print(posts);
+
         return posts;
       } else {
         throw Exception('Failed to load Data');
@@ -94,7 +94,7 @@ class PostApi {
                 username: e['username'],
                 userBookmarked: e['user_bookmarked']))
             .toList();
-        print(posts);
+
         return posts;
       } else {
         throw Exception('Failed to load Data');
@@ -154,7 +154,6 @@ class PostApi {
           body: json.encode(data));
 
       if (response.statusCode == 200) {
-        print('object');
         return "success";
       } else {
         throw Exception('Failed to load Data');
@@ -173,13 +172,11 @@ class PostApi {
         "email": email,
         "profile": profileUrl,
       };
-      final response = await http.post(
+      await http.post(
         Uri.parse('${ApiConstants.baseUrl}${ApiConstants.addComment}$id'),
         body: json.encode(data),
         headers: {"Content-Type": "application/json; charset=utf-8"},
       );
-
-      print(response.statusCode.toString());
       return "success";
     } catch (e) {
       rethrow;

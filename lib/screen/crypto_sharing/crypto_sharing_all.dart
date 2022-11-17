@@ -16,10 +16,25 @@ class CryptoSharingAll extends StatefulWidget {
 
 class _CryptoSharingAllState extends State<CryptoSharingAll> {
   @override
-  initState() {
-    super.initState();
-    Provider.of<PostProvider>(context, listen: false).getAllPostData();
+  void didChangeDependencies() {
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+      // final data = Provider.of<AuthProvider>(context, listen: false);
+      Provider.of<PostProvider>(context, listen: false).getAllPostData();
+      // Provider.of<PostProvider>(context, listen: false)
+      //     .getSharingBookmarkData(data.getUser()!.email!);
+    });
+    super.didChangeDependencies();
   }
+  // @override
+  // void initState() {
+  //   super.initState();
+  //   WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+  //     // final data = Provider.of<AuthProvider>(context, listen: false);
+  //     Provider.of<PostProvider>(context, listen: false).getAllPostData();
+  //     // Provider.of<PostProvider>(context, listen: false)
+  //     //     .getSharingBookmarkData(data.getUser()!.email!);
+  //   });
+  // }
 
   @override
   void dispose() {
@@ -47,7 +62,7 @@ class _CryptoSharingAllState extends State<CryptoSharingAll> {
             Consumer<PostProvider>(
               builder: (context, value, child) => value.state ==
                       PostViewState.loading
-                  ? CircularProgressIndicator()
+                  ? const CircularProgressIndicator()
                   : value.allSharing.isEmpty
                       ? Column(
                           children: [

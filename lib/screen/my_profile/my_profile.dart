@@ -6,7 +6,6 @@ import 'package:cryptopedia/screen/components/default_appbar.dart';
 import 'package:cryptopedia/screen/components/form_field_component.dart';
 import 'package:cryptopedia/utils/constant/app_colors.dart';
 import 'package:cryptopedia/utils/constant/app_shadow.dart';
-import 'package:cryptopedia/utils/constant/app_text_style.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';

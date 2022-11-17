@@ -20,7 +20,7 @@ class PostProvider extends ChangeNotifier {
   PostViewState get state => _state;
 
   changeState(PostViewState s) {
-    s = _state;
+    _state = s;
     notifyListeners();
   }
 
@@ -30,21 +30,25 @@ class PostProvider extends ChangeNotifier {
       final c = await PostApi.getAllPost();
       c.sort((a, b) => b.date!.compareTo(a.date!));
       _allSharing = c;
-    } finally {
       notifyListeners();
       changeState(PostViewState.none);
+    } catch (e) {
+      changeState(PostViewState.error);
+      return e.toString();
     }
   }
 
   getMyPostData(String email) async {
-    changeState(PostViewState.loading);
     try {
+      changeState(PostViewState.loading);
       final c = await PostApi.getMyPost(email);
       c.sort((a, b) => b.date!.compareTo(a.date!));
       _myPostSharing = c;
-    } finally {
       notifyListeners();
       changeState(PostViewState.none);
+    } catch (e) {
+      changeState(PostViewState.error);
+      return e.toString();
     }
   }
 
@@ -55,6 +59,7 @@ class PostProvider extends ChangeNotifier {
       notifyListeners();
       changeState(PostViewState.none);
     } catch (e) {
+      changeState(PostViewState.error);
       e.toString();
     }
   }
@@ -63,11 +68,12 @@ class PostProvider extends ChangeNotifier {
     changeState(PostViewState.loading);
     try {
       final c = await PostApi.getMySharingBookmark(email);
-      c.sort((a, b) => b.date!.compareTo(a.date!));
       _sharingBookmark = c;
-    } finally {
       notifyListeners();
       changeState(PostViewState.none);
+    } catch (e) {
+      changeState(PostViewState.error);
+      return e.toString();
     }
   }
 
@@ -78,6 +84,7 @@ class PostProvider extends ChangeNotifier {
       notifyListeners();
       changeState(PostViewState.none);
     } catch (e) {
+      changeState(PostViewState.error);
       e.toString();
     }
   }
@@ -89,6 +96,7 @@ class PostProvider extends ChangeNotifier {
       notifyListeners();
       changeState(PostViewState.none);
     } catch (e) {
+      changeState(PostViewState.error);
       e.toString();
     }
   }
@@ -101,6 +109,7 @@ class PostProvider extends ChangeNotifier {
       notifyListeners();
       changeState(PostViewState.none);
     } catch (e) {
+      changeState(PostViewState.error);
       e.toString();
     }
   }

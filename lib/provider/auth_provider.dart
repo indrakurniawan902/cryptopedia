@@ -47,7 +47,6 @@ class AuthProvider with ChangeNotifier {
           "${ApiConstants.baseUrl}${ApiConstants.register}?email=$email&name=$fullname&username=$username"));
       if (res.statusCode == 200) {
         var dataResponse = jsonDecode(res.body);
-        print(dataResponse);
         if (dataResponse != null) {
           onSuccess.call();
         }

@@ -2,6 +2,7 @@ import 'package:cryptopedia/provider/auth_provider.dart';
 import 'package:cryptopedia/provider/coin_provider.dart';
 import 'package:cryptopedia/provider/post_provider.dart';
 import 'package:cryptopedia/provider/theme_provider.dart';
+import 'package:cryptopedia/provider/user_provider.dart';
 import 'package:cryptopedia/screen/components/crypto_card.dart';
 import 'package:cryptopedia/screen/components/default_appbar.dart';
 import 'package:cryptopedia/screen/components/post_card.dart';
@@ -20,6 +21,22 @@ class Homepage extends StatefulWidget {
 }
 
 class _HomepageState extends State<Homepage> {
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) async {
+      Provider.of<CoinProvider>(context, listen: false).getAllCoin();
+      Provider.of<CoinProvider>(context, listen: false).coinSortPriceChange();
+      Provider.of<CoinProvider>(context, listen: false).coinSortMarketCap();
+      // Provider.of<PostProvider>(context, listen: false).getAllPostData();
+      final data = Provider.of<AuthProvider>(context, listen: false);
+      Provider.of<PostProvider>(context, listen: false)
+          .getMyPostData(data.getUser()!.email!);
+      Provider.of<UserProvider>(context, listen: false)
+          .getUserData(data.getUser()!.email!);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

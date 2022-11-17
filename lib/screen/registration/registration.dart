@@ -1,6 +1,3 @@
-import 'dart:convert';
-
-// ignore: unused_import
 import 'package:cryptopedia/provider/auth_provider.dart';
 import 'package:cryptopedia/provider/theme_provider.dart';
 

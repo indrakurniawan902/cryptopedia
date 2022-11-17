@@ -49,7 +49,7 @@ class _BookmarkCryptoSharingState extends State<BookmarkCryptoSharing> {
             Consumer<PostProvider>(
               builder: (context, value, child) => value.state ==
                       PostViewState.loading
-                  ? CircularProgressIndicator()
+                  ? const CircularProgressIndicator()
                   : value.sharingBookmark.isEmpty
                       ? Column(
                           children: [

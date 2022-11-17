@@ -5,8 +5,6 @@ import 'package:http/http.dart' as http;
 class Crypto101AddBookmarkApi {
   static Future addBookmark(String email, String id) async {
     try {
-      print(email);
-
       Map data = {'email': email};
 
       final response = await http.post(

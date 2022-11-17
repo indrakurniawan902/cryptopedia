@@ -22,8 +22,8 @@ class _AuthWrapperState extends State<AuthWrapper> {
   @override
   Widget build(BuildContext context) {
     AuthProvider auth = Provider.of<AuthProvider>(context, listen: false);
-    User? user = auth.getUser();
-    String? email = user != null ? user.email : "";
+    // User? user = auth.getUser();
+    // String? email = user != null ? user.email : "";
 
     return StreamBuilder<User?>(
       stream: auth.changeState(),

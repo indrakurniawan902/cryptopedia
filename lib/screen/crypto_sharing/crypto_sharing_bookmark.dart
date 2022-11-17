@@ -18,11 +18,13 @@ class CryptoSharingBookmark extends StatefulWidget {
 
 class _CryptoSharingBookmarkState extends State<CryptoSharingBookmark> {
   @override
-  initState() {
+  void initState() {
     super.initState();
-    final data = Provider.of<AuthProvider>(context, listen: false);
-    Provider.of<PostProvider>(context, listen: false)
-        .getSharingBookmarkData(data.getUser()!.email!);
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+      final data = Provider.of<AuthProvider>(context, listen: false);
+      Provider.of<PostProvider>(context, listen: false)
+          .getSharingBookmarkData(data.getUser()!.email!);
+    });
   }
 
   @override
@@ -51,7 +53,7 @@ class _CryptoSharingBookmarkState extends State<CryptoSharingBookmark> {
             Consumer<PostProvider>(
               builder: (context, value, child) => value.state ==
                       PostViewState.loading
-                  ? CircularProgressIndicator()
+                  ? const CircularProgressIndicator()
                   : value.sharingBookmark.isEmpty
                       ? Column(
                           children: [
@@ -68,7 +70,7 @@ class _CryptoSharingBookmarkState extends State<CryptoSharingBookmark> {
                                   ),
                                   // SizedBox(height: 5.h),
                                   Text(
-                                    'You don’t have post yet',
+                                    'You don’t have bookmark yet',
                                     style: noPost,
                                   ),
                                 ],

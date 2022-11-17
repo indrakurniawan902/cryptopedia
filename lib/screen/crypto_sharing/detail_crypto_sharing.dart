@@ -1,4 +1,3 @@
-import 'package:cryptopedia/model/post_model/api/post_api.dart';
 import 'package:cryptopedia/provider/auth_provider.dart';
 import 'package:cryptopedia/provider/post_provider.dart';
 import 'package:cryptopedia/provider/theme_provider.dart';
@@ -24,12 +23,14 @@ class DetailCryptoSharing extends StatefulWidget {
 
 class _DetailCryptoSharingState extends State<DetailCryptoSharing> {
   @override
-  initState() {
+  void initState() {
     super.initState();
-    final data = Provider.of<AuthProvider>(context, listen: false);
-    Provider.of<PostProvider>(context, listen: false)
-        .getSharingBookmarkData(data.getUser()!.email!);
-    Provider.of<PostProvider>(context, listen: false).getAllPostData();
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+      final data = Provider.of<AuthProvider>(context, listen: false);
+      Provider.of<PostProvider>(context, listen: false).getAllPostData();
+      Provider.of<PostProvider>(context, listen: false)
+          .getSharingBookmarkData(data.getUser()!.email!);
+    });
   }
 
   @override
@@ -39,14 +40,11 @@ class _DetailCryptoSharingState extends State<DetailCryptoSharing> {
 
   @override
   Widget build(BuildContext context) {
-    final action = Provider.of<PostProvider>(context, listen: false);
     final data = Provider.of<AuthProvider>(context, listen: false);
-    TextEditingController _commentControler = TextEditingController();
+    TextEditingController commentControler = TextEditingController();
     Map<String, dynamic> argsSharing =
         ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
     String id = argsSharing['id'];
-    bool isLoading = false;
-    List userBookmarked = argsSharing['userBookmarked'];
     bool isBookmarked =
         argsSharing['userBookmarked'].contains(data.getUser()!.email);
     return Consumer<PostProvider>(
@@ -57,22 +55,19 @@ class _DetailCryptoSharingState extends State<DetailCryptoSharing> {
                 articleId: id,
                 isBookmarked: isBookmarked,
                 bookmarkFunction: () async {
+                  showDialog(
+                    context: context,
+                    builder: (BuildContext context) {
+                      return PopUpDialog(
+                        type: 'success',
+                        title: 'Success!',
+                        description: isBookmarked
+                            ? 'This post removed from bookmark!'
+                            : 'This post added to bookmark!',
+                      );
+                    },
+                  );
                   await value.changeBookmarkStatus(data.getUser()!.email!, id);
-                  value.state == PostViewState.loading
-                      ? CircularProgressIndicator()
-                      : showDialog(
-                          context: context,
-                          builder: (BuildContext context) {
-                            return PopUpDialog(
-                              type: 'success',
-                              title: 'Success!',
-                              description: isBookmarked
-                                  ? 'This post added to bookmark!'
-                                  : 'This post removed from bookmark!',
-                            );
-                          },
-                        );
-                  print(isBookmarked);
                 },
               ),
               body: SafeArea(
@@ -84,7 +79,7 @@ class _DetailCryptoSharingState extends State<DetailCryptoSharing> {
                       color: AppColors.primaryBrand,
                     ),
                     SingleChildScrollView(
-                      physics: BouncingScrollPhysics(),
+                      physics: const BouncingScrollPhysics(),
                       child: Padding(
                         padding: EdgeInsets.fromLTRB(20.w, 0.h, 20.w, 75.h),
                         child: Column(
@@ -315,7 +310,7 @@ class _DetailCryptoSharingState extends State<DetailCryptoSharing> {
                                 children: [
                                   Flexible(
                                       child: FormFieldComponent(
-                                    controller: _commentControler,
+                                    controller: commentControler,
                                     isDisable: false,
                                     isComment: true,
                                     placeholder: 'Type your comment',
@@ -336,11 +331,11 @@ class _DetailCryptoSharingState extends State<DetailCryptoSharing> {
                                             onPressed: () async {
                                               await value.addComment(
                                                   id,
-                                                  _commentControler.text,
+                                                  commentControler.text,
                                                   user.users.name,
                                                   user.users.username,
                                                   data.getUser()!.photoURL!);
-                                              _commentControler.clear();
+                                              commentControler.clear();
                                             },
                                             child: const Icon(
                                               FeatherIcons.send,

@@ -33,10 +33,8 @@ class UserApi {
         "name": name,
       });
       if (response.statusCode == 200) {
-        print(response.data);
         return response.data;
       } else {
-        print(response.data);
         throw Exception('Failed to save Data');
       }
     } on DioError catch (e) {

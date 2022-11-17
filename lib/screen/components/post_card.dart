@@ -41,7 +41,7 @@ class PostCard extends StatelessWidget {
     return Consumer<ThemeProvider>(
       builder: (context, value, child) => Container(
         margin: EdgeInsets.symmetric(vertical: 5.h),
-        padding: EdgeInsets.all(12),
+        padding: const EdgeInsets.all(12),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(12),
           boxShadow: const <BoxShadow>[
@@ -70,7 +70,7 @@ class PostCard extends StatelessWidget {
                         ),
                 ),
                 isBookmark == true
-                    ? Icon(
+                    ? const Icon(
                         size: 24,
                         Icons.bookmark,
                         // Icons.bookmark_outline,
@@ -92,7 +92,7 @@ class PostCard extends StatelessWidget {
                       style: categoryTitleStyle,
                     ),
                   )
-                : SizedBox(),
+                : const SizedBox(),
             SizedBox(
               height: 6.h,
             ),
@@ -129,7 +129,7 @@ class PostCard extends StatelessWidget {
                         style: userPostStyle,
                       ),
                       isDetailBody == true
-                          ? SizedBox()
+                          ? const SizedBox()
                           : Row(
                               children: [
                                 Row(

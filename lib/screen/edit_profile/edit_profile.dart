@@ -19,7 +19,7 @@ class EditProfile extends StatefulWidget {
   State<EditProfile> createState() => _EditProfileState();
 }
 
-final formKey = GlobalKey<FormState>();
+final _formKey = GlobalKey<FormState>();
 TextEditingController _fullnameC = TextEditingController();
 void validateInput() {
   if (_fullnameC.text != "") {}
@@ -55,7 +55,7 @@ class _EditProfileState extends State<EditProfile> {
                   height: 21.h,
                 ),
                 Form(
-                  key: formKey,
+                  key: _formKey,
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
@@ -122,21 +122,32 @@ class _EditProfileState extends State<EditProfile> {
                               builder: (context, value, child) =>
                                   ButtonComponent(
                                       text: "Save",
-                                      onClickFunction: () {
-                                        UserApi.putUserDetail(
-                                          value.users.username,
-                                          value.users.email,
-                                          _fullnameC.text,
-                                        );
-                                        const PopUpDialog(
-                                          type: 'success',
-                                          title: 'Success!',
-                                          description: 'Profile Changed',
-                                        );
-                                        Navigator.pushNamedAndRemoveUntil(
-                                            context,
-                                            '/navbar',
-                                            (route) => false);
+                                      onClickFunction: () async {
+                                        if (_formKey.currentState!.validate()) {
+                                          showDialog(
+                                            context: context,
+                                            builder: (BuildContext context) {
+                                              return const PopUpDialog(
+                                                type: 'success',
+                                                title: 'Success!',
+                                                description: 'Profile Changed',
+                                              );
+                                            },
+                                          );
+                                          await UserApi.putUserDetail(
+                                            value.users.username,
+                                            value.users.email,
+                                            _fullnameC.text,
+                                          );
+                                          Future.delayed(
+                                            const Duration(seconds: 2),
+                                            () => Navigator
+                                                .pushNamedAndRemoveUntil(
+                                                    context,
+                                                    '/navbar',
+                                                    (route) => false),
+                                          );
+                                        }
                                       },
                                       isDisable: false),
                             ),

@@ -40,7 +40,7 @@ class FormFieldComponent extends StatelessWidget {
       children: [
         Text(name ?? ''),
         isComment == true
-            ? SizedBox()
+            ? const SizedBox()
             : SizedBox(
                 height: 8.h,
               ),
