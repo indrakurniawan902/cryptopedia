@@ -181,7 +181,7 @@ class _ProfileState extends State<Profile> {
                               value.logout();
                             },
                             isLogout: true,
-                            title: 'Log oout',
+                            title: 'Log out',
                             leading: FeatherIcons.logOut,
                           ),
                         ),
