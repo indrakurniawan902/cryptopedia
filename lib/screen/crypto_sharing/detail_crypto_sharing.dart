@@ -203,15 +203,19 @@ class _DetailCryptoSharingState extends State<DetailCryptoSharing> {
                               height: 10.h,
                             ),
                             Consumer<ThemeProvider>(
-                              builder: (context, theme, child) => argsSharing[
-                                          'comment'] ==
+                              builder: (context, theme, child) => value
+                                          .allSharing[argsSharing['index']]
+                                          .comment ==
                                       null
                                   ? Text('No Comment')
                                   : ListView.builder(
                                       physics:
                                           const NeverScrollableScrollPhysics(),
                                       shrinkWrap: true,
-                                      itemCount: argsSharing['comment'].length,
+                                      itemCount: value
+                                          .allSharing[argsSharing['index']]
+                                          .comment!
+                                          .length,
                                       itemBuilder: (context, index) =>
                                           Container(
                                         margin: EdgeInsets.only(bottom: 10.h),
@@ -232,8 +236,10 @@ class _DetailCryptoSharingState extends State<DetailCryptoSharing> {
                                               children: [
                                                 CircleAvatar(
                                                   backgroundImage: NetworkImage(
-                                                    argsSharing['comment']
-                                                        [index][3],
+                                                    value
+                                                        .allSharing[argsSharing[
+                                                            'index']]
+                                                        .comment![index][3],
                                                   ),
                                                   maxRadius: 20.h,
                                                 ),
@@ -245,13 +251,19 @@ class _DetailCryptoSharingState extends State<DetailCryptoSharing> {
                                                       CrossAxisAlignment.start,
                                                   children: [
                                                     Text(
-                                                      argsSharing['comment']
-                                                          [index][1],
+                                                      value
+                                                          .allSharing[
+                                                              argsSharing[
+                                                                  'index']]
+                                                          .comment![index][1],
                                                       style: commentFullname,
                                                     ),
                                                     Text(
-                                                      argsSharing['comment']
-                                                          [index][2],
+                                                      value
+                                                          .allSharing[
+                                                              argsSharing[
+                                                                  'index']]
+                                                          .comment![index][2],
                                                       style: commentUsername,
                                                     )
                                                   ],
@@ -275,8 +287,10 @@ class _DetailCryptoSharingState extends State<DetailCryptoSharing> {
                                                   vertical: 5.h,
                                                   horizontal: 10.w),
                                               child: Text(
-                                                argsSharing['comment'][index]
-                                                    [0],
+                                                value
+                                                    .allSharing[
+                                                        argsSharing['index']]
+                                                    .comment![index][0],
                                               ),
                                             )
                                           ],
@@ -334,7 +348,8 @@ class _DetailCryptoSharingState extends State<DetailCryptoSharing> {
                                                   commentControler.text,
                                                   user.users.name,
                                                   user.users.username,
-                                                  data.getUser()!.photoURL!);
+                                                  data.getUser()!.photoURL!,
+                                                  argsSharing['index']);
                                               commentControler.clear();
                                             },
                                             child: const Icon(

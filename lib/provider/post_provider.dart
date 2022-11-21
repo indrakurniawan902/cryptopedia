@@ -102,10 +102,12 @@ class PostProvider extends ChangeNotifier {
   }
 
   addComment(String id, String text, String username, String email,
-      String profileUrl) async {
+      String profileUrl, int index) async {
     changeState(PostViewState.loading);
     try {
       await PostApi.addComment(id, text, username, email, profileUrl);
+      allSharing[index].comment!.add([text, username, email, profileUrl]);
+
       notifyListeners();
       changeState(PostViewState.none);
     } catch (e) {
