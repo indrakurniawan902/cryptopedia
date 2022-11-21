@@ -213,101 +213,91 @@ class _DetailCryptoSharingState extends State<DetailCryptoSharing> {
                               height: 10.h,
                             ),
                             Consumer<ThemeProvider>(
-                              builder: (context, theme, child) => value
-                                          .allSharing[argsSharing['index']]
-                                          .comment ==
-                                      null
-                                  ? Text('No Comment')
-                                  : ListView.builder(
-                                      controller: scrollController,
-                                      physics:
-                                          const NeverScrollableScrollPhysics(),
-                                      shrinkWrap: true,
-                                      itemCount: value
-                                          .allSharing[argsSharing['index']]
-                                          .comment!
-                                          .length,
-                                      itemBuilder: (context, index) =>
-                                          Container(
-                                        margin: EdgeInsets.only(bottom: 10.h),
-                                        decoration: BoxDecoration(
-                                          borderRadius:
-                                              BorderRadius.circular(10),
-                                          boxShadow: const <BoxShadow>[
-                                            AppShadow.shadow1,
-                                          ],
-                                          color: theme.themeValue == false
-                                              ? AppColors.lightColor
-                                              : AppColors.darkModeFrame,
-                                        ),
-                                        padding: EdgeInsets.all(10.h),
-                                        child: Column(
-                                          children: [
-                                            Row(
-                                              children: [
-                                                CircleAvatar(
-                                                  backgroundImage: NetworkImage(
-                                                    value
-                                                        .allSharing[argsSharing[
-                                                            'index']]
-                                                        .comment![index][3],
-                                                  ),
-                                                  maxRadius: 20.h,
-                                                ),
-                                                SizedBox(
-                                                  width: 10.w,
-                                                ),
-                                                Column(
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment.start,
-                                                  children: [
-                                                    Text(
-                                                      value
-                                                          .allSharing[
-                                                              argsSharing[
-                                                                  'index']]
-                                                          .comment![index][1],
-                                                      style: commentFullname,
-                                                    ),
-                                                    Text(
-                                                      value
-                                                          .allSharing[
-                                                              argsSharing[
-                                                                  'index']]
-                                                          .comment![index][2],
-                                                      style: commentUsername,
-                                                    )
-                                                  ],
-                                                )
-                                              ],
+                              builder: (context, theme, child) =>
+                                  ListView.builder(
+                                controller: scrollController,
+                                physics: const NeverScrollableScrollPhysics(),
+                                shrinkWrap: true,
+                                itemCount: value
+                                    .allSharing[argsSharing['index']]
+                                    .comment!
+                                    .length,
+                                itemBuilder: (context, index) => Container(
+                                  margin: EdgeInsets.only(bottom: 10.h),
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(10),
+                                    boxShadow: const <BoxShadow>[
+                                      AppShadow.shadow1,
+                                    ],
+                                    color: theme.themeValue == false
+                                        ? AppColors.lightColor
+                                        : AppColors.darkModeFrame,
+                                  ),
+                                  padding: EdgeInsets.all(10.h),
+                                  child: Column(
+                                    children: [
+                                      Row(
+                                        children: [
+                                          CircleAvatar(
+                                            backgroundImage: NetworkImage(
+                                              value
+                                                  .allSharing[
+                                                      argsSharing['index']]
+                                                  .comment![index][3],
                                             ),
-                                            SizedBox(
-                                              height: 10.h,
-                                            ),
-                                            Container(
-                                              width: double.infinity,
-                                              decoration: BoxDecoration(
-                                                color: AppColors.primary5,
-                                                borderRadius:
-                                                    BorderRadius.circular(5),
-                                                boxShadow: const <BoxShadow>[
-                                                  AppShadow.shadow1,
-                                                ],
-                                              ),
-                                              padding: EdgeInsets.symmetric(
-                                                  vertical: 5.h,
-                                                  horizontal: 10.w),
-                                              child: Text(
+                                            maxRadius: 20.h,
+                                          ),
+                                          SizedBox(
+                                            width: 10.w,
+                                          ),
+                                          Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              Text(
                                                 value
                                                     .allSharing[
                                                         argsSharing['index']]
-                                                    .comment![index][0],
+                                                    .comment![index][1],
+                                                style: commentFullname,
                                               ),
-                                            )
+                                              Text(
+                                                value
+                                                    .allSharing[
+                                                        argsSharing['index']]
+                                                    .comment![index][2],
+                                                style: commentUsername,
+                                              )
+                                            ],
+                                          )
+                                        ],
+                                      ),
+                                      SizedBox(
+                                        height: 10.h,
+                                      ),
+                                      Container(
+                                        width: double.infinity,
+                                        decoration: BoxDecoration(
+                                          color: AppColors.primary5,
+                                          borderRadius:
+                                              BorderRadius.circular(5),
+                                          boxShadow: const <BoxShadow>[
+                                            AppShadow.shadow1,
                                           ],
                                         ),
-                                      ),
-                                    ),
+                                        padding: EdgeInsets.symmetric(
+                                            vertical: 5.h, horizontal: 10.w),
+                                        child: Text(
+                                          value.allSharing[argsSharing['index']]
+                                              .comment![index][0],
+                                          style: TextStyle(
+                                              color: AppColors.darkColor),
+                                        ),
+                                      )
+                                    ],
+                                  ),
+                                ),
+                              ),
                             ),
                           ],
                         ),

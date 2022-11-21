@@ -91,6 +91,7 @@ class _CryptoSharingBookmarkState extends State<CryptoSharingBookmark> {
                               onTap: () {
                                 Navigator.pushNamed(context, "/sharing-detail",
                                     arguments: {
+                                      'index': index,
                                       'id': value.sharingBookmark[index].id,
                                       'title': value
                                           .sharingBookmark[index].postTitle,
