@@ -42,6 +42,16 @@ class _DetailCryptoSharingState extends State<DetailCryptoSharing> {
   Widget build(BuildContext context) {
     final data = Provider.of<AuthProvider>(context, listen: false);
     TextEditingController commentControler = TextEditingController();
+    final ScrollController scrollController = ScrollController();
+
+    void _scrollDown() {
+      scrollController.animateTo(
+        scrollController.position.maxScrollExtent,
+        duration: Duration(seconds: 1),
+        curve: Curves.fastOutSlowIn,
+      );
+    }
+
     Map<String, dynamic> argsSharing =
         ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
     String id = argsSharing['id'];
@@ -209,6 +219,7 @@ class _DetailCryptoSharingState extends State<DetailCryptoSharing> {
                                       null
                                   ? Text('No Comment')
                                   : ListView.builder(
+                                      controller: scrollController,
                                       physics:
                                           const NeverScrollableScrollPhysics(),
                                       shrinkWrap: true,
@@ -307,7 +318,7 @@ class _DetailCryptoSharingState extends State<DetailCryptoSharing> {
                         child: Consumer<ThemeProvider>(
                           builder: (context, theme, child) => Container(
                               width: double.infinity,
-                              height: 70.h,
+                              height: 80.h,
                               decoration: BoxDecoration(
                                 borderRadius: const BorderRadius.only(
                                     topLeft: Radius.circular(20),
@@ -321,6 +332,8 @@ class _DetailCryptoSharingState extends State<DetailCryptoSharing> {
                               ),
                               padding: EdgeInsets.symmetric(horizontal: 20.w),
                               child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
                                   Flexible(
                                       child: FormFieldComponent(
@@ -351,6 +364,7 @@ class _DetailCryptoSharingState extends State<DetailCryptoSharing> {
                                                   data.getUser()!.photoURL!,
                                                   argsSharing['index']);
                                               commentControler.clear();
+                                              _scrollDown();
                                             },
                                             child: const Icon(
                                               FeatherIcons.send,
