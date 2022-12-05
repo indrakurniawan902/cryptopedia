@@ -278,7 +278,9 @@ class _DetailCryptoSharingState extends State<DetailCryptoSharing> {
                                       Container(
                                         width: double.infinity,
                                         decoration: BoxDecoration(
-                                          color: AppColors.primary5,
+                                          color: theme.themeValue == false
+                                              ? AppColors.primary5
+                                              : AppColors.darkModeBg,
                                           borderRadius:
                                               BorderRadius.circular(5),
                                           boxShadow: const <BoxShadow>[
@@ -291,7 +293,10 @@ class _DetailCryptoSharingState extends State<DetailCryptoSharing> {
                                           value.allSharing[argsSharing['index']]
                                               .comment![index][0],
                                           style: TextStyle(
-                                              color: AppColors.darkColor),
+                                            color: theme.themeValue == true
+                                                ? AppColors.primary5
+                                                : AppColors.darkModeBg,
+                                          ),
                                         ),
                                       )
                                     ],

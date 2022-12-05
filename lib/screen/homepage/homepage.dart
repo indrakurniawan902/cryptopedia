@@ -265,8 +265,13 @@ class _HomepageState extends State<Homepage> {
                                             ? AppColors.lightColor
                                             : AppColors.darkModeFrame,
                                       ),
-                                      padding: EdgeInsets.all(10.h),
+                                      padding: EdgeInsets.symmetric(
+                                          vertical: 24.h, horizontal: 32.w),
                                       child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.stretch,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
                                         children: [
                                           Image.asset(
                                             'assets/images/no_post.png',
@@ -277,6 +282,7 @@ class _HomepageState extends State<Homepage> {
                                           Text(
                                             'You don’t have post yet',
                                             style: noPost,
+                                            textAlign: TextAlign.center,
                                           ),
                                         ],
                                       ),

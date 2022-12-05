@@ -1,3 +1,4 @@
+import 'package:cryptopedia/utils/constant/app_text_style.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
@@ -54,11 +55,28 @@ class _Crypto101BookmarkState extends State<Crypto101Bookmark> {
           SizedBox(
             height: 20.h,
           ),
-          crypto101.articles.length == 0
+          crypto101.articles.length == 0 && !crypto101.loading
               ? Center(
-                  child: Text(
-                  "Currently, no bookmark for crypto 101 here",
-                ))
+                  child: Center(
+                    child: Column(
+                      children: [
+                        SizedBox(
+                          height: 50.h,
+                        ),
+                        Image.asset(
+                          'assets/images/no_post.png',
+                          height: 120.h,
+                          width: 158.w,
+                        ),
+                        // SizedBox(height: 5.h),
+                        Text(
+                          'You don’t have bookmark yet',
+                          style: noPost,
+                        ),
+                      ],
+                    ),
+                  ),
+                )
               : SizedBox(),
           crypto101.loading
               ? Center(
@@ -70,6 +88,9 @@ class _Crypto101BookmarkState extends State<Crypto101Bookmark> {
                   itemCount: crypto101.articles.length,
                   itemBuilder: (context, index) {
                     final article = crypto101.articles[index];
+                    List<String> userBookmarked =
+                        List<String>.from(article.userBookmarked as List);
+
                     return InkWell(
                       splashColor: Colors.transparent,
                       splashFactory: NoSplash.splashFactory,
@@ -78,6 +99,7 @@ class _Crypto101BookmarkState extends State<Crypto101Bookmark> {
                           'id': article.id,
                           'title': article.title,
                           'body': article.body,
+                          'userBookmarked': userBookmarked,
                         });
                       },
                       child: PostCard(

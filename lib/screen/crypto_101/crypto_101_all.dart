@@ -5,6 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 
 import '../../provider/auth_provider.dart';
+import '../../utils/constant/app_text_style.dart';
 import '../components/form_field_component.dart';
 import '../components/post_card.dart';
 
@@ -53,11 +54,28 @@ class _Crypto101AllState extends State<Crypto101All> {
             SizedBox(
               height: 20.h,
             ),
-            value.articles.length == 0
+            value.articles.length == 0 && !value.loading
                 ? Center(
-                    child: Text(
-                    "Currently, no crypto 101 here",
-                  ))
+                    child: Center(
+                      child: Column(
+                        children: [
+                          SizedBox(
+                            height: 50.h,
+                          ),
+                          Image.asset(
+                            'assets/images/no_post.png',
+                            height: 120.h,
+                            width: 158.w,
+                          ),
+                          // SizedBox(height: 5.h),
+                          Text(
+                            'Currently, no crypto 101 here',
+                            style: noPost,
+                          ),
+                        ],
+                      ),
+                    ),
+                  )
                 : SizedBox(),
             value.loading
                 ? Center(

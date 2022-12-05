@@ -53,7 +53,7 @@ class _BookmarkCrypto101State extends State<BookmarkCrypto101> {
           SizedBox(
             height: 20.h,
           ),
-          crypto101.articles.isEmpty
+          crypto101.articles.isEmpty && !crypto101.loading
               ? const Center(
                   child: Text(
                   "Currently, no bookmark for crypto 101 here",
